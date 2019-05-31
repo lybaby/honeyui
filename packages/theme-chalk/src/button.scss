@@ -5,39 +5,46 @@
 @import "mixins/utils";
 
 @include b(button) {
-  display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  background: $--button-default-background-color;
-  border: $--border-base;
-  border-color: $--button-default-border-color;
-  color: $--button-default-font-color;
-  -webkit-appearance: none;
+  height: 30px;
+  min-width: 24px;
+  padding: 0 20px;
+  background-color: #006eff;
+  color: #fff;
+  border: 1px solid #006eff;
+  line-height: 30px;
   text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  outline: 0;
   box-sizing: border-box;
-  outline: none;
-  margin: 0;
-  transition: .1s;
-  font-weight: $--button-font-weight;
+  text-decoration: none;
+  font-size: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;
   }
 
-  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
+  //@include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
 
-  &:hover,
+  &:hover {
+    border-color: #0063e5;
+    background-color: #0063e5;
+    text-decoration: none;
+    transition: all .3s ease-in-out
+  }
+
   &:focus {
-    color: $--color-primary;
-    border-color: $--color-primary-light-7;
-    background-color: $--color-primary-light-9;
+    border-color: #006eff;
+    background-color: #006eff;
+    transition: all .3s ease-in-out
   }
 
   &:active {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    outline: none;
+    border-color: #0058cc;
+    background-color: #0058cc;
+    transition: all .3s ease-in-out
   }
 
   &::-moz-focus-inner {
@@ -75,26 +82,25 @@
     &,
     &:hover,
     &:focus {
-      color: $--button-disabled-font-color;
-      cursor: not-allowed;
-      background-image: none;
-      background-color: $--button-disabled-background-color;
-      border-color: $--button-disabled-border-color;
+      border-color: #ddd;
+      background-color: #fff;
+      color: #bbb;
+      cursor: not-allowed
     }
 
-    &.el-button--text {
-      background-color: transparent;
-    }
+    // &.el-button--text {
+    //   background-color: transparent;
+    // }
 
-    &.is-plain {
-      &,
-      &:hover,
-      &:focus {
-        background-color: $--color-white;
-        border-color: $--button-disabled-border-color;
-        color: $--button-disabled-font-color;
-      }
-    }
+    // &.is-plain {
+    //   &,
+    //   &:hover,
+    //   &:focus {
+    //     background-color: $--color-white;
+    //     border-color: $--button-disabled-border-color;
+    //     color: $--button-disabled-font-color;
+    //   }
+    // }
   }
 
   @include when(loading) {
@@ -114,27 +120,56 @@
     }
   }
   @include when(round) {
-    border-radius: 20px;
-    padding: 12px 23px;
+    // tea 没有圆角
+    // border-radius: 20px;
+    // padding: 12px 23px;
   }
   @include when(circle) {
     border-radius: 50%;
     padding: $--button-padding-vertical;
   }
   @include m(primary) {
-    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
+    //@include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
   }
   @include m(success) {
     @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-border-color);
   }
   @include m(warning) {
-    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
+    //tea pay
+    border-color: #ff9700;
+    background-color: #ff9700;
+    &:focus,
+    &:hover {
+      background-color: #f28f00;
+      border-color: #f28f00
+    }
+
+    &:active {
+      background-color: #e0880b;
+      border-color: #e0880b
+    }
+    //@include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
   }
   @include m(danger) {
     @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-border-color);
   }
   @include m(info) {
-    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+    //tea weak
+    background-color: #fff;
+    border-color: #ddd;
+    color: #000;
+    &:focus,
+    &:hover {
+      border-color: #ddd;
+      color: #000;
+      background-color: #f2f2f2
+    }
+    &:active {
+      background-color: #f2f2f2;
+      border-color: #ddd;
+      color: #000
+    }
+    //@include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
   }
   @include m(medium) {
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
@@ -154,23 +189,62 @@
       padding: $--button-mini-padding-vertical;
     }
   }
-  @include m(text) {
-    border-color: transparent;
-    color: $--color-primary;
-    background: transparent;
-    padding-left: 0;
-    padding-right: 0;
+  @include m(icon) {
+    display: inline-block;
+    font-size: 12px;//tea is 0
+    color: #666;
+    border: none;
+    padding: 5px;
+    height: inherit;
+    line-height: inherit;
+    background-color: transparent;
+    box-sizing: border-box;
 
-    &:hover,
-    &:focus {
-      color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
-      border-color: transparent;
-      background-color: transparent;
+    &:active,
+    &:hover {
+      background-color: rgba(0, 0, 0, .05);
+      text-decoration: none
     }
-    &:active {
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+
+    &:focus {
+      background-color: transparent
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
       border-color: transparent;
-      background-color: transparent;
+    }
+  }
+  @include m(text) {
+    padding: 5px;
+    color: #444;
+    display: inline-block;
+    text-align: center;
+    height: auto;
+    vertical-align: middle;
+    text-decoration: none;
+    line-height: 1.5;
+    background-color: transparent;
+    border: none;
+
+    // &:hover,
+    // &:focus {
+    //   color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
+    //   border-color: transparent;
+    //   background-color: transparent;
+    // }
+    // &:active {
+    //   color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+    //   border-color: transparent;
+    //   background-color: transparent;
+    // }
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: rgba(0, 0, 0, .05);
+      text-decoration: none;
+      font-size: 12px
     }
 
     &.is-disabled,
