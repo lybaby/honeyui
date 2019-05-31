@@ -8,23 +8,847 @@
   font-style: normal
 }
 
+$icon-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dist/sprite/tea.mf646518b.min-201905161128.svg);
+$icon-png-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dist/sprite/tea.mf646518b.min-201905161128.png);
 [class^="el-icon-"], [class*=" el-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'element-icons' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  vertical-align: baseline;
-  display: inline-block;
+  // font-family: 'element-icons' !important;
+  // speak: none;
+  // font-style: normal;
+  // font-weight: normal;
+  // font-variant: normal;
+  // text-transform: none;
+  // line-height: 1;
+  // vertical-align: baseline;
+  // display: inline-block;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // /* Better Font Rendering =========== */
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: inherit;
+  font-size: 0
 }
 
+
+.el-icon-shopcart {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 9.64%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-more {
+  background-image: $icon-url;
+  ;
+  background-position: 72.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-folderclose {
+  background-image: $icon-url;
+  ;
+  background-position: 63.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-folderopen {
+  background-image: $icon-url;
+  ;
+  background-position: 72.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-notice {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-guide {
+  background-image: $icon-url;
+  ;
+  background-position: 18.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-consult {
+  background-image: $icon-url;
+  ;
+  background-position: 0.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-realname {
+  background-image: $icon-url;
+  ;
+  background-position: 18.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-realnamev {
+  background-image: $icon-url;
+  ;
+  background-position: 27.500000000000004% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-show {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 18.78%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-hide {
+  background-image: $icon-url;
+  ;
+  background-position: 27.500000000000004% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-records {
+  width: 15px;
+  height: 16px;
+  background-image: $icon-png-url;
+  background-position: -57px -18px
+}
+
+.el-icon-error.size-l {
+  width: 32px;
+  height: 32px;
+  background-image: $icon-url;
+  ;
+  background-position: 37.5% 2.21%;
+  background-size: 675% 665.625%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-sales {
+  background-image: $icon-png-url;
+  background-position: -57px 0px
+}
+
+.el-icon-success {
+  background-image: $icon-url;
+  ;
+  background-position: 27.500000000000004% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-success.size-l {
+  width: 32px;
+  height: 32px;
+  background-image: $icon-url;
+  ;
+  background-size: 675% 665.625%;
+  ;
+  background-position: 19.02% 2.21%;
+  background-repeat: no-repeat
+}
+
+.el-icon-warning {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 18.78%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-warning.size-l {
+  width: 32px;
+  height: 32px;
+  background-image: $icon-url;
+  ;
+  background-size: 675% 665.625%;
+  ;
+  background-position: 0.54% 20.990000000000002%;
+  background-repeat: no-repeat
+}
+
+.el-icon-loading {
+  background-image: $icon-url;
+  ;
+  -webkit-animation: spin .6s linear infinite;
+  animation: spin .6s linear infinite;
+  background-position: 81.5% 55.33%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0)
+  }
+
+  to {
+    -webkit-transform: rotate(359deg)
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg)
+  }
+}
+
+.el-icon-shutdown {
+  background-image: $icon-png-url;
+  background-position: 0px -21px
+}
+
+.el-icon-running {
+  background-image: $icon-png-url;
+  background-position: -18px -21px
+}
+
+.el-icon-error {
+  background-image: $icon-url;
+  ;
+  background-position: 18.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-deploy {
+  background-image: $icon-png-url;
+  width: 17px;
+  height: 17px;
+  background-position: -21px 0px
+}
+
+.el-icon-sort {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 37.059999999999995%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-sortup {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 55.33%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-sortdown {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 27.92%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-links {
+  width: 14px;
+  height: 13px;
+  background-image: $icon-png-url;
+  background-position: -36px -40px
+}
+
+.el-icon-btnback {
+  background-image: $icon-url;
+  ;
+  background-position: 36.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-client {
+  width: 16px;
+  height: 15px;
+  background-image: $icon-png-url;
+  margin-top: 2px;
+  background-position: -18px -40px
+}
+
+.el-icon-plus {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-minus {
+  background-image: $icon-url;
+  ;
+  background-position: 54.50000000000001% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-setting {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 0.51%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-pencil {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 27.92%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-pencil:hover {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 37.059999999999995%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-copy {
+  background-image: $icon-url;
+  ;
+  background-position: 70.5% 40.1%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-copy:hover {
+  background-image: $icon-url;
+  ;
+  background-position: 70.5% 49.24%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-remind {
+  background-image: $icon-url;
+  ;
+  background-position: 71.21% 11.790000000000001%;
+  background-size: 1200% 1183.3333333333335%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-dismiss {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-dismiss:hover {
+  background-image: $icon-url;
+  ;
+  background-position: 99.5% 73.6%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-dismiss.size-s {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-phone {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 46.19%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-phonev {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 55.33%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-wechat {
+  background-image: $icon-url;
+  ;
+  background-position: 9.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-wechatv {
+  background-image: $icon-url;
+  ;
+  background-position: 9.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-email {
+  background-image: $icon-url;
+  ;
+  background-position: 27.500000000000004% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-emailv {
+  background-image: $icon-url;
+  ;
+  background-position: 36.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-qq {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 73.6%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-favorable {
+  width: 15px;
+  height: 18px;
+  background-image: $icon-png-url;
+  background-position: -40px 0px
+}
+
+.el-icon-viewgrid {
+  background-image: $icon-url;
+  ;
+  background-position: 36.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-viewlist {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-alarm {
+  width: 15px;
+  height: 14px;
+  background-image: $icon-png-url;
+  background-position: -40px -20px
+}
+
+.el-icon-monitor {
+  background-image: $icon-url;
+  ;
+  background-position: 9.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-download {
+  background-image: $icon-url;
+  ;
+  background-position: 36.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-filter {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-try {
+  width: 19px;
+  height: 19px;
+  background-image: $icon-png-url;
+  background-position: 0px 0px
+}
+
+.el-icon-convertip--blue {
+  background-image: $icon-url;
+  ;
+  background-position: 70.5% 21.83%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-convertip {
+  cursor: default;
+  background-image: $icon-url;
+  ;
+  background-position: 9.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-convertip:hover {
+  background-image: $icon-url;
+  ;
+  background-position: 70.5% 30.959999999999997%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-new {
+  cursor: default;
+  background-image: $icon-png-url;
+  background-position: 0px -40px
+}
+
+.el-icon-info {
+  background-image: $icon-url;
+  ;
+  cursor: pointer;
+  background-position: 90.5% 64.47%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-close {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 64.47%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-close.size-s {
+  background-image: $icon-url;
+  ;
+  background-position: 54.50000000000001% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-arrowup {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 18.78%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-arrowdown {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 0.51%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-arrowleft {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 46.19%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-arrowright {
+  background-image: $icon-url;
+  ;
+  background-position: 63.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-externallink {
+  background-image: $icon-url;
+  ;
+  background-position: 36.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-refresh {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 0.51%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-fullscreen {
+  background-image: $icon-url;
+  ;
+  background-position: 0.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-fullscreenquit {
+  background-image: $icon-url;
+  ;
+  background-position: 0.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-delete {
+  background-image: $icon-url;
+  ;
+  background-position: 72.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-trenddown {
+  background-image: $icon-url;
+  ;
+  background-position: 63.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-trendup {
+  background-image: $icon-url;
+  ;
+  background-position: 72.5% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-drop {
+  width: 24px;
+  height: 24px;
+  cursor: move;
+  background-image: $icon-url;
+  ;
+  background-position: 31.77% 38.1%;
+  background-size: 900% 887.5%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-news {
+  background-image: $icon-url;
+  ;
+  background-position: 63.5% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-help {
+  background-image: $icon-url;
+  ;
+  cursor: pointer;
+  background-position: 54.50000000000001% 72.08%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-pending {
+  background-image: $icon-url;
+  ;
+  background-position: 90.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-pending.size-l {
+  width: 32px;
+  height: 32px;
+  background-image: $icon-url;
+  ;
+  background-position: 0.54% 2.21%;
+  background-size: 675% 665.625%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-infoblue {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 90.36%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-infoblue.size-l {
+  width: 32px;
+  height: 32px;
+  background-image: $icon-url;
+  ;
+  background-position: 19.02% 20.990000000000002%;
+  background-size: 675% 665.625%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-lastpage {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 37.059999999999995%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-firstpage {
+  background-image: $icon-url;
+  ;
+  background-position: 54.50000000000001% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-search {
+  background-image: $icon-url;
+  ;
+  background-position: 81.5% 9.64%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-transfer {
+  background-image: $icon-url;
+  ;
+  background-position: 54.50000000000001% 99.49%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-cur {
+  background-image: $icon-url;
+  ;
+  background-position: 49.5% 19.29%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-cur-active {
+  background-image: $icon-url;
+  ;
+  background-position: 0.5% 62.94%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-fold {
+  background-image: $icon-url;
+  ;
+  background-position: 45.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-check {
+  background-image: $icon-url;
+  ;
+  background-position: 9.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+.el-icon-check.size-s {
+  background-image: $icon-url;
+  ;
+  background-position: 18.5% 81.22%;
+  background-size: 1350% 1331.25%;
+  ;
+  background-repeat: no-repeat
+}
+
+/*
 .el-icon-ice-cream-round:before {
   content: "\e6a0";
 }
@@ -1144,7 +1968,7 @@
 .el-icon-platform-eleme:before {
   content: "\e7ca";
 }
-
+*/
 .el-icon-loading {
   animation: rotating 2s linear infinite;
 }
