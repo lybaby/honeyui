@@ -2,29 +2,19 @@
   <div
     @dragstart.prevent
     :class="[
-      'el-input-number',
+      'tea-inputnum',
       inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
     ]">
     <span
-      class="el-input-number__decrease"
+      class="tea-inputnum__minus"
       role="button"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease">
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
-    </span>
-    <span
-      class="el-input-number__increase"
-      role="button"
-      v-if="controls"
-      v-repeat-click="increase"
-      :class="{'is-disabled': maxDisabled}"
-      @keydown.enter="increase">
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
     <el-input
       ref="input"
@@ -41,8 +31,18 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
-      @change="handleInputChange">
+      @change="handleInputChange"
+      style="display: inline-block">
     </el-input>
+    <span
+      class="tea-inputnum__plus"
+      role="button"
+      v-if="controls"
+      v-repeat-click="increase"
+      :class="{'is-disabled': maxDisabled}"
+      @keydown.enter="increase">
+    </span>
+    
   </div>
 </template>
 <script>
