@@ -2,10 +2,10 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
-    class="el-select-dropdown__item"
+    class="tea-list__label"
     v-show="visible"
     :class="{
-      'selected': itemSelected,
+      'is-selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
       'hover': hover
     }">
