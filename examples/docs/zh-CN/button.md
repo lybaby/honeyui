@@ -11,8 +11,8 @@
 <el-row>
   <el-button>默认按钮</el-button>
   <el-button type="primary">主要按钮</el-button>
-  <el-button type="info">次要按钮</el-button>
-  <el-button type="warning">支付按钮</el-button>
+  <el-button type="weak">次要按钮</el-button>
+  <el-button type="pay">支付按钮</el-button>
 </el-row>
 
 ```
@@ -53,10 +53,10 @@
 :::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
 ```html
-<el-button type="icon" icon="el-icon-edit"></el-button>
-<el-button type="icon" icon="el-icon-share"></el-button>
-<el-button type="icon" icon="el-icon-delete"></el-button>
-<el-button type="icon" icon="el-icon-search">搜索</el-button>
+<el-button type="icon" icon="setting"></el-button>
+<el-button type="icon" icon="download"></el-button>
+<el-button type="icon" icon="refresh"></el-button>
+<el-button type="icon" icon="refresh">搜索</el-button>
 <el-button type="icon">上传<i class="el-icon-upload el-icon--right"></i></el-button>
 ```
 :::
@@ -87,7 +87,9 @@
 :::demo 要设置为 loading 状态，只要设置`loading`属性为`true`即可。
 
 ```html
-<el-button type="primary" :loading="true">加载中</el-button>
+<el-button type="primary" :loading="true"></el-button>
+<el-button type="weak" :loading="true"></el-button>
+<el-button type="pay" :loading="true"></el-button>
 ```
 :::
 

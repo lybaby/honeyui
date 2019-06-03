@@ -1,6 +1,6 @@
 <template>
   <label
-    class="el-radio"
+    class="tea-form-check"
     :class="[
       border && radioSize ? 'el-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
@@ -14,16 +14,16 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
-    <span class="el-radio__input"
+    <span class="el-radio__input--x"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
-      <span class="el-radio__inner"></span>
+      <span class="el-radio__inner--x"></span>
       <input
         ref="radio"
-        class="el-radio__original"
+        class="tea-radio"
         :value="label"
         type="radio"
         aria-hidden="true"
@@ -35,11 +35,12 @@
         :disabled="isDisabled"
         tabindex="-1"
       >
+      <span class="tea-form-check__label" @keydown.stop>
+        <slot></slot>
+        <template v-if="!$slots.default">{{label}}</template>
+      </span>
     </span>
-    <span class="el-radio__label" @keydown.stop>
-      <slot></slot>
-      <template v-if="!$slots.default">{{label}}</template>
-    </span>
+    
   </label>
 </template>
 <script>

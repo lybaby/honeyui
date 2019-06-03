@@ -1,6 +1,6 @@
 <template>
   <label
-    class="el-checkbox"
+    class="tea-form-check"
     :class="[
       border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
@@ -12,7 +12,7 @@
     :aria-disabled="isDisabled"
     :id="id"
   >
-    <span class="el-checkbox__input"
+    <span class="el-checkbox__input-x"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
@@ -21,10 +21,10 @@
       }"
        aria-checked="mixed"
     >
-      <span class="el-checkbox__inner"></span>
+      <span class="el-checkbox__inner-x"></span>
       <input
         v-if="trueLabel || falseLabel"
-        class="el-checkbox__original"
+        class="tea-checkbox"
         type="checkbox"
         aria-hidden="true"
         :name="name"
@@ -37,7 +37,7 @@
         @blur="focus = false">
       <input
         v-else
-        class="el-checkbox__original"
+        class="tea-checkbox"
         type="checkbox"
         aria-hidden="true"
         :disabled="isDisabled"
@@ -47,11 +47,12 @@
         @change="handleChange"
         @focus="focus = true"
         @blur="focus = false">
+      <span class="tea-form-check__label" v-if="$slots.default || label">
+        <slot></slot>
+        <template v-if="!$slots.default">{{label}}</template>
+      </span>
     </span>
-    <span class="el-checkbox__label" v-if="$slots.default || label">
-      <slot></slot>
-      <template v-if="!$slots.default">{{label}}</template>
-    </span>
+    
   </label>
 </template>
 <script>

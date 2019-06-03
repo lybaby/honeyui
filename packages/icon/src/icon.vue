@@ -1,5 +1,5 @@
 <template>
-  <i :class="'el-icon-' + name"></i>
+  <i :class="'tea-icon-' + name" class="tea-icon"></i>
 </template>
 
 <script>

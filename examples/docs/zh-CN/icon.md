@@ -21,7 +21,7 @@
 <ul class="icon-list">
   <li v-for="name in $icon" :key="name">
     <span>
-      <i :class="'el-icon-' + name"></i>
+      <i :class="'tea-icon-' + name" class="tea-icon"></i>
       <span class="icon-name">{{'el-icon-' + name}}</span>
     </span>
   </li>

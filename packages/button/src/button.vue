@@ -1,12 +1,12 @@
 <template>
   <button
-    class="el-button"
+    class="tea-btn"
     @click="handleClick"
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'el-button--' + type : '',
+      type ? 'tea-btn--' + type : '',
       buttonSize ? 'el-button--' + buttonSize : '',
       {
         'is-disabled': buttonDisabled,
@@ -17,8 +17,8 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
+    <i class="tea-icon tea-icon-loading" v-if="loading"></i>
+    <i :class="'tea-icon-'+icon" class="tea-icon" v-if="icon && !loading"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
