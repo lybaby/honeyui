@@ -1,15 +1,15 @@
 <template>
   <div :class="[
-    type === 'textarea' ? 'el-textarea' : 'el-input',
+    type === 'textarea' ? 'el-textarea-x' : 'el-input-x',
     inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
       'is-exceed': inputExceed,
-      'el-input-group': $slots.prepend || $slots.append,
-      'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend,
-      'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
+      'tea-input-group': $slots.prepend || $slots.append,
+      'el-input-group--append-x': $slots.append,
+      'el-input-group--prepend-x': $slots.prepend,
+      'el-input--prefix-x': $slots.prefix || prefixIcon,
+      'el-input--suffix-x': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
     @mouseenter="hovering = true"
@@ -17,13 +17,13 @@
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
-        <slot name="prepend"></slot>
+      <div class="tea-input-group__addon" v-if="$slots.prepend">
+        <span class="tea-input-group__text"><slot name="prepend"></slot></span>
       </div>
       <input
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        class="tea-input"
         v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
@@ -78,14 +78,14 @@
         </i>
       </span>
       <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
-        <slot name="append"></slot>
+      <div class="tea-input-group__addon" v-if="$slots.append">
+        <span class="tea-input-group__text"><slot name="append"></slot></span>
       </div>
     </template>
     <textarea
       v-else
       :tabindex="tabindex"
-      class="el-textarea__inner"
+      class="tea-textarea"
       @compositionstart="handleCompositionStart"
       @compositionend="handleCompositionEnd"
       @input="handleInput"
