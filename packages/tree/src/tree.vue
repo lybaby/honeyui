@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-tree"
+    class="tea-tree"
     :class="{
       'el-tree--highlight-current': highlightCurrent,
       'is-dragging': !!dragState.draggingNode,
