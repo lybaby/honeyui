@@ -1,34 +1,39 @@
 <template>
-  <table
+  <div
     cellspacing="0"
     cellpadding="0"
-    class="el-date-table"
+    class="tea-calendar__row-group"
     @click="handleClick"
     @mousemove="handleMouseMove"
     :class="{ 'is-week-mode': selectionMode === 'week' }">
-    <tbody>
-    <tr>
-      <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
-      <th v-for="(week, key) in WEEKS" :key="key">{{ t('el.datepicker.weeks.' + week) }}</th>
-    </tr>
-    <tr
-      class="el-date-table__row"
-      v-for="(row, key) in rows"
-      :class="{ current: isWeekActive(row[1]) }"
-      :key="key">
-      <td
-        v-for="(cell, key) in row"
-        :class="getCellClasses(cell)"
-        :key="key">
-        <div>
-          <span>
-            {{ cell.text }}
-          </span>
+    <div class="tea-calendar__type-wrap">
+      <div class="tea-calendar__header-group">
+        <div class="tea-calendar__row">
+          <div class="tea-calendar__cell" v-if="showWeekNumber"><span>{{ t('el.datepicker.week') }}</span></div>
+          <div class="tea-calendar__cell" v-for="(week, key) in WEEKS" :key="key"><span>{{ t('el.datepicker.weeks.' + week) }}</span></div>
         </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+      
+      <div
+        class="tea-calendar__row"
+        v-for="(row, key) in rows"
+        :class="{ current: isWeekActive(row[1]) }"
+        :key="key"
+        :data-index="key">
+        <div
+          class="tea-calendar__cell"
+          v-for="(cell, key) in row"
+          :class="getCellClasses(cell)"
+          :key="key"
+          :data-index="key">
+            <span>
+              {{ cell.text }}
+            </span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </template>
 
 <script>
@@ -255,9 +260,11 @@
           classes.push('available');
           if (cell.type === 'today') {
             classes.push('today');
+            classes.push('tea-calendar__cell--now');
           }
         } else {
           classes.push(cell.type);
+          classes.push('tea-calendar__day--outside'); // fixme
         }
 
         if (cell.type === 'normal' && defaultValue.some(date => this.cellMatchesDate(cell, date))) {
@@ -266,6 +273,7 @@
 
         if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
           classes.push('current');
+          classes.push('is-selected');
         }
 
         if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
@@ -382,16 +390,17 @@
       handleClick(event) {
         let target = event.target;
         if (target.tagName === 'SPAN') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
+          // target = target.parentNode.parentNode;
           target = target.parentNode;
         }
+        // if (target.tagName === 'DIV') {
+        //   target = target.parentNode;
+        // }
 
-        if (target.tagName !== 'TD') return;
+        // if (target.tagName !== 'TD') return;
 
-        const row = target.parentNode.rowIndex - 1;
-        const column = this.selectionMode === 'week' ? 1 : target.cellIndex;
+        const row = target.parentNode.dataset.index; // target.parentNode.rowIndex - 1;
+        const column = this.selectionMode === 'week' ? 1 : /* target.cellIndex */target.dataset.index;
         const cell = this.rows[row][column];
 
         if (cell.disabled || cell.type === 'week') return;
