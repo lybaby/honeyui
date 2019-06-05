@@ -1,0 +1,14 @@
+.tea-textarea-group {
+  display: inline-block;
+  font-size: 0;
+  position: relative;
+  padding-bottom: 20px;
+
+  .tea-textarea__label {
+    font-size: 12px;
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    color: #888;
+  }
+}
