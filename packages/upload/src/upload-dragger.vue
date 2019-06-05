@@ -1,14 +1,23 @@
 <template>
   <div
-    class="el-upload-dragger"
+    class="tea-form-upload-drag"
     :class="{
-      'is-dragover': dragover
+      ' tea-form-upload-drag--drag': dragover
     }"
     @drop.prevent="onDrop"
     @dragover.prevent="onDragover"
     @dragleave.prevent="dragover = false"
   >
-    <slot></slot>
+    <div class="tea-form-upload__inner" v-if="!$slots.default">
+      <!-- <slot></slot> -->
+      <p class="tea-text tea-text__upload-drag">
+        <a href="#" class="tea-btn tea-btn--link tea-btn--file">
+          <span>点击上传</span>
+        </a>
+        <span class="tea-text-weak">/ 拖拽到此区域</span></p>
+      <p class="tea-text tea-text__upload-drag tea-text__upload-drag--hover">释放鼠标</p>
+    </div>
+    <slot v-else></slot>
   </div>
 </template>
 <script>

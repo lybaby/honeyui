@@ -16,7 +16,7 @@
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
+  <el-button type="weak">点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -165,7 +165,7 @@
   :on-remove="handleRemove"
   :file-list="fileList"
   list-type="picture">
-  <el-button size="small" type="primary">点击上传</el-button>
+  <el-button type="weak">点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -199,7 +199,7 @@
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
+  <el-button type="weak">点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -234,9 +234,9 @@
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
   multiple>
-  <i class="el-icon-upload"></i>
+  <!-- <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
 </el-upload>
 ```
 :::
@@ -253,8 +253,8 @@
   :on-remove="handleRemove"
   :file-list="fileList"
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+  <el-button slot="trigger" type="weak">选取文件</el-button>
+  <el-button style="margin-left: 10px;" type="primary" @click="submitUpload">上传到服务器</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
