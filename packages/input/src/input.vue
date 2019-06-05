@@ -82,7 +82,10 @@
       </span>
       <!-- 后置元素 -->
       <div class="tea-input-group__addon" v-if="$slots.append">
-        <span class="tea-input-group__text"><slot name="append"></slot></span>
+        <template v-if="typeof $slots.append[0].text !== 'undefined'">
+          <span class="tea-input-group__text"><slot name="append"></slot></span>
+        </template>
+        <slot v-else name="append"></slot>
       </div>
     </template>
     <textarea

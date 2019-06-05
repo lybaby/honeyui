@@ -217,12 +217,17 @@ export default {
 </div>
 <div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="餐厅名" value="1"></el-option>
-      <el-option label="订单号" value="2"></el-option>
-      <el-option label="用户电话" value="3"></el-option>
+    <el-select v-model="select" slot="prepend" placeholder="请选择" border>
+      <el-option label="http" value="1"></el-option>
+      <el-option label="ftp" value="2"></el-option>
+      <el-option label="sftp" value="3"></el-option>
     </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
+    <!-- <el-button slot="append" type="icon" icon="search"></el-button> -->
+    <el-select v-model="dotcom" slot="append" placeholder="请选择" border>
+      <el-option label=".com" value="1"></el-option>
+      <el-option label=".net" value="2"></el-option>
+      <el-option label=".org" value="3"></el-option>
+    </el-select>
   </el-input>
 </div>
 <style>
@@ -240,7 +245,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      select: ''
+      select: '',
+      dotcom: ''
     }
   }
 }
