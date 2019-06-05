@@ -1,9 +1,9 @@
 <template>
-  <div class="el-table"
+  <div class="tea-table"
     :class="[{
       'el-table--fit': fit,
       'el-table--striped': stripe,
-      'el-table--border': border || isGroup,
+      'tea-table--bordered': border || isGroup,
       'el-table--hidden': isHidden,
       'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,
@@ -17,7 +17,7 @@
     <div
       v-if="showHeader"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="el-table__header-wrapper"
+      class="tea-table__header"
       ref="headerWrapper">
       <table-header
         ref="tableHeader"
@@ -30,7 +30,7 @@
       </table-header>
     </div>
     <div
-      class="el-table__body-wrapper"
+      class="el-table__body-wrapper-x tea-table__body"
       ref="bodyWrapper"
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
       :style="[bodyHeight]">
