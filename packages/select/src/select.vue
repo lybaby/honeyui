@@ -67,8 +67,10 @@
         :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
+    
     <el-input
-      ref="reference"
+      v-show="false"
+      ref="reference1"
       v-model="selectedLabel"
       type="text"
       :placeholder="currentPlaceholder"
@@ -99,6 +101,12 @@
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
+    <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}">
+      <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}">
+        <div class="tea-dropdown__value">{{selectedLabel || placeholder}}</div>
+        <i type="arrowdown" class="tea-icon tea-icon-arrowdown"></i>
+      </div>
+    </div>
     <transition
       name="el-zoom-in-top"
       @before-enter="handleMenuEnter"
@@ -110,7 +118,7 @@
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
-          view-class="el-select-dropdown__list"
+          view-class="tea-list tea-list--option"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
@@ -152,7 +160,7 @@
   import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
-    mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
+    mixins: [Emitter, Locale, Focus('reference1'), NavigationMixin],
 
     name: 'ElSelect',
 
@@ -302,6 +310,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      border: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -577,7 +589,7 @@
 
       blur() {
         this.visible = false;
-        this.$refs.reference.blur();
+        this.$refs.reference1.blur();
       },
 
       handleBlur(event) {
@@ -641,8 +653,8 @@
       resetInputHeight() {
         if (this.collapseTags && !this.filterable) return;
         this.$nextTick(() => {
-          if (!this.$refs.reference) return;
-          let inputChildNodes = this.$refs.reference.$el.childNodes;
+          if (!this.$refs.reference1) return;
+          let inputChildNodes = this.$refs.reference1.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           const sizeInMap = this.initialInputHeight || 40;
@@ -704,7 +716,7 @@
 
       setSoftFocus() {
         this.softFocus = true;
-        const input = this.$refs.input || this.$refs.reference;
+        const input = this.$refs.input || this.$refs.reference1;
         if (input) {
           input.focus();
         }
@@ -736,7 +748,7 @@
             this.visible = !this.visible;
           }
           if (this.visible) {
-            (this.$refs.input || this.$refs.reference).focus();
+            (this.$refs.input || this.$refs.reference1).focus();
           }
         }
       },
@@ -788,7 +800,7 @@
       },
 
       resetInputWidth() {
-        this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+        this.inputWidth = this.$refs.reference1.$el.getBoundingClientRect().width;
       },
 
       handleResize() {
@@ -862,21 +874,21 @@
       }
       addResizeListener(this.$el, this.handleResize);
 
-      const reference = this.$refs.reference;
-      if (reference && reference.$el) {
+      const reference1 = this.$refs.reference1;
+      if (reference1 && reference1.$el) {
         const sizeMap = {
           medium: 36,
           small: 32,
           mini: 28
         };
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
+        this.initialInputHeight = reference1.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
       this.$nextTick(() => {
-        if (reference && reference.$el) {
-          this.inputWidth = reference.$el.getBoundingClientRect().width;
+        if (reference1 && reference1.$el) {
+          this.inputWidth = reference1.$el.getBoundingClientRect().width;
         }
       });
       this.setSelected();

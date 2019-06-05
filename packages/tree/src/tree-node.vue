@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-tree-node"
+    class="tea-tree__node"
     @click.stop="handleClick"
     @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
@@ -23,16 +23,24 @@
     @drop.stop="handleDrop"
     ref="node"
   >
-    <div class="el-tree-node__content"
+    <div class="tea-tree__node-content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
         @click.stop="handleExpandIconClick"
+        class="tea-tree__switcher"
         :class="[
           { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
-          'el-tree-node__expand-icon',
+          /*'el-tree-node__expand-icon',*/
           tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
         ]"
+        style="cursor: pointer"
       >
+        <i v-if="!node.isLeaf" class="tea-icon" :class="!node.isLeaf && expanded ? 'tea-icon-arrowdown' : 'tea-icon-arrowright'"></i>
+      </span>
+      <span
+        v-if="node.loading"
+        class="tea-icon tea-icon-loading"
+        style="margin-right: 4px">
       </span>
       <el-checkbox
         v-if="showCheckbox"
@@ -41,12 +49,10 @@
         :disabled="!!node.disabled"
         @click.native.stop
         @change="handleCheckChange"
+        style="margin-right: 0"
       >
       </el-checkbox>
-      <span
-        v-if="node.loading"
-        class="el-tree-node__loading-icon el-icon-loading">
-      </span>
+      
       <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
@@ -121,7 +127,9 @@
               ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
               : tree.$scopedSlots.default
                 ? tree.$scopedSlots.default({ node, data })
-                : <span class="el-tree-node__label">{ node.label }</span>
+                : (<div class="tea-tree__label">
+                      <span class="tea-tree__label-title">{ node.label }</span>
+                  </div>)
           );
         }
       }

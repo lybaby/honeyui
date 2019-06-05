@@ -2,141 +2,158 @@
   <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-picker el-popper"
+      class="el-popper tea-dropdown-box"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]">
-      <div class="el-picker-panel__body-wrapper">
-        <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-        <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
-            type="button"
-            class="el-picker-panel__shortcut"
-            v-for="(shortcut, key) in shortcuts"
-            :key="key"
-            @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
+      <div class="tea-calendar">
+        <div class="tea-calendar__body">
+          <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
+          <div class="el-picker-panel__sidebar" v-if="shortcuts">
+            <button
+              type="button"
+              class="el-picker-panel__shortcut"
+              v-for="(shortcut, key) in shortcuts"
+              :key="key"
+              @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
+          </div>
+          <div class="tea-calendar__table">
+            <div class="el-date-picker__time-header" v-if="showTime">
+              <span class="el-date-picker__editor-wrap">
+                <el-input
+                  :placeholder="t('el.datepicker.selectDate')"
+                  :value="visibleDate"
+                  size="small"
+                  @input="val => userInputDate = val"
+                  @change="handleVisibleDateChange" />
+              </span>
+              <span class="el-date-picker__editor-wrap" v-clickoutside="handleTimePickClose">
+                <el-input
+                  ref="input"
+                  @focus="timePickerVisible = true"
+                  :placeholder="t('el.datepicker.selectTime')"
+                  :value="visibleTime"
+                  size="small"
+                  @input="val => userInputTime = val"
+                  @change="handleVisibleTimeChange" />
+                <time-picker
+                  ref="timepicker"
+                  :time-arrow-control="arrowControl"
+                  @pick="handleTimePick"
+                  :visible="timePickerVisible"
+                  @mounted="proxyTimePickerDataProperties">
+                </time-picker>
+              </span>
+            </div>
+            
+            <template v-show="currentView !== 'time'">
+              <div
+                class="tea-calendar__caption"
+                :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+                v-show="currentView !== 'time'">
+                <!--<button
+                  type="button"
+                  @click="prevYear"
+                  :aria-label="t(`el.datepicker.prevYear`)"
+                  class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
+                </button>
+                <button
+                  type="button"
+                  @click="prevMonth"
+                  v-show="currentView === 'date'"
+                  :aria-label="t(`el.datepicker.prevMonth`)"
+                  class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
+                </button>-->
+                <a
+                  @click="showYearPicker"
+                  role="button"
+                  class="op-item">{{ yearLabel }}</a>
+                <a
+                  @click="showMonthPicker"
+                  v-show="currentView === 'date'"
+                  role="button"
+                  class="op-item"
+                  :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</a>
+                <!--<button
+                  type="button"
+                  @click="nextYear"
+                  :aria-label="t(`el.datepicker.nextYear`)"
+                  class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
+                </button>
+                <button
+                  type="button"
+                  @click="nextMonth"
+                  v-show="currentView === 'date'"
+                  :aria-label="t(`el.datepicker.nextMonth`)"
+                  class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
+                </button>-->
+                
+              </div>
+              <div class="tea-pagination tea-pagination--bordernone">
+                <a class="tea-pagination__turnbtn tea-pagination__prebtn" @click="prevMonth" title="上一月">
+                  <i class="tea-icon tea-icon-arrowleft"></i>
+                </a>
+                <a class="tea-pagination__turnbtn tea-pagination__curbtn" @click="date = new Date()" title="今天">
+                  <i class="tea-icon tea-icon-cur"></i>
+                </a>
+                <a class="tea-pagination__turnbtn tea-pagination__nextbtn" @click="nextMonth" title="下一月">
+                  <i class="tea-icon tea-icon-arrowright"></i>
+                </a>
+              </div>
+            </template>
+            <div class="el-picker-panel__content-x">
+              <date-table
+                v-show="currentView === 'date'"
+                @pick="handleDatePick"
+                :selection-mode="selectionMode"
+                :first-day-of-week="firstDayOfWeek"
+                :value="value"
+                :default-value="defaultValue ? new Date(defaultValue) : null"
+                :date="date"
+                :disabled-date="disabledDate">
+              </date-table>
+              <year-table
+                v-show="currentView === 'year'"
+                @pick="handleYearPick"
+                :value="value"
+                :default-value="defaultValue ? new Date(defaultValue) : null"
+                :date="date"
+                :disabled-date="disabledDate">
+              </year-table>
+              <month-table
+                v-show="currentView === 'month'"
+                @pick="handleMonthPick"
+                :value="value"
+                :default-value="defaultValue ? new Date(defaultValue) : null"
+                :date="date"
+                :disabled-date="disabledDate">
+              </month-table>
+            </div>
+          </div>
         </div>
-        <div class="el-picker-panel__body">
-          <div class="el-date-picker__time-header" v-if="showTime">
-            <span class="el-date-picker__editor-wrap">
-              <el-input
-                :placeholder="t('el.datepicker.selectDate')"
-                :value="visibleDate"
-                size="small"
-                @input="val => userInputDate = val"
-                @change="handleVisibleDateChange" />
-            </span>
-            <span class="el-date-picker__editor-wrap" v-clickoutside="handleTimePickClose">
-              <el-input
-                ref="input"
-                @focus="timePickerVisible = true"
-                :placeholder="t('el.datepicker.selectTime')"
-                :value="visibleTime"
-                size="small"
-                @input="val => userInputTime = val"
-                @change="handleVisibleTimeChange" />
-              <time-picker
-                ref="timepicker"
-                :time-arrow-control="arrowControl"
-                @pick="handleTimePick"
-                :visible="timePickerVisible"
-                @mounted="proxyTimePickerDataProperties">
-              </time-picker>
-            </span>
-          </div>
-          <div
-            class="el-date-picker__header"
-            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
-            v-show="currentView !== 'time'">
-            <button
-              type="button"
-              @click="prevYear"
-              :aria-label="t(`el.datepicker.prevYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
-            </button>
-            <button
-              type="button"
-              @click="prevMonth"
-              v-show="currentView === 'date'"
-              :aria-label="t(`el.datepicker.prevMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
-            </button>
-            <span
-              @click="showYearPicker"
-              role="button"
-              class="el-date-picker__header-label">{{ yearLabel }}</span>
-            <span
-              @click="showMonthPicker"
-              v-show="currentView === 'date'"
-              role="button"
-              class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
-            <button
-              type="button"
-              @click="nextYear"
-              :aria-label="t(`el.datepicker.nextYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
-            </button>
-            <button
-              type="button"
-              @click="nextMonth"
-              v-show="currentView === 'date'"
-              :aria-label="t(`el.datepicker.nextMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
-            </button>
-          </div>
 
-          <div class="el-picker-panel__content">
-            <date-table
-              v-show="currentView === 'date'"
-              @pick="handleDatePick"
-              :selection-mode="selectionMode"
-              :first-day-of-week="firstDayOfWeek"
-              :value="value"
-              :default-value="defaultValue ? new Date(defaultValue) : null"
-              :date="date"
-              :disabled-date="disabledDate">
-            </date-table>
-            <year-table
-              v-show="currentView === 'year'"
-              @pick="handleYearPick"
-              :value="value"
-              :default-value="defaultValue ? new Date(defaultValue) : null"
-              :date="date"
-              :disabled-date="disabledDate">
-            </year-table>
-            <month-table
-              v-show="currentView === 'month'"
-              @pick="handleMonthPick"
-              :value="value"
-              :default-value="defaultValue ? new Date(defaultValue) : null"
-              :date="date"
-              :disabled-date="disabledDate">
-            </month-table>
-          </div>
+        <div
+          class="el-picker-panel__footer"
+          v-show="footerVisible && currentView === 'date'">
+          <el-button
+            size="mini"
+            type="text"
+            class="el-picker-panel__link-btn"
+            @click="changeToNow"
+            v-show="selectionMode !== 'dates'">
+            {{ t('el.datepicker.now') }}
+          </el-button>
+          <el-button
+            plain
+            size="mini"
+            class="el-picker-panel__link-btn"
+            @click="confirm">
+            {{ t('el.datepicker.confirm') }}
+          </el-button>
         </div>
       </div>
-
-      <div
-        class="el-picker-panel__footer"
-        v-show="footerVisible && currentView === 'date'">
-        <el-button
-          size="mini"
-          type="text"
-          class="el-picker-panel__link-btn"
-          @click="changeToNow"
-          v-show="selectionMode !== 'dates'">
-          {{ t('el.datepicker.now') }}
-        </el-button>
-        <el-button
-          plain
-          size="mini"
-          class="el-picker-panel__link-btn"
-          @click="confirm">
-          {{ t('el.datepicker.confirm') }}
-        </el-button>
-      </div>
+      
     </div>
   </transition>
 </template>
