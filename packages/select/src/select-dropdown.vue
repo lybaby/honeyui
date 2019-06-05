@@ -35,7 +35,7 @@
       },
 
       visibleArrow: {
-        default: true
+        default: false
       },
 
       appendToBody: {
@@ -63,7 +63,9 @@
     },
 
     mounted() {
-      this.referenceElm = this.$parent.$refs.reference.$el;
+      // eslint-disabled-next-line no-debugger
+      // debugger;
+      this.referenceElm = this.$parent.$refs.reference/* .$el*/;
       this.$parent.popperElm = this.popperElm = this.$el;
       this.$on('updatePopper', () => {
         if (this.$parent.visible) this.updatePopper();
