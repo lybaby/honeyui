@@ -112,7 +112,7 @@
           </template>
           
         </div>
-        <i type="arrowdown" class="tea-icon tea-icon-arrowdown"></i>
+        <i type="arrowdown" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
       </div>
     </div>
     <transition
@@ -122,6 +122,8 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
+        :placement="type === 'pagination' ? 'top-start':'bottom-start'"
+        :class="{'tea-extends--pagination-select': type === 'pagination'}"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -322,6 +324,10 @@
       border: {
         type: Boolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: 'normal'
       }
     },
 
