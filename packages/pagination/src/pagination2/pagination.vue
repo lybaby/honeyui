@@ -1,5 +1,5 @@
 <template>
-  <div class="tea-pagination" style="padding-top:200px;">
+  <div class="tea-pagination">
     <div class="tea-pagination__state">
       <span class="tea-pagination__text">
         共
@@ -93,6 +93,7 @@ export default {
       console.log(val, old);
       const currentItem = (this.currentPage - 1) * old + 1;
       this.currentPage = Math.ceil(currentItem / val);
+      this.sizeChange();
     }
   },
   computed: {
@@ -110,19 +111,28 @@ export default {
     gotoFirstPage() {
       if (!this.canGoPrev) return;
       this.currentPage = 1;
+      this.pageChange();
     },
     gotoLastPage() {
       if (!this.canGoNext) return;
       this.currentPage = this.pageCount;
+      this.pageChange();
     },
     gotoNextPage() {
       if (!this.canGoNext) return;
       this.currentPage++;
-
+      this.pageChange();
     },
     gotoPrevPage() {
       if (!this.canGoPrev) return;
       this.currentPage--;
+      this.pageChange();
+    },
+    pageChange() {
+      this.$emit('current-change', this.currentPage);
+    },
+    sizeChange() {
+      this.$emit('size-change', this.pagerCount);
     }
   }
 };
