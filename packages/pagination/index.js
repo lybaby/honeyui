@@ -1,4 +1,4 @@
-import Pagination from './src/pagination';
+import Pagination from './src/pagination2/pagination';
 
 /* istanbul ignore next */
 Pagination.install = function(Vue) {

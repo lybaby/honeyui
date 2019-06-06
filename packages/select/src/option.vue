@@ -2,15 +2,19 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
-    class="tea-list__label"
     v-show="visible"
     :class="{
-      'is-selected': itemSelected,
+      'tea-list__label': !select.multiple,
+      'is-selected': !select.multiple && itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
       'hover': hover
     }">
     <slot>
-      <span>{{ currentLabel }}</span>
+      <label v-if="select.multiple" class="tea-form-check">
+        <input class="tea-checkbox" type="checkbox" value="" id="" name="checkboxGroup" :checked="itemSelected">
+        <span class="tea-form-check__label">{{ currentLabel }}</span>
+      </label>
+      <span v-else>{{ currentLabel }}</span>
     </slot>
   </li>
 </template>
