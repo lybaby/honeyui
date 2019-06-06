@@ -76,6 +76,29 @@ export default {
   },
 
   render(h) {
+    let className = '';
+    switch (this.placement) {
+      case 'top-start':
+        className = ' tea-bubble--bottom tea-bubble--end'; break;
+      case 'top':
+        className = ' tea-bubble--bottom'; break;
+      case 'top-end':
+        className = ' tea-bubble--bottom tea-bubble--start'; break;
+      case 'left-start':
+      case 'left':
+      case 'left-end':
+        className = 'tea-bubble--right'; break;
+      case 'bottom-start':
+        className = ' tea-bubble--top tea-bubble--end'; break;
+      case 'bottom':
+        className = ' tea-bubble--top'; break;
+      case 'bottom-end':
+        className = ' tea-bubble--top tea-bubble--start'; break;
+      case 'right-start':
+      case 'right':
+      case 'right-end':
+        className = 'tea-bubble--left'; break;
+    }
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
@@ -90,9 +113,11 @@ export default {
             aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
-              ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
+              [this.popperClass, 'tea-bubble', className]
             }>
-            { this.$slots.content || this.content }
+            <div class="tea-bubble__inner ">
+              { this.$slots.content || this.content }
+            </div>
           </div>
         </transition>);
     }

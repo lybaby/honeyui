@@ -11,13 +11,13 @@
 ```html
 <div class="box">
   <div class="top">
-    <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
+    <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start" :hide-after="sec">
       <el-button>上左</el-button>
     </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top">
+    <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top" :hide-after="sec">
       <el-button>上边</el-button>
     </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end">
+    <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end" hide-after=0>
       <el-button>上右</el-button>
     </el-tooltip>
   </div>
@@ -56,7 +56,23 @@
     </el-tooltip>
   </div>
 </div>
-
+<script>
+  export default {
+    data(){
+      return {
+        sec: 1000000
+      }
+    },
+    methods: {
+      input(value) {
+        alert(value);
+      },
+      onSearch(value){
+        alert(value);
+      }
+    }
+  }
+</script>
 <style>
   .box {
     width: 400px;
