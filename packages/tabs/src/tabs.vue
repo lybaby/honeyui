@@ -123,6 +123,8 @@
         stretch
       } = this;
 
+      tabPosition = tabPosition === 'left' ? 'tea-tabs--vertical' : `is-${tabPosition}`;
+
       const newButton = editable || addable
         ? (
           <span
@@ -149,22 +151,18 @@
         ref: 'nav'
       };
       const header = (
-        <div class={['el-tabs__header', `is-${tabPosition}`]}>
+        <div class={['tea-tabs__tabbar' ]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
         </div>
       );
-      const panels = (
-        <div class="el-tabs__content">
-          {this.$slots.default}
-        </div>
-      );
+      const panels = this.$slots.default;
 
       return (
         <div class={{
-          'el-tabs': true,
+          'tea-tabs': true,
           'el-tabs--card': type === 'card',
-          [`el-tabs--${tabPosition}`]: true,
+          [tabPosition]: true,
           'el-tabs--border-card': type === 'border-card'
         }}>
           { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }

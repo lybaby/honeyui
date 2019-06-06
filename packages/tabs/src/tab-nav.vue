@@ -69,7 +69,8 @@
       scrollNext() {
         const navSize = this.$refs.nav[`offset${firstUpperCase(this.sizeName)}`];
         const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
-        const currentOffset = this.navOffset;
+        const currentOffset = this.navOffset - 40;
+        console.log(this.navOffset);
 
         if (navSize - currentOffset <= containerSize) return;
 
@@ -77,7 +78,8 @@
           ? currentOffset + containerSize
           : (navSize - containerSize);
 
-        this.navOffset = newOffset;
+        this.navOffset = newOffset - 40 ;
+        console.log(this.navOffset);
       },
       scrollToActiveTab() {
         if (!this.scrollable) return;
@@ -99,7 +101,7 @@
         }
 
         newOffset = Math.max(newOffset, 0);
-        this.navOffset = Math.min(newOffset, maxOffset);
+        this.navOffset = Math.min(newOffset, maxOffset) - 40;
       },
       update() {
         if (!this.$refs.nav) return;
@@ -114,7 +116,7 @@
           this.scrollable.prev = currentOffset;
           this.scrollable.next = currentOffset + containerSize < navSize;
           if (navSize - currentOffset < containerSize) {
-            this.navOffset = navSize - containerSize;
+            this.navOffset = navSize - containerSize - 40;
           }
         } else {
           this.scrollable = false;
@@ -184,7 +186,6 @@
 
     render(h) {
       const {
-        type,
         panes,
         editable,
         stretch,
@@ -200,8 +201,8 @@
       } = this;
       const scrollBtn = scrollable
         ? [
-          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+          <a class={['tea-btn tea-btn--icon tea-tabs__backward', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="tea-icon tea-icon-arrowleft"></i></a>,
+          <a class={['"tea-btn tea-btn--icon tea-tabs__forward', scrollable.next ? '' : 'is-disabled']} on-click={()=> { scrollNext(); }}><i class="tea-icon tea-icon-arrowright"></i></a>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
@@ -217,10 +218,9 @@
         const tabLabelContent = pane.$slots.label || pane.label;
         const tabindex = pane.active ? 0 : -1;
         return (
-          <div
+          <li
             class={{
-              'el-tabs__item': true,
-              [`is-${ this.rootTabs.tabPosition }`]: true,
+              'tea-tabs__tabitem': true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
               'is-closable': closable,
@@ -238,27 +238,24 @@
             on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
-          >
-            {tabLabelContent}
+          ><a class={{'tea-tabs__tab': true, 'is-active': pane.active}}
+            > {tabLabelContent}</a>
             {btnClose}
-          </div>
+          </li>
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
+        <div class={['tea-tabs__scroll-area', scrollable ? 'is-scrolling' : '']} ref="navScroll">
+          <ul
+            class={['tea-tabs__tablist', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+            ref="nav"
+            style={navStyle}
+            role="tablist"
+            on-keydown={ changeTab }
+          >
+            {tabs}
+          </ul>
           {scrollBtn}
-          <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div
-              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
-              ref="nav"
-              style={navStyle}
-              role="tablist"
-              on-keydown={ changeTab }
-            >
-              {!type ? <tab-bar tabs={panes}></tab-bar> : null}
-              {tabs}
-            </div>
-          </div>
         </div>
       );
     },

@@ -80,8 +80,8 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
     <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    <el-button @click="dialogFormVisible = false">取 消</el-button>
   </div>
 </el-dialog>
 
