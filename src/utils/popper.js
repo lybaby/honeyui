@@ -1203,10 +1203,10 @@
         }
 
         var rect = {
-            top: elementRect.top - parentRect.top ,
-            left: elementRect.left - parentRect.left ,
-            bottom: (elementRect.top - parentRect.top) + elementRect.height,
-            right: (elementRect.left - parentRect.left) + elementRect.width,
+            top: elementRect.top - parentRect.top - 6 ,
+            left: elementRect.left - parentRect.left - 6 ,
+            bottom: (elementRect.top - parentRect.top) + elementRect.height + 6,
+            right: (elementRect.left - parentRect.left) + elementRect.width + 6,
             width: elementRect.width,
             height: elementRect.height
         };

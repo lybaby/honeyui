@@ -5,8 +5,8 @@
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave">
       <div
-        class="el-popover el-popper"
-        :class="[popperClass, content && 'el-popover--plain']"
+        class="tea-bubble tea-popconfirm"
+        :class="[popperClass,className]"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
@@ -14,8 +14,16 @@
         :id="tooltipId"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
-        <div class="el-popover__title" v-if="title" v-text="title"></div>
-        <slot>{{ content }}</slot>
+        <div class="tea-bubble__inner">
+              <div class="tea-popconfirm__body">
+                <div class="tea-media">
+                    <div class="tea-media__body">
+                        <h3 class="tea-popconfirm__messagetitle" v-if="title" v-text="title"></h3>
+                        <slot>{{ content }}</slot>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </transition>
     <slot name="reference"></slot>
@@ -26,6 +34,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
+import th from "../../../src/locale/lang/th";
 
 export default {
   name: 'ElPopover',
@@ -44,6 +53,7 @@ export default {
     },
     title: String,
     disabled: Boolean,
+    showButton: Boolean,
     content: String,
     reference: {},
     popperClass: String,
@@ -70,6 +80,11 @@ export default {
       return `el-popover-${generateId()}`;
     }
   },
+  data() {
+    return {
+      className: ''
+    };
+  },
   watch: {
     showPopper(val) {
       if (this.disabled) {
@@ -82,6 +97,30 @@ export default {
   mounted() {
     let reference = this.referenceElm = this.reference || this.$refs.reference;
     const popper = this.popper || this.$refs.popper;
+    let className = '';
+    switch (this.placement) {
+      case 'top-start':
+        className = ' tea-bubble--bottom tea-bubble--end'; break;
+      case 'top':
+        className = ' tea-bubble--bottom'; break;
+      case 'top-end':
+        className = ' tea-bubble--bottom tea-bubble--start'; break;
+      case 'left-start':
+      case 'left':
+      case 'left-end':
+        className = 'tea-bubble--right'; break;
+      case 'bottom-start':
+        className = ' tea-bubble--top tea-bubble--end'; break;
+      case 'bottom':
+        className = ' tea-bubble--top'; break;
+      case 'bottom-end':
+        className = ' tea-bubble--top tea-bubble--start'; break;
+      case 'right-start':
+      case 'right':
+      case 'right-end':
+        className = 'tea-bubble--left'; break;
+    }
+    this.className = className;
 
     if (!reference && this.$slots.reference && this.$slots.reference[0]) {
       reference = this.referenceElm = this.$slots.reference[0].elm;

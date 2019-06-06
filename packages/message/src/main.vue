@@ -2,7 +2,7 @@
   <transition name="el-message-fade" @after-leave="handleAfterLeave">
     <div
       :class="[
-        'el-message',
+        'tea-toast',
         type && !iconClass ? '' : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
@@ -16,8 +16,8 @@
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
-        <span v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</span>
-        <span v-else v-html="message" class="el-message__content"></span>
+        <span v-if="!dangerouslyUseHTMLString">{{ message }}</span>
+        <span v-else v-html="message"></span>
       </slot>
       <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
     </div>
