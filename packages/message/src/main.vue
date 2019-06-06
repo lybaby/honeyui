@@ -3,7 +3,7 @@
     <div
       :class="[
         'el-message',
-        type && !iconClass ? `el-message--${ type }` : '',
+        type && !iconClass ? '' : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
         customClass
@@ -16,8 +16,8 @@
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
-        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
-        <p v-else v-html="message" class="el-message__content"></p>
+        <span v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</span>
+        <span v-else v-html="message" class="el-message__content"></span>
       </slot>
       <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
     </div>
@@ -54,7 +54,7 @@
     computed: {
       typeClass() {
         return this.type && !this.iconClass
-          ? `el-message__icon el-icon-${ typeMap[this.type] }`
+          ? `tea-icon tea-icon-${ typeMap[this.type] }`
           : '';
       },
       positionStyle() {

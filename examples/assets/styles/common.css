@@ -93,12 +93,8 @@ button, input, select, textarea {
     margin: 0;
   }
   h3 {
-    font-size: 22px;
   }
   h2, h3, h4, h5 {
-    font-weight: normal;
-    color: #1f2f3d;
-
     &:hover a {
       opacity: .4;
     }
@@ -116,7 +112,6 @@ button, input, select, textarea {
   }
 
   p {
-    font-size: 14px;
     color: #5e6d82;
     line-height: 1.5em;
   }
