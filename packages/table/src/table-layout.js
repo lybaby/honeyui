@@ -45,7 +45,7 @@ class TableLayout {
     if (height === null) return;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
-      const body = bodyWrapper.querySelector('.el-table__body');
+      const body = bodyWrapper.querySelector('.tea-table__box');// bad
       this.scrollY = body.offsetHeight > this.bodyHeight;
     }
   }

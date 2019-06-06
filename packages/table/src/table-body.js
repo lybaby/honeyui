@@ -33,7 +33,7 @@ export default {
     const data = this.data || [];
     return (
       <table
-        class="el-table__body"
+        class="el-table__body-x tea-table__box"
         cellspacing="0"
         cellpadding="0"
         border="0">

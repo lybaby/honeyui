@@ -76,7 +76,7 @@ export default {
     if (isGroup) this.$parent.isGroup = true;
     return (
       <table
-        class="el-table__header"
+        class="el-table__header-x tea-table__box"
         cellspacing="0"
         cellpadding="0"
         border="0">

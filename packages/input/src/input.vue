@@ -1,6 +1,6 @@
 <template>
   <div :class="[
-    type === 'textarea' ? 'el-textarea-x' : 'el-input-x',
+    type === 'textarea' ? 'tea-textarea-group' : 'el-input-x',
     inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
@@ -18,7 +18,10 @@
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
       <div class="tea-input-group__addon" v-if="$slots.prepend">
-        <span class="tea-input-group__text"><slot name="prepend"></slot></span>
+        <template v-if="typeof $slots.prepend[0].text !== 'undefined'">
+          <span class="tea-input-group__text"><slot name="prepend"></slot></span>
+        </template>
+        <slot v-else name="prepend"></slot>
       </div>
       <input
         :tabindex="tabindex"
@@ -59,7 +62,7 @@
             </i>
           </template>
           <i v-if="showClear"
-            class="el-input__icon el-icon-circle-close el-input__clear"
+            class="el-input__icon tea-icon-dismiss el-input__clear"
             @click="clear"
           ></i>
           <i v-if="showPwdVisible"
@@ -79,7 +82,10 @@
       </span>
       <!-- 后置元素 -->
       <div class="tea-input-group__addon" v-if="$slots.append">
-        <span class="tea-input-group__text"><slot name="append"></slot></span>
+        <template v-if="typeof $slots.append[0].text !== 'undefined'">
+          <span class="tea-input-group__text"><slot name="append"></slot></span>
+        </template>
+        <slot v-else name="append"></slot>
       </div>
     </template>
     <textarea
@@ -101,7 +107,7 @@
       :aria-label="label"
     >
     </textarea>
-    <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
+    <span v-if="isWordLimitVisible && type === 'textarea'" class="tea-textarea__label">{{ textLength }}/{{ upperLimit }}</span>
   </div>
 </template>
 <script>

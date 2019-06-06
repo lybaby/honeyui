@@ -324,7 +324,6 @@
     border
     style="width: 100%">
     <el-table-column
-      fixed
       prop="date"
       label="日期"
       width="150">
@@ -355,12 +354,11 @@
       width="120">
     </el-table-column>
     <el-table-column
-      fixed="right"
       label="操作"
       width="100">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
+        <el-button @click="handleClick(scope.row)" type="text">查看</el-button>
+        <el-button type="text">编辑</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -423,8 +421,7 @@
     :data="tableData"
     style="width: 100%"
     height="250">
-    <el-table-column
-      fixed
+    <el-table-column   
       prop="date"
       label="日期"
       width="150">
@@ -530,7 +527,6 @@
     style="width: 100%"
     max-height="250">
     <el-table-column
-      fixed
       prop="date"
       label="日期"
       width="150">
@@ -561,14 +557,13 @@
       width="120">
     </el-table-column>
     <el-table-column
-      fixed="right"
       label="操作"
       width="120">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData)"
-          type="text"
-          size="small">
+          type="pay"
+          >
           移除
         </el-button>
       </template>
@@ -1118,11 +1113,9 @@
     <el-table-column label="操作">
       <template slot-scope="scope">
         <el-button
-          size="mini"
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
         <el-button
-          size="mini"
-          type="danger"
+          type="pay"
           @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       </template>
     </el-table-column>
@@ -1444,11 +1437,9 @@
       </template>
       <template slot-scope="scope">
         <el-button
-          size="mini"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
         <el-button
-          size="mini"
-          type="danger"
+          type="pay"
           @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
       </template>
     </el-table-column>
