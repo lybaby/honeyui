@@ -378,6 +378,9 @@
         </ul>
       </div>
     </header>
+    <div style="width: 300px;margin: 20px;">
+      <el-search multiple></el-search>
+    </div>
   </div>
 </template>
 <script>
