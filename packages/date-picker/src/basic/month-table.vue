@@ -98,6 +98,7 @@
         return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === value.getMonth();
       },
       getCellStyle(cell) {
+        console.log('a');
         const style = {};
         const year = this.date.getFullYear();
         const today = new Date();
@@ -107,7 +108,9 @@
           ? datesInMonth(year, month).every(this.disabledDate)
           : false;
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
+        style['is-selected'] = style.current;
         style.today = today.getFullYear() === year && today.getMonth() === month;
+        style['tea-calendar__cell--now'] = style.today;
         style.default = defaultValue.some(date => this.cellMatchesDate(cell, date));
 
         if (cell.inRange) {

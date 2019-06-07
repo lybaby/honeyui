@@ -7,7 +7,7 @@
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]">
-      <div class="tea-calendar">
+      <div class="tea-calendar" :class="{'tea-calendar--year': currentView === 'year'}">
         <div class="tea-calendar__body">
           <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
           <div class="el-picker-panel__sidebar" v-if="shortcuts">
@@ -50,7 +50,7 @@
             <template v-show="currentView !== 'time'">
               <div
                 class="tea-calendar__caption"
-                :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+                :class="{ 'el-date-picker__header--bordered-x': currentView === 'year' || currentView === 'month' }"
                 v-show="currentView !== 'time'">
                 <!--<button
                   type="button"
@@ -583,11 +583,11 @@
       yearLabel() {
         const yearTranslation = this.t('el.datepicker.year');
         if (this.currentView === 'year') {
-          const startYear = Math.floor(this.year / 10) * 10;
+          const startYear = this.year - 19; // Math.floor(this.year / 10) * 10;
           if (yearTranslation) {
-            return startYear + ' ' + yearTranslation + ' - ' + (startYear + 9) + ' ' + yearTranslation;
+            return startYear + ' ' + yearTranslation + ' - ' + (startYear + 19) + ' ' + yearTranslation;
           }
-          return startYear + ' - ' + (startYear + 9);
+          return startYear + ' - ' + (startYear + 19);
         }
         return this.year + ' ' + yearTranslation;
       },
