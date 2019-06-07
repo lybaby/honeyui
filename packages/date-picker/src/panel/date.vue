@@ -8,16 +8,20 @@
         'has-time': showTime
       }, popperClass]">
       <div class="tea-calendar" :class="{'tea-calendar--year': currentView === 'year'}">
-        <div class="tea-calendar__body">
-          <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-          <div class="el-picker-panel__sidebar" v-if="shortcuts">
+        <div class="tea-calendar__header" v-if="shortcuts">
+          <div class="tea-segment tea-segment--rimless">
             <button
-              type="button"
-              class="el-picker-panel__shortcut"
-              v-for="(shortcut, key) in shortcuts"
-              :key="key"
-              @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
+            type="button"
+            class="tea-btn tea-btn--text"
+            v-for="(shortcut, key) in shortcuts"
+            :key="key"
+            @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
           </div>
+          
+        </div>
+        <div class="tea-calendar__body">
+          <!-- <slot name="sidebar" class="el-picker-panel__sidebar"></slot> -->
+          
           <div class="tea-calendar__table">
             <div class="el-date-picker__time-header" v-if="showTime">
               <span class="el-date-picker__editor-wrap">
