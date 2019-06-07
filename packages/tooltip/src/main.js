@@ -37,7 +37,8 @@ export default {
       default() {
         return {
           boundariesPadding: 10,
-          gpuAcceleration: false
+          gpuAcceleration: false,
+          offset: 6
         };
       }
     },
@@ -52,6 +53,10 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    initOffset: {
+      type: Number,
+      default: 6
     }
   },
 

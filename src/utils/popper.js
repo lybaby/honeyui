@@ -78,7 +78,9 @@
 
         modifiersIgnored: [],
 
-        forceAbsolute: false
+        forceAbsolute: false,
+
+        initOffset:0
     };
 
     /**
@@ -230,7 +232,7 @@
         data._originalPlacement = this._options.placement;
 
         // compute the popper and reference offsets and put them inside data.offsets
-        data.offsets = this._getOffsets(this._popper, this._reference, data.placement);
+        data.offsets = this._getOffsets(this._popper, this._reference, data.placement, this._options.initOffset);
 
         // get boundaries
         data.boundaries = this._getBoundaries(data, this._options.boundariesPadding, this._options.boundariesElement);
@@ -395,7 +397,7 @@
      * @param {Element} reference - the reference element (the popper will be relative to this)
      * @returns {Object} An object containing the offsets which will be applied to the popper
      */
-    Popper.prototype._getOffsets = function(popper, reference, placement) {
+    Popper.prototype._getOffsets = function(popper, reference, placement,offset = 0) {
         placement = placement.split('-')[0];
         var popperOffsets = {};
 
@@ -405,7 +407,7 @@
         //
         // Get reference element position
         //
-        var referenceOffsets = getOffsetRectRelativeToCustomParent(reference, getOffsetParent(popper), isParentFixed);
+        var referenceOffsets = getOffsetRectRelativeToCustomParent(reference, getOffsetParent(popper), isParentFixed,offset);
 
         //
         // Get popper sizes
@@ -830,7 +832,7 @@
                 if (variation) {
                     data.placement += '-' + variation;
                 }
-                data.offsets.popper = this._getOffsets(this._popper, this._reference, data.placement).popper;
+                data.offsets.popper = this._getOffsets(this._popper, this._reference, data.placement, this._options.initOffset).popper;
 
                 data = this.runModifiers(data, this._options.modifiers, this._flip);
             }
@@ -849,7 +851,6 @@
     Popper.prototype.modifiers.offset = function(data) {
         var offset = this._options.offset;
         var popper  = data.offsets.popper;
-
         if (data.placement.indexOf('left') !== -1) {
             popper.top -= offset;
         }
@@ -1190,7 +1191,7 @@
      * @param {HTMLElement} parent
      * @return {Object} rect
      */
-    function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
+    function getOffsetRectRelativeToCustomParent(element, parent, fixed, offset = 0) {
         var elementRect = getBoundingClientRect(element);
         var parentRect = getBoundingClientRect(parent);
 
@@ -1203,10 +1204,10 @@
         }
 
         var rect = {
-            top: elementRect.top - parentRect.top - 6 ,
-            left: elementRect.left - parentRect.left - 6 ,
-            bottom: (elementRect.top - parentRect.top) + elementRect.height + 6,
-            right: (elementRect.left - parentRect.left) + elementRect.width + 6,
+            top: elementRect.top - parentRect.top - offset ,
+            left: elementRect.left - parentRect.left - offset ,
+            bottom: (elementRect.top - parentRect.top) + elementRect.height + offset,
+            right: (elementRect.left - parentRect.left) + elementRect.width + offset,
             width: elementRect.width,
             height: elementRect.height
         };
