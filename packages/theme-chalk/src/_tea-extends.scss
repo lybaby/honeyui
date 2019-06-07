@@ -29,18 +29,29 @@
 .has-time {
   .el-date-picker__time-header {
     border-bottom: none;
+
     .el-date-picker__editor-wrap {
       width: 100px;
       display: inline-block;
+
       .tea-input {
         width: 100px;
-        border:none;
+        border: none;
       }
     }
   }
-  
+
 }
 
-.tea-menu__submenu.is-opened .tea-menu__list{
+.tea-form {
+  .tea-form__label.is-required {
+    label:after {
+      position: relative;
+      vertical-align: -3px;
+    }
+  }
+}
+
+.tea-menu__submenu.is-opened .tea-menu__list {
   display: block;
 }
