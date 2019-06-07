@@ -95,13 +95,13 @@
                 
               </div>
               <div class="tea-pagination tea-pagination--bordernone">
-                <a class="tea-pagination__turnbtn tea-pagination__prebtn" @click="prevMonth" title="上一月">
+                <a class="tea-pagination__turnbtn tea-pagination__prebtn" @click="prevClick" title="">
                   <i class="tea-icon tea-icon-arrowleft"></i>
                 </a>
-                <a class="tea-pagination__turnbtn tea-pagination__curbtn" @click="date = new Date()" title="今天">
+                <a class="tea-pagination__turnbtn tea-pagination__curbtn" @click="date = new Date()" title="">
                   <i class="tea-icon tea-icon-cur"></i>
                 </a>
-                <a class="tea-pagination__turnbtn tea-pagination__nextbtn" @click="nextMonth" title="下一月">
+                <a class="tea-pagination__turnbtn tea-pagination__nextbtn" @click="nextClick" title="">
                   <i class="tea-icon tea-icon-arrowright"></i>
                 </a>
               </div>
@@ -294,7 +294,20 @@
       //     this.showYearPicker();
       //   }
       // },
-
+      prevClick() {
+        if (this.currentView === 'date') {
+          this.prevMonth();
+        } else if (this.currentView === 'month' || this.currentView === 'year') {
+          this.prevYear();
+        }
+      },
+      nextClick() {
+        if (this.currentView === 'date') {
+          this.nextMonth();
+        } else if (this.currentView === 'month' || this.currentView === 'year') {
+          this.nextYear();
+        }
+      },
       prevMonth() {
         this.date = prevMonth(this.date);
       },
@@ -305,7 +318,7 @@
 
       prevYear() {
         if (this.currentView === 'year') {
-          this.date = prevYear(this.date, 10);
+          this.date = prevYear(this.date, 20);
         } else {
           this.date = prevYear(this.date);
         }
@@ -313,7 +326,7 @@
 
       nextYear() {
         if (this.currentView === 'year') {
-          this.date = nextYear(this.date, 10);
+          this.date = nextYear(this.date, 20);
         } else {
           this.date = nextYear(this.date);
         }
