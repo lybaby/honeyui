@@ -1,15 +1,14 @@
 <template>
-  <table @click="handleMonthTableClick" @mousemove="handleMouseMove" class="el-month-table">
-    <tbody>
-    <tr v-for="(row, key) in rows" :key="key">
-      <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key">
-        <div>
-          <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+  <div @click="handleMonthTableClick" @mousemove="handleMouseMove" class="el-month-table-x tea-calendar__row-group">
+    <div class="tea-calendar__type-wrap tea-calendar__type--month">
+      <div class="tea-calendar__row" v-for="(row, key) in rows" :key="key" :data-index="key">
+        <div class="tea-calendar__cell" :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key" :data-index="key">
+          <span>{{ t('el.datepicker.months.' + months[cell.text]) }}</span>
         </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+    </div>
+    
+  </div>
 </template>
 
 <script type="text/babel">
@@ -180,17 +179,18 @@
         }
       },
       handleMonthTableClick(event) {
+        console.log('a');
         let target = event.target;
-        if (target.tagName === 'A') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
+        if (target.tagName === 'SPAN') {
           target = target.parentNode;
         }
-        if (target.tagName !== 'TD') return;
+        if (target.tagName === 'DIV') {
+        }
+        // if (target.tagName !== 'TD') return;
+        if (!hasClass(target, 'tea-calendar__cell')) return;
         if (hasClass(target, 'disabled')) return;
-        const column = target.cellIndex;
-        const row = target.parentNode.rowIndex;
+        const column = parseInt(target.dataset.index, 10);
+        const row = parseInt(target.parentNode.dataset.index, 10);
         const month = row * 4 + column;
         const newDate = this.getMonthOfCell(month);
         if (this.selectionMode === 'range') {
