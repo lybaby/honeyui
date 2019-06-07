@@ -6,6 +6,13 @@ import Autocomplete from '../packages/autocomplete/index.js';
 import Dropdown from '../packages/dropdown/index.js';
 import DropdownMenu from '../packages/dropdown-menu/index.js';
 import DropdownItem from '../packages/dropdown-item/index.js';
+import MenuBody from '../packages/menu-body/index.js';
+import MenuHeader from '../packages/menu-header/index.js';
+import MenuSlider from '../packages/menu-slider/index.js';
+import MenuTea from '../packages/menu-tea/index.js';
+import SubmenuTea from '../packages/submenu-tea/index.js';
+import MenuTeaItem from '../packages/menu-tea-item/index.js';
+import MenuTeaItemGroup from '../packages/menu-tea-item-group/index.js';
 import Menu from '../packages/menu/index.js';
 import Submenu from '../packages/submenu/index.js';
 import MenuItem from '../packages/menu-item/index.js';
@@ -90,6 +97,13 @@ const components = [
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  MenuBody,
+  MenuHeader,
+  MenuSlider,
+  MenuTea,
+  SubmenuTea,
+  MenuTeaItem,
+  MenuTeaItemGroup,
   Menu,
   Submenu,
   MenuItem,
@@ -206,6 +220,13 @@ export default {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  MenuBody,
+  MenuHeader,
+  MenuSlider,
+  MenuTea,
+  SubmenuTea,
+  MenuTeaItem,
+  MenuTeaItemGroup,
   Menu,
   Submenu,
   MenuItem,

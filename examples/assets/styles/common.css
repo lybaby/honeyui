@@ -87,28 +87,7 @@ button, input, select, textarea {
 .page-container {
   padding-top: 55px;
 
-  h2 {
-    font-size: 28px;
-    color: #1f2d3d;
-    margin: 0;
-  }
   h3 {
-  }
-  h2, h3, h4, h5 {
-    &:hover a {
-      opacity: .4;
-    }
-
-    a {
-      float: left;
-      margin-left: -20px;
-      opacity: 0;
-      cursor: pointer;
-
-      &:hover {
-        opacity: .4;
-      }
-    }
   }
 
   p {
