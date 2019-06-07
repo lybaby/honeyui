@@ -94,6 +94,7 @@ export default {
       const currentItem = (this.currentPage - 1) * old + 1;
       this.currentPage = Math.ceil(currentItem / val);
       this.sizeChange();
+      this.pageChange();
     }
   },
   computed: {

@@ -1,46 +1,78 @@
 <template>
-  <table @click="handleYearTableClick" class="el-year-table">
-    <tbody>
-    <tr>
-      <td class="available" :class="getCellStyle(startYear + 0)">
-        <a class="cell">{{ startYear }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 1)">
-        <a class="cell">{{ startYear + 1 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 2)">
-        <a class="cell">{{ startYear + 2 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 3)">
-        <a class="cell">{{ startYear + 3 }}</a>
-      </td>
-    </tr>
-    <tr>
-      <td class="available" :class="getCellStyle(startYear + 4)">
-        <a class="cell">{{ startYear + 4 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 5)">
-        <a class="cell">{{ startYear + 5 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 6)">
-        <a class="cell">{{ startYear + 6 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 7)">
-        <a class="cell">{{ startYear + 7 }}</a>
-      </td>
-    </tr>
-    <tr>
-      <td class="available" :class="getCellStyle(startYear + 8)">
-        <a class="cell">{{ startYear + 8 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 9)">
-        <a class="cell">{{ startYear + 9 }}</a>
-      </td>
-      <td></td>
-      <td></td>
-    </tr>
-    </tbody>
-  </table>
+  <div @click="handleYearTableClick" class="el-year-table-x tea-calendar__row-group">
+    <div class="tea-calendar__type-wrap tea-calendar__type-year">
+      <div class="tea-calendar__row">
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 0)">
+          <span>{{ startYear }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 1)">
+          <span>{{ startYear + 1 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 2)">
+          <span>{{ startYear + 2 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 3)">
+          <span>{{ startYear + 3 }}</span>
+        </div>
+      </div>
+      <div class="tea-calendar__row">
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 4)">
+          <span>{{ startYear + 4 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 5)">
+          <span>{{ startYear + 5 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 6)">
+          <span>{{ startYear + 6 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 7)">
+          <span>{{ startYear + 7 }}</span>
+        </div>
+      </div>
+      <div class="tea-calendar__row">
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 8)">
+          <span>{{ startYear + 8 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 9)">
+          <span>{{ startYear + 9 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 10)">
+          <span>{{ startYear + 10 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 11)">
+          <span>{{ startYear + 11 }}</span>
+        </div>
+      </div>
+      <div class="tea-calendar__row">
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 12)">
+          <span>{{ startYear + 12 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 13)">
+          <span>{{ startYear + 13 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 14)">
+          <span>{{ startYear + 14 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 15)">
+          <span>{{ startYear + 15 }}</span>
+        </div>
+      </div>
+      <div class="tea-calendar__row">
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 16)">
+          <span>{{ startYear + 16 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 17)">
+          <span>{{ startYear + 17 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 18)">
+          <span>{{ startYear + 18 }}</span>
+        </div>
+        <div class="tea-calendar__cell available" :class="getCellStyle(startYear + 19)">
+          <span>{{ startYear + 19 }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/babel">
@@ -69,7 +101,7 @@
 
     computed: {
       startYear() {
-        return Math.floor(this.date.getFullYear() / 10) * 10;
+        return this.date.getFullYear() - 19;// Math.floor(this.date.getFullYear() / 10) * 10;
       }
     },
 
@@ -82,7 +114,9 @@
           ? datesInYear(year).every(this.disabledDate)
           : false;
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
+        style['is-selected'] = style.current;
         style.today = today.getFullYear() === year;
+        style['tea-calendar__cell--now'] = style.today;
         style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
 
         return style;
@@ -90,7 +124,7 @@
 
       handleYearTableClick(event) {
         const target = event.target;
-        if (target.tagName === 'A') {
+        if (target.tagName === 'SPAN') {
           if (hasClass(target.parentNode, 'disabled')) return;
           const year = target.textContent || target.innerText;
           this.$emit('pick', Number(year));

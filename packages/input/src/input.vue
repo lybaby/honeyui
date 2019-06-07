@@ -1,6 +1,6 @@
 <template>
   <div :class="[
-    type === 'textarea' ? 'tea-textarea-group' : 'el-input-x',
+    type === 'textarea' ? 'tea-textarea-group' : 'tea-ext-input-wrap',
     inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,

@@ -422,7 +422,7 @@
           dropType = 'none';
         }
 
-        const iconPosition = dropNode.$el.querySelector('.el-tree-node__expand-icon').getBoundingClientRect();
+        const iconPosition = dropNode.$el.querySelector('.tea-tree__switcher').getBoundingClientRect();
         const dropIndicator = this.$refs.dropIndicator;
         if (dropType === 'before') {
           indicatorTop = iconPosition.top - treePosition.top;
