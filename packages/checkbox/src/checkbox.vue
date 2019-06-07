@@ -34,7 +34,7 @@
         v-model="model"
         @change="handleChange"
         @focus="focus = true"
-        @blur="focus = false">
+        @blur="focus = false" ref="c1">
       <input
         v-else
         class="tea-checkbox"
@@ -46,7 +46,7 @@
         v-model="model"
         @change="handleChange"
         @focus="focus = true"
-        @blur="focus = false">
+        @blur="focus = false" ref="c2">
       <span class="tea-form-check__label" v-if="$slots.default || label">
         <slot></slot>
         <template v-if="!$slots.default">{{label}}</template>
@@ -203,6 +203,14 @@
             this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }
         });
+      },
+      updateIndeterminate(val) {
+        if (this.$refs.c1) {
+          this.$refs.c1.indeterminate = val;
+        }
+        if (this.$refs.c2) {
+          this.$refs.c2.indeterminate = val;
+        }
       }
     },
 
@@ -213,11 +221,16 @@
       if (this.indeterminate) {
         this.$el.setAttribute('aria-controls', this.controls);
       }
+      this.updateIndeterminate(this.indeterminate);
     },
 
     watch: {
       value(value) {
         this.dispatch('ElFormItem', 'el.form.change', value);
+      },
+      indeterminate(val) {
+        console.log(val);
+        this.updateIndeterminate(val);
       }
     }
   };
