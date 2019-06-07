@@ -13,15 +13,10 @@
   </div>
 </template>
 <script>
-  import Menu from './menu-mixin';
-  import Emitter from 'element-ui/src/mixins/emitter';
-
   export default {
     name: 'ElMenuHeader',
 
     componentName: 'ElMenuHeader',
-
-    mixins: [Menu, Emitter],
 
     props: {
       title: String,

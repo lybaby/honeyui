@@ -47,6 +47,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: undefined
+      },
+      expandNo: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -254,9 +258,8 @@
     },
     render(h) {
       const {
-        active,
+        expandNo,
         opened,
-        paddingStyle,
         titleStyle,
         backgroundColor,
         rootMenu,
@@ -304,12 +307,10 @@
         rootMenu.mode === 'horizontal' && isFirstLevel ||
         rootMenu.mode === 'vertical' && !rootMenu.collapse
       ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
-
       return (
         <li
           class={{
             'tea-menu__submenu': true,
-            'is-active': active,
             'is-opened': opened,
             'is-disabled': disabled,
             submenuTitleIcon
@@ -327,12 +328,12 @@
             on-click={this.handleClick}
             on-mouseenter={this.handleTitleMouseenter}
             on-mouseleave={this.handleTitleMouseleave}
-            style={[paddingStyle, titleStyle, { backgroundColor }]}
+            style={[ titleStyle, { backgroundColor }]}
           >
             <div class="tea-menu__text">{$slots.title}</div>
-            <i class="tea-icon tea-icon-arrowdown"></i>
+            {expandNo === false ? <i class="tea-icon tea-icon-arrowdown" ></i> : ''}
           </a>
-          {this.isMenuPopup ? popupMenu : inlineMenu}
+          {expandNo === false ? this.isMenuPopup ? popupMenu : inlineMenu : ''}
         </li>
       );
     }

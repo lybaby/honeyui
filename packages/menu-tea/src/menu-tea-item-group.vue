@@ -7,7 +7,6 @@
         <template v-if="!$slots.title">{{title}}</template>
         <slot v-else name="title"></slot>
       </div>
-      <i class="tea-icon tea-icon-arrowdown"></i>
     </a>
     <ul>
       <slot></slot>

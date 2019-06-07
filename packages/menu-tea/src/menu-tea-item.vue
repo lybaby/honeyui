@@ -2,10 +2,10 @@
   <li
     role="menuitem"
     tabindex="-1"
-    :style="[paddingStyle, itemStyle, { backgroundColor }]"
+    :style="[itemStyle, { backgroundColor }]"
     :class="{
       'is-selected': active,
-      'is-disabled': disabled
+      'is-disabled': disabled,
     }"
     @click="handleClick"
     @mouseenter="onMouseEnter"
@@ -20,8 +20,8 @@
       <div slot="content"><slot name="title"></slot></div>
     </el-tooltip>
     <template v-else>
-      <a href="#" class="tea-menu__item">
-        <div class="tea-menu__text"><slot></slot></div>
+      <a class="tea-menu__item">
+        <div class="tea-menu__text"><slot name="title"></slot></div>
       </a>
     </template>
   </li>

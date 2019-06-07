@@ -81,7 +81,7 @@
       <el-menu-header title="产品名称" subTitle="标签123"></el-menu-header>
       <el-menu-body>
         <el-menu-tea
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose">
@@ -92,28 +92,25 @@
             </template>
             <el-menu-tea-item-group>
               <template slot="title">分组一</template>
-              <el-menu-tea-item index="1-1">选项1</el-menu-tea-item>
-              <el-menu-tea-item index="1-2">选项2</el-menu-tea-item>
+              <el-menu-tea-item index="1-1"><template slot="title">选项1</template></el-menu-tea-item>
+              <el-menu-tea-item index="1-2"><template slot="title">选项2</template></el-menu-tea-item>
             </el-menu-tea-item-group>
             <el-menu-tea-item-group title="分组2">
-              <el-menu-tea-item index="1-3">选项3</el-menu-tea-item>
+              <el-menu-tea-item index="1-3"><template slot="title">选项3</template></el-menu-tea-item>
             </el-menu-tea-item-group>
             <el-submenu-tea index="1-4">
               <template slot="title">选项4</template>
-              <el-menu-tea-item index="1-4-1">选项1</el-menu-tea-item>
+              <el-menu-tea-item index="1-4-1"><template slot="title">选项1</template></el-menu-tea-item>
             </el-submenu-tea>
           </el-submenu-tea>
-          <el-menu-tea-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
+          <el-menu-tea-item index="2" expandNo>
+            <template slot="title">导航二</template>
           </el-menu-tea-item>
-          <el-menu-tea-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
+          <el-menu-tea-item index="3" disabled expandNo>
+            <template slot="title">导航三</template>
           </el-menu-tea-item>
-          <el-menu-tea-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+          <el-menu-tea-item index="4" expandNo>
+            <template slot="title">导航四</template>
           </el-menu-tea-item>
         </el-menu-tea>
       </el-menu-body>
