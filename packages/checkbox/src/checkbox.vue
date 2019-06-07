@@ -5,7 +5,8 @@
       border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
-      { 'is-checked': isChecked }
+      { 'is-checked': isChecked },
+      { 'tea-form-check--block': block }
     ]"
     role="checkbox"
     :aria-checked="indeterminate ? 'mixed': isChecked"
@@ -175,7 +176,11 @@
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       border: Boolean,
-      size: String
+      size: String,
+      block: {
+        type: Boolean,
+        default: false
+      }
     },
 
     methods: {
