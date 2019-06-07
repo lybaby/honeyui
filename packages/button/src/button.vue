@@ -7,7 +7,7 @@
     :type="nativeType"
     :class="[
       type ? 'tea-btn--' + type : '',
-      buttonSize ? 'el-button--' + buttonSize : '',
+      /* buttonSize ? 'el-button--' + buttonSize : '', */
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
@@ -38,7 +38,7 @@
     props: {
       type: {
         type: String,
-        default: 'default'
+        default: 'primary'
       },
       size: String,
       icon: {
