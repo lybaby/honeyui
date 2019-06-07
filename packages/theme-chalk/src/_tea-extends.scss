@@ -21,3 +21,23 @@
 .tea-pagination__turnbtn {
   user-select: none;
 }
+
+.tea-ext-input-wrap {
+  display: inline-block;
+}
+
+.has-time {
+  .el-date-picker__time-header {
+    border-bottom: none;
+    .el-date-picker__editor-wrap {
+      width: 100px;
+      display: inline-block;
+      .tea-input {
+        width: 100px;
+        border:none;
+      }
+    }
+  }
+  
+}
+
