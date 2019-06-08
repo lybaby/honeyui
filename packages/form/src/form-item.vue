@@ -1,5 +1,5 @@
 <template>
-  <div class="el-form-item" :class="[{
+  <div class="tea-form__item" :class="[{
       'el-form-item--feedback': elForm && elForm.statusIcon,
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
@@ -12,13 +12,21 @@
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
-      <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
-        <slot name="label">{{label + form.labelSuffix}}</slot>
-      </label>
+      <div class="tea-form__label">
+        <label :for="labelFor" class="el-form-item__label-x" :style="labelStyle" v-if="label || $slots.label">
+          <slot name="label">{{label + form.labelSuffix}}</slot>
+        </label>
+      </div>
+      
     </label-wrap>
-    <div class="el-form-item__content" :style="contentStyle">
+    <div class="el-form-item__content-x tea-form__controls" :class="{'is-error': validateState === 'error'}" :style="contentStyle">
       <slot></slot>
-      <transition name="el-zoom-in-top">
+      <template v-if="validateState === 'error' && showMessage && form.showMessage">
+        <b class="tea-icon tea-icon-valid"></b>
+        <div class="tea-form__help-text">{{validateMessage}}</div>
+      </template>
+      
+      <!--<transition name="el-zoom-in-top">
         <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
           name="error"
@@ -34,7 +42,7 @@
             {{validateMessage}}
           </div>
         </slot>
-      </transition>
+      </transition>-->
     </div>
   </div>
 </template>

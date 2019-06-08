@@ -1,5 +1,5 @@
 <template>
-  <form class="el-form" :class="[
+  <form class="tea-form" :class="[
     labelPosition ? 'el-form--label-' + labelPosition : '',
     { 'el-form--inline': inline }
   ]">

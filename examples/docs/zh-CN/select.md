@@ -204,7 +204,8 @@
       v-for="item in options"
       :key="item.value"
       :label="item.label"
-      :value="item.value">
+      :value="item.value"
+      type="checkbox">
     </el-option>
   </el-select>
 
@@ -213,12 +214,14 @@
     multiple
     collapse-tags
     style="margin-left: 20px;"
-    placeholder="请选择">
+    placeholder="请选择"
+    border>
     <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
-      :value="item.value">
+      :value="item.value"
+      type="checkbox">
     </el-option>
   </el-select>
 </template>

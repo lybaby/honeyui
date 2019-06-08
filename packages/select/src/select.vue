@@ -6,7 +6,7 @@
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
-      v-if="multiple"
+      v-if="multiple && false"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
@@ -103,8 +103,16 @@
     </el-input>
     <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}">
       <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}">
-        <div class="tea-dropdown__value">{{selectedLabel || placeholder}}</div>
-        <i type="arrowdown" class="tea-icon tea-icon-arrowdown"></i>
+        <div class="tea-dropdown__value">
+          <template v-if="multiple && selected.length > 0">
+            <span v-for="(item, index) in selected" :key="index">{{item.currentLabel}}{{index+1 === selected.length?'':', '}}</span>
+          </template>
+          <template v-else>
+            {{selectedLabel || placeholder}}
+          </template>
+          
+        </div>
+        <i type="arrowdown" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
       </div>
     </div>
     <transition
@@ -114,11 +122,13 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
+        :placement="type === 'pagination' ? 'top-start':'bottom-start'"
+        :class="{'tea-extends--pagination-select': type === 'pagination'}"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
-          view-class="tea-list tea-list--option"
+          :view-class="'tea-list tea-list--option' + (multiple ? ' tea-list--checkoption' : '')"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
@@ -314,6 +324,10 @@
       border: {
         type: Boolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: 'normal'
       }
     },
 

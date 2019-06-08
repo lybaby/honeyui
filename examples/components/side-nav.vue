@@ -122,7 +122,7 @@
     :class="{ 'is-fade': isFade }"
     :style="navStyle">
     <ul>
-      <li class="nav-item sponsors">
+      <!-- <li class="nav-item sponsors">
         <a>{{ lang === 'zh-CN' ? '赞助商' : 'Sponsors' }}</a>
         <ul class="pure-menu-list sub-nav">
           <li class="nav-item" v-show="lang !== 'zh-CN'">
@@ -136,7 +136,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> -->
       <li
         class="nav-item"
         v-for="(item, key) in data"

@@ -1,7 +1,6 @@
 <template>
   <el-input
-    class="el-date-editor"
-    :class="'el-date-editor--' + type"
+    :class="['el-date-editor--' + type, this.type.indexOf('time') !== -1 ? 'tea-timepicker__input':'tea-datepicker__input']"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
     :disabled="pickerDisabled"
     :size="pickerSize"
@@ -353,7 +352,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'el-icon-circle-close'
+      default: 'tea-icon-dismiss'
     },
     name: {
       default: '',

@@ -6,7 +6,8 @@
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
-      { 'is-checked': model === label }
+      { 'is-checked': model === label },
+      { 'tea-form-check--block': block }
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -69,7 +70,11 @@
       disabled: Boolean,
       name: String,
       border: Boolean,
-      size: String
+      size: String,
+      block: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {

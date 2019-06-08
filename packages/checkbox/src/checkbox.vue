@@ -5,7 +5,8 @@
       border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
-      { 'is-checked': isChecked }
+      { 'is-checked': isChecked },
+      { 'tea-form-check--block': block }
     ]"
     role="checkbox"
     :aria-checked="indeterminate ? 'mixed': isChecked"
@@ -34,7 +35,7 @@
         v-model="model"
         @change="handleChange"
         @focus="focus = true"
-        @blur="focus = false">
+        @blur="focus = false" ref="c1">
       <input
         v-else
         class="tea-checkbox"
@@ -46,7 +47,7 @@
         v-model="model"
         @change="handleChange"
         @focus="focus = true"
-        @blur="focus = false">
+        @blur="focus = false" ref="c2">
       <span class="tea-form-check__label" v-if="$slots.default || label">
         <slot></slot>
         <template v-if="!$slots.default">{{label}}</template>
@@ -175,7 +176,11 @@
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       border: Boolean,
-      size: String
+      size: String,
+      block: {
+        type: Boolean,
+        default: false
+      }
     },
 
     methods: {
@@ -203,6 +208,14 @@
             this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }
         });
+      },
+      updateIndeterminate(val) {
+        if (this.$refs.c1) {
+          this.$refs.c1.indeterminate = val;
+        }
+        if (this.$refs.c2) {
+          this.$refs.c2.indeterminate = val;
+        }
       }
     },
 
@@ -213,11 +226,16 @@
       if (this.indeterminate) {
         this.$el.setAttribute('aria-controls', this.controls);
       }
+      this.updateIndeterminate(this.indeterminate);
     },
 
     watch: {
       value(value) {
         this.dispatch('ElFormItem', 'el.form.change', value);
+      },
+      indeterminate(val) {
+        console.log(val);
+        this.updateIndeterminate(val);
       }
     }
   };
