@@ -1,73 +1,75 @@
 <template>
   <transition name="msgbox-fade">
     <div
-      class="el-message-box__wrapper"
+      class="tea-dialog"
       tabindex="-1"
       v-show="visible"
       @click.self="handleWrapperClick"
       role="dialog"
       aria-modal="true"
       :aria-label="title || 'dialog'">
-      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
-        <div class="el-message-box__header" v-if="title !== null">
-          <div class="el-message-box__title">
-            <div
-              :class="['el-message-box__status', icon]"
-              v-if="icon && center">
-            </div>
-            <span>{{ title }}</span>
-          </div>
+      <div class="tea-dialog__inner" :class="[customClass, center && 'el-message-box--center']">
+        <div class="tea-dialog__header" v-if="title !== null">
           <button
             type="button"
-            class="el-message-box__headerbtn"
+            class="tea-btn--icon"
             aria-label="Close"
             v-if="showClose"
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
             @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
-            <i class="el-message-box__close el-icon-close"></i>
+            <i class="tea-icon tea-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content">
-          <div
-            :class="['el-message-box__status', icon]"
-            v-if="icon && !center && message !== ''">
-          </div>
-          <div class="el-message-box__message" v-if="message !== ''">
-            <slot>
-              <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
-              <p v-else v-html="message"></p>
-            </slot>
-          </div>
-          <div class="el-message-box__input" v-show="showInput">
-            <el-input
-              v-model="inputValue"
-              :type="inputType"
-              @keydown.enter.native="handleInputEnter"
-              :placeholder="inputPlaceholder"
-              ref="input"></el-input>
-            <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
+        <div class="tea-dialog__body">
+          <div class="tea-media">
+            <div
+                    :class="['tea-media__left']"
+                    v-if="icon && !center && message !== ''">
+              <i class="tea-icon size-l" :class="[icon]"></i>
+            </div>
+            <div class=" tea-media__body">
+              <h3 class="tea-dialog__messagetitle " v-if="title !== null">{{ title }}</h3>
+              <div class="tea-dialog__messagetext" v-if="message !== ''">
+                <slot>
+                  <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+                  <p v-else v-html="message"></p>
+                </slot>
+              </div>
+              <div class="el-message-box__input" v-show="showInput">
+                <el-input
+                        v-model="inputValue"
+                        :type="inputType"
+                        @keydown.enter.native="handleInputEnter"
+                        :placeholder="inputPlaceholder"
+                        ref="input"></el-input>
+                <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="el-message-box__btns">
-          <el-button
-                  :loading="confirmButtonLoading"
-                  ref="confirm"
-                  :class="[ confirmButtonClasses ]"
-                  v-show="showConfirmButton"
-                  :round="roundButton"
-                  @click.native="handleAction('confirm')"
-                  @keydown.enter="handleAction('confirm')">
-            {{ confirmButtonText || t('el.messagebox.confirm') }}
-          </el-button>
-          <el-button
-            :loading="cancelButtonLoading"
-            :class="[ cancelButtonClasses ]"
-            v-if="showCancelButton"
-            :round="roundButton"
-            @click.native="handleAction('cancel')"
-            @keydown.enter="handleAction('cancel')">
-            {{ cancelButtonText || t('el.messagebox.cancel') }}
-          </el-button>
+        <div class="tea-dialog__footer">
+          <div class="tea-dialog__btnwrap">
+            <el-button
+                    :loading="confirmButtonLoading"
+                    ref="confirm"
+                    :class="[ confirmButtonClasses ]"
+                    v-show="showConfirmButton"
+                    :round="roundButton"
+                    @click.native="handleAction('confirm')"
+                    @keydown.enter="handleAction('confirm')">
+              {{ confirmButtonText || t('el.messagebox.confirm') }}
+            </el-button>
+            <el-button
+                    :loading="cancelButtonLoading"
+                    :class="[ cancelButtonClasses ]"
+                    v-if="showCancelButton"
+                    type="weak"
+                    :round="roundButton"
+                    @click.native="handleAction('cancel')"
+                    @keydown.enter="handleAction('cancel')">
+              {{ cancelButtonText || t('el.messagebox.cancel') }}
+            </el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -132,7 +134,7 @@
     computed: {
       icon() {
         const { type, iconClass } = this;
-        return iconClass || (type && typeMap[type] ? `el-icon-${ typeMap[type] }` : '');
+        return iconClass || (type && typeMap[type] ? `tea-icon-${ typeMap[type] }` : '');
       },
 
       confirmButtonClasses() {
