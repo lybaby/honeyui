@@ -331,7 +331,7 @@
             style={[ titleStyle, { backgroundColor }]}
           >
             <div class="tea-menu__text">{$slots.title}</div>
-            {expandNo === false ? <i class="tea-icon tea-icon-arrowdown" ></i> : ''}
+            {expandNo === false ? <i class={{'tea-icon': true, 'tea-icon-arrowdown': opened, 'tea-icon-arrowup': !opened }} ></i> : ''}
           </a>
           {expandNo === false ? this.isMenuPopup ? popupMenu : inlineMenu : ''}
         </li>

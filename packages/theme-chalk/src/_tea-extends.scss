@@ -44,3 +44,10 @@
 .tea-menu__submenu.is-opened .tea-menu__list{
   display: block;
 }
+
+
+.tea-menu__submenu .tea-icon-arrowup{
+  position: absolute;
+  left: 160px;
+  top: 10px;
+}
