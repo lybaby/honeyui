@@ -347,34 +347,7 @@
             </el-dropdown>
           </li>
 
-          <!-- 语言选择器 -->
-          <li class="nav-item lang-item">
-            <el-dropdown
-              trigger="click"
-              class="nav-dropdown nav-lang"
-              :class="{ 'is-active': langDropdownVisible }">
-              <span>
-                {{ displayedLang }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleLangDropdownToggle">
-                <el-dropdown-item
-                  v-for="(value, key) in langs"
-                  :key="key"
-                  @click.native="switchLang(key)">
-                  {{ value }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </li>
-          
-          <!--theme picker-->
-          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker v-if="!$isEle"></theme-picker>
-          </li>
+         
         </ul>
       </div>
     </header>

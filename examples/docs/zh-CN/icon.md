@@ -4,14 +4,14 @@
 
 ### 使用方法
 
-直接通过设置类名为 `el-icon-iconName` 来使用即可。例如：
+直接通过设置类名为 `tea-icon-iconName` 来使用即可。例如：
 
 :::demo
 ```html
-<i class="el-icon-edit"></i>
-<i class="el-icon-share"></i>
-<i class="el-icon-delete"></i>
-<el-button type="primary" icon="el-icon-search">搜索</el-button>
+<i class="tea-icon tea-icon-pencil"></i>
+<i class="tea-icon tea-icon-wechat"></i>
+<i class="tea-icon tea-icon-delete"></i>
+<el-button type="icon" icon="search">搜索</el-button>
 
 ```
 :::
@@ -22,7 +22,7 @@
   <li v-for="name in $icon" :key="name">
     <span>
       <i :class="'tea-icon-' + name" class="tea-icon"></i>
-      <span class="icon-name">{{'el-icon-' + name}}</span>
+      <span class="icon-name">{{'tea-icon-' + name}}</span>
     </span>
   </li>
 </ul>

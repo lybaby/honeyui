@@ -1,0 +1,34 @@
+{
+  "name": "honey-ui-doc-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve-handler": "^6.0.1"
+  },
+  "taf": {
+    "app": "CommunityPlatform",
+    "service": "honeyuidoc",
+    "set": "",
+    "containers": [],
+    "platform": "213.taf.wsd.com",
+    "node": "6768",
+    "version": {
+      "major": 2,
+      "minor": 5,
+      "build": 3
+    },
+    "exclude": [
+      "package-lock.json",
+      "npm-shrinkwrap.json",
+      "node_modules"
+    ],
+    "include": {}
+  }
+}
