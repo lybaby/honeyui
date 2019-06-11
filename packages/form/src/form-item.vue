@@ -12,7 +12,7 @@
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
-      <div class="tea-form__label">
+      <div class="tea-form__label" :class="{'is-required': isRequired || required}">
         <label :for="labelFor" class="el-form-item__label-x" :style="labelStyle" v-if="label || $slots.label">
           <slot name="label">{{label + form.labelSuffix}}</slot>
         </label>
