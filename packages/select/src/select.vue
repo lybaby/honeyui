@@ -760,6 +760,9 @@
             this.menuVisibleOnFocus = false;
           } else {
             this.visible = !this.visible;
+            if (this.visible) {
+              this.$emit('on-dropdown');
+            }
           }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference1).focus();

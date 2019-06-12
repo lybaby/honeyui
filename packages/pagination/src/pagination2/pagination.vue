@@ -37,7 +37,7 @@
       </a>
 
       <div class="tea-pagination__manualinput" data-page-select is-disabled="true">
-        <input type="text" class="tea-input tea-pagination__inputpagenum" v-model="currentPage">
+        <input type="text" class="tea-input tea-pagination__inputpagenum" @change="handleChange" v-model.number="currentPage">
         <span class="tea-pagination__totalpage">/{{pageCount}}页</span>
       </div>
       <a title="下一页" class="tea-pagination__turnbtn tea-pagination__nextbtn"
@@ -91,7 +91,8 @@ export default {
     pagerCount(val, old) {
       // recalculate currentPage
       console.log(val, old);
-      const currentItem = (this.currentPage - 1) * old + 1;
+      const cp = parseInt(this.currentPage, 10);
+      const currentItem = (cp - 1) * old + 1;
       this.currentPage = Math.ceil(currentItem / val);
       this.sizeChange();
       this.pageChange();
@@ -102,13 +103,27 @@ export default {
       return Math.ceil(this.total / this.pagerCount);
     },
     canGoPrev() {
-      return this.currentPage > 1;
+      const cp = parseInt(this.currentPage, 10);
+      return cp > 1;
     },
     canGoNext() {
-      return this.currentPage < this.pageCount;
+      const cp = parseInt(this.currentPage, 10);
+      return cp < this.pageCount;
     }
   },
   methods: {
+    handleChange() {
+      console.log('change');
+      let cp = ('' + this.currentPage).replace(/\D/g, '');
+      if (cp < 1) {
+        cp = 1;
+      }
+      if (cp > this.pageCount) {
+        cp = this.pageCount;
+      }
+      this.currentPage = cp;
+      this.pageChange();
+    },
     gotoFirstPage() {
       if (!this.canGoPrev) return;
       this.currentPage = 1;
@@ -130,9 +145,11 @@ export default {
       this.pageChange();
     },
     pageChange() {
+      console.log('pc', this.currentPage);
       this.$emit('current-change', this.currentPage);
     },
     sizeChange() {
+      console.log('sc', this.pagerCount);
       this.$emit('size-change', this.pagerCount);
     }
   }
