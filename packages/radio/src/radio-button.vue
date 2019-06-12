@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio-button"
+    class="el-radio-button-x"
     :class="[
-      size ? 'el-radio-button--' + size : '',
+      size ? 'el-radio-button--x-' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
       { 'is-focus': focus }
@@ -26,7 +26,11 @@
       @blur="focus = false"
     >
     <span
-      class="el-radio-button__inner"
+      class="tea-btn"
+      :class="{
+          'is-selected': value === label,
+          'is-disabled': isDisabled
+        }"
       :style="value === label ? activeStyle : null"
       @keydown.stop>
       <slot></slot>

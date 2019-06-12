@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-radio-group"
+    :class="{'el-radio-group': !segment, 'tea-segment': segment}"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -34,7 +34,11 @@
       size: String,
       fill: String,
       textColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      segment: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
