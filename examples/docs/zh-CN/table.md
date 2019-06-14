@@ -1008,7 +1008,7 @@
       prop="name"
       label="姓名"
       width="180"
-      :filters="[{ text: '王小虎', value: '王小虎' }, { text: '蔡小翔', value: '蔡小翔' }, { text: '佘大便', value: '佘大便' }]"
+      :filters="[{ text: '王小虎', value: '王小虎' }, { text: '蔡小翔', value: '蔡小翔' }, { text: '佘小翔', value: '佘小翔' }]"
       :filter-method="filterName"
       :filter-multiple="false">
     </el-table-column>
@@ -1044,7 +1044,7 @@
           tag: '家'
         }, {
           date: '2016-05-04',
-          name: '佘大便',
+          name: '佘小翔',
           address: '上海市普陀区金沙江路 1517 弄',
           tag: '公司'
         }, {
