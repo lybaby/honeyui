@@ -30,7 +30,7 @@
 
 <script>
 import bus from '../../bus.js';
-import { getVars } from '../theme/loader/api.js';
+// import { getVars } from '../theme/loader/api.js';
 import mainPanel from './main';
 import actionPanel from './action';
 import {
@@ -92,28 +92,28 @@ export default {
     showConfigurator() {
       if (this.init) return;
       this.$nextTick(() => {
-        const loading = this.$loading({
-          target: this.$refs.configurator
-        });
-        let defaultConfig;
-        getVars()
-          .then(res => {
-            defaultConfig = res;
-          })
-          .catch(err => {
-            this.onError(err);
-          })
-          .then(() => {
-            setTimeout(() => {
-              if (defaultConfig) {
-                this.defaultConfig = defaultConfig;
-                this.setSelectOption();
-                this.filterCurrentConfig();
-                this.init = true;
-              }
-              loading.close();
-            }, 300); // action after transition
-          });
+        // const loading = this.$loading({
+        //   target: this.$refs.configurator
+        // });
+        // let defaultConfig;
+        // getVars()
+        //   .then(res => {
+        //     defaultConfig = res;
+        //   })
+        //   .catch(err => {
+        //     this.onError(err);
+        //   })
+        //   .then(() => {
+        //     setTimeout(() => {
+        //       if (defaultConfig) {
+        //         this.defaultConfig = defaultConfig;
+        //         this.setSelectOption();
+        //         this.filterCurrentConfig();
+        //         this.init = true;
+        //       }
+        //       loading.close();
+        //     }, 300); // action after transition
+        //   });
       });
     },
     setSelectOption() {

@@ -168,15 +168,15 @@ route.push({
   component: require('./play/index.vue')
 });
 
-let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
-let defaultPath = '/en-US';
-if (userLanguage.indexOf('zh-') !== -1) {
-  defaultPath = '/zh-CN';
-} else if (userLanguage.indexOf('es') !== -1) {
-  defaultPath = '/es';
-} else if (userLanguage.indexOf('fr') !== -1) {
-  defaultPath = '/fr-FR';
-}
+// let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
+let defaultPath = '/zh-CN';
+// if (userLanguage.indexOf('zh-') !== -1) {
+//   defaultPath = '/zh-CN';
+// } else if (userLanguage.indexOf('es') !== -1) {
+//   defaultPath = '/es';
+// } else if (userLanguage.indexOf('fr') !== -1) {
+//   defaultPath = '/fr-FR';
+// }
 
 route = route.concat([{
   path: '/',

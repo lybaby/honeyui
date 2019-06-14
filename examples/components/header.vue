@@ -359,7 +359,7 @@
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import themeLoader from './theme/loader';
-  import { getTestEle } from './theme/loader/api.js';
+  // import { getTestEle } from './theme/loader/api.js';
   import bus from '../bus';
   import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
 
@@ -404,14 +404,14 @@
       }
     },
     mounted() {
-      getTestEle()
-        .then(() => {
-          this.$isEle = true;
-          ga('send', 'event', 'DocView', 'Inner');
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      // getTestEle()
+      //   .then(() => {
+      //     this.$isEle = true;
+      //     ga('send', 'event', 'DocView', 'Inner');
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
     },
     methods: {
       switchVersion(version) {

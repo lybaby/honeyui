@@ -5,7 +5,14 @@
 推荐使用 npm 的方式安装，它能更好地和 [webpack](https://webpack.js.org/) 打包工具配合使用。
 
 ```shell
-tnpm install --save @tencent/honey-ui@2.9.1-r3
+tnpm install --save @tencent/honey-ui@2.9.1-r6
+```
+
+```javascript
+import HoneyUI from '@tencent/honey-ui'
+import '@tencent/honey-ui/lib/theme-chalk/index.css'
+
+Vue.use(HoneyUI)
 ```
 
 ### CDN

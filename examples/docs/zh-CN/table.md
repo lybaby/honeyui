@@ -1007,7 +1007,10 @@
     <el-table-column
       prop="name"
       label="姓名"
-      width="180">
+      width="180"
+      :filters="[{ text: '王小虎', value: '王小虎' }, { text: '蔡小翔', value: '蔡小翔' }, { text: '佘大便', value: '佘大便' }]"
+      :filter-method="filterName"
+      :filter-multiple="false">
     </el-table-column>
     <el-table-column
       prop="address"
@@ -1020,7 +1023,7 @@
       width="100"
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
       :filter-method="filterTag"
-      filter-placement="bottom-end">
+      filter-placement="bottom-start">
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"
@@ -1041,7 +1044,7 @@
           tag: '家'
         }, {
           date: '2016-05-04',
-          name: '王小虎',
+          name: '佘大便',
           address: '上海市普陀区金沙江路 1517 弄',
           tag: '公司'
         }, {
@@ -1051,7 +1054,7 @@
           tag: '家'
         }, {
           date: '2016-05-03',
-          name: '王小虎',
+          name: '蔡小翔',
           address: '上海市普陀区金沙江路 1516 弄',
           tag: '公司'
         }]
@@ -1069,6 +1072,9 @@
       },
       filterTag(value, row) {
         return row.tag === value;
+      },
+      filterName(value, row) {
+        return row.name === value;
       },
       filterHandler(value, row, column) {
         const property = column['property'];
