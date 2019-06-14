@@ -116,20 +116,20 @@ export default {
                       {
                         column.sortable ? (<span
                           class="caret-wrapper"
-                          on-click={ ($event) => this.handleSortClick($event, column) }>
-                          <i class="sort-caret ascending"
-                            on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
-                          </i>
-                          <i class="sort-caret descending"
-                            on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
-                          </i>
+                          on-click={ ($event) => this.handleSortClick($event, column) } style={{cursor: 'pointer'}}>
+                          { column.order === 'ascending'
+                            ? <i class="tea-icon tea-icon-sortup"></i>
+                            : (column.order === 'descending'
+                              ? <i class="tea-icon tea-icon-sortdown"></i>
+                              : <i class="tea-icon tea-icon-sort"></i>)
+                          }
                         </span>) : ''
                       }
                       {
                         column.filterable ? (<span
                           class="el-table__column-filter-trigger"
                           on-click={ ($event) => this.handleFilterClick($event, column) }>
-                          <i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i>
+                          <i type="filter" class="tea-icon tea-icon-filter"></i>
                         </span>) : ''
                       }
                     </div>
@@ -294,8 +294,15 @@ export default {
     handleFilterClick(event, column) {
       event.stopPropagation();
       const target = event.target;
-      let cell = target.tagName === 'TH' ? target : target.parentNode;
-      cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
+
+      let cell = target;
+
+      try {
+        cell = target.parentNode.parentNode;
+      } catch (err) {
+        cell = target;
+      }
+
       const table = this.$parent;
 
       let filterPanel = this.filterPanels[column.id];
