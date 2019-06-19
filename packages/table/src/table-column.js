@@ -92,7 +92,8 @@ export default {
     },
 
     realAlign() {
-      return this.align ? 'is-' + this.align : null;
+      // return this.align ? 'is-' + this.align : null;
+      return this.align ? 'tea-text-' + this.align : null;
     },
 
     realHeaderAlign() {
@@ -185,6 +186,14 @@ export default {
           if (column.showOverflowTooltip) {
             props.class += ' el-tooltip';
             props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
+          }
+          if (column.showOverflowTooltip) {
+            return (<div { ...props }>
+              <span class="tea-text-overflow">
+                { prefix }
+                { children }
+              </span>
+            </div>);
           }
           return (<div { ...props }>
             { prefix }
