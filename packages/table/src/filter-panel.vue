@@ -7,12 +7,19 @@
       v-show="showPopper">
       <div class="el-table-filter__content">
         <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group class="tea-list tea-list--option tea-list--checkoption" v-model="filteredValue">
+          <div class="tea-list tea-list--option tea-list--checkoption">
             <el-checkbox
-              v-for="filter in filters"
-              :key="filter.value"
-              :label="filter.value">{{ filter.text }}</el-checkbox>
-          </el-checkbox-group>
+              v-model="checkAll" 
+              :indeterminate="filteredValue.length > 0 && filteredValue.length < filters.length"
+              @change="handleCheckAll">全选</el-checkbox>
+            <el-checkbox-group class="" v-model="filteredValue" @change="optionChange">
+              <el-checkbox
+                v-for="filter in filters"
+                :key="filter.value"
+                :label="filter.value">{{ filter.text }}</el-checkbox>
+            </el-checkbox-group>
+          </div>
+          
         </el-scrollbar>
       </div>
       <div class="tea-dropdown-box__footer">
@@ -94,8 +101,18 @@
         }, 16);
       },
 
+      handleCheckAll(val) {
+        this.filteredValue = val ? this.filters.map(filter=>filter.value) : [];
+        // this.isIndeterminate = false;
+      },
+
+      optionChange() {
+        this.checkAll = this.filteredValue.length === this.filters.length;
+      },
+
       handleReset() {
         this.filteredValue = [];
+        this.checkAll = false;
         this.confirmFilter(this.filteredValue);
         this.handleOutsideClick();
       },
@@ -125,7 +142,8 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        checkAll: false
       };
     },
 

@@ -1,6 +1,6 @@
 {
   "name": "@tencent/honey-ui",
-  "version": "2.9.1-r9",
+  "version": "2.9.1-r10",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
