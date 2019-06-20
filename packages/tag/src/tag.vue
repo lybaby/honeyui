@@ -6,7 +6,10 @@
       closable: Boolean,
       type: String,
       hit: Boolean,
-      disableTransitions: Boolean,
+      disableTransitions: {
+        type: Boolean,
+        default: true
+      },
       color: String,
       size: String,
       effect: {
@@ -32,24 +35,26 @@
       }
     },
     render(h) {
-      const { type, tagSize, hit, effect } = this;
+      const { type, /* tagSize, */hit, effect, closable } = this;
       const classes = [
-        'el-tag',
+        'tea-tag',
         type ? `el-tag--${type}` : '',
-        tagSize ? `el-tag--${tagSize}` : '',
+        // tagSize ? `el-tag--${tagSize}` : '',
         effect ? `el-tag--${effect}` : '',
-        hit && 'is-hit'
+        hit && 'is-hit',
+        closable ? 'tea-tag--edit' : ''
       ];
       const tagEl = (
-        <span
+        <div
           class={ classes }
           style={{ backgroundColor: this.color }}
           on-click={ this.handleClick }>
-          { this.$slots.default }
+          <span>{ this.$slots.default }</span>
+
           {
-            this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>
+            this.closable && <a href="#" type="close" class="tea-icon tea-icon-dismiss" on-click={ this.handleClose }></a>
           }
-        </span>
+        </div>
       );
 
       return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center">{ tagEl }</transition>;

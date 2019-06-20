@@ -56,7 +56,7 @@
   :key="tag"
   v-for="tag in dynamicTags"
   closable
-  :disable-transitions="false"
+  :disable-transitions="true"
   @close="handleClose(tag)">
   {{tag}}
 </el-tag>
