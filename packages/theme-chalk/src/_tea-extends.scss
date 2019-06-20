@@ -61,3 +61,12 @@
 .tea-menu__submenu.is-opened .tea-menu__list {
   display: block;
 }
+
+.is-error {
+  .tea-dropdown {
+    .tea-dropdown-btn.tea-dropdown__header {
+      color: #e1504a;
+      border-color: #e1504a;
+    }
+  }
+}
