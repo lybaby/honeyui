@@ -8,8 +8,11 @@
 ```html
 <div class="block">
   <span class="demonstration">页数较少时的效果</span>
+  <el-button @click="changePage">add page</el-button>
+  <span>{{currentPage1}}</span>
   <el-pagination
     layout="prev, pager, next"
+    :current-page.sync="currentPage1"
     :total="50">
   </el-pagination>
 </div>
@@ -20,6 +23,28 @@
     :total="1000">
   </el-pagination>
 </div>
+<script>
+  export default {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
+    data() {
+      return {
+        currentPage1: 6
+      };
+    },
+    methods: {
+      changePage() {
+        this.currentPage1++
+      }
+    }
+  }
+</script>
 ```
 :::
 

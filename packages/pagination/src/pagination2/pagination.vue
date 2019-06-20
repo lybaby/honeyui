@@ -9,7 +9,7 @@
     <div class="tea-pagination__operate">
       <!--if start-->
       <span class="tea-pagination__text">每页显示行</span>
-      <el-select v-model="pagerCount" placeholder="请选择" type="pagination">
+      <el-select v-model="internalPagerCount" placeholder="请选择" type="pagination">
         <el-option
           v-for="item in pageSizes"
           :key="item"
@@ -37,7 +37,7 @@
       </a>
 
       <div class="tea-pagination__manualinput" data-page-select is-disabled="true">
-        <input type="text" class="tea-input tea-pagination__inputpagenum" @change="handleChange" v-model.number="currentPage">
+        <input type="text" class="tea-input tea-pagination__inputpagenum" @change="handleChange" v-model.number="internalCurrentPage">
         <span class="tea-pagination__totalpage">/{{pageCount}}页</span>
       </div>
       <a title="下一页" class="tea-pagination__turnbtn tea-pagination__nextbtn"
@@ -75,12 +75,31 @@ export default {
     pageSizes: {
       type: Array,
       default: () => [50, 40, 30, 20, 10]
+    },
+    pagerCount: {
+      type: Number,
+      default: 10
+    },
+    currentPage: {
+      type: Number,
+      default: 1
     }
   },
   data() {
+    // debugger;
+    let val = this.currentPage;
+    const pageCount = Math.ceil(this.total / this.pagerCount);
+    if (val < 1) {
+      val = 1;
+      this.$emit('update:currentPage', val);
+    }
+    if (val > pageCount) {
+      val = pageCount;
+      this.$emit('update:currentPage', val);
+    }
     return {
-      pagerCount: 10,
-      currentPage: 1
+      internalPagerCount: this.pagerCount,
+      internalCurrentPage: val
     };
   },
   components: {
@@ -88,69 +107,89 @@ export default {
     ElOption
   },
   watch: {
-    pagerCount(val, old) {
+    internalPagerCount(val, old) {
       // recalculate currentPage
-      console.log(val, old);
-      const cp = parseInt(this.currentPage, 10);
+      // console.log(val, old);
+      const cp = parseInt(this.internalCurrentPage, 10);
       const currentItem = (cp - 1) * old + 1;
-      this.currentPage = Math.ceil(currentItem / val);
+      this.internalCurrentPage = Math.ceil(currentItem / val);
       this.sizeChange();
       this.pageChange();
+    },
+    currentPage(val) {
+      // console.log('cp');
+      if (val < 1) {
+        val = 1;
+        this.$emit('update:currentPage', val);
+        return;
+      }
+      if (val > this.pageCount) {
+        val = this.pageCount;
+        this.$emit('update:currentPage', val);
+        return;
+      }
+      if (val !== this.internalCurrentPage) {
+        this.internalCurrentPage = val;
+        this.pageChange();
+      }
     }
   },
   computed: {
     pageCount() {
-      return Math.ceil(this.total / this.pagerCount);
+      return Math.ceil(this.total / this.internalPagerCount);
     },
     canGoPrev() {
-      const cp = parseInt(this.currentPage, 10);
+      const cp = parseInt(this.internalCurrentPage, 10);
       return cp > 1;
     },
     canGoNext() {
-      const cp = parseInt(this.currentPage, 10);
+      const cp = parseInt(this.internalCurrentPage, 10);
       return cp < this.pageCount;
     }
   },
   methods: {
     handleChange() {
-      console.log('change');
-      let cp = ('' + this.currentPage).replace(/\D/g, '');
+      // console.log('change');
+      let cp = Number(('' + this.internalCurrentPage).replace(/\D/g, ''));
       if (cp < 1) {
         cp = 1;
       }
       if (cp > this.pageCount) {
         cp = this.pageCount;
       }
-      this.currentPage = cp;
+      this.internalCurrentPage = cp;
       this.pageChange();
     },
     gotoFirstPage() {
       if (!this.canGoPrev) return;
-      this.currentPage = 1;
+      this.internalCurrentPage = 1;
       this.pageChange();
     },
     gotoLastPage() {
       if (!this.canGoNext) return;
-      this.currentPage = this.pageCount;
+      this.internalCurrentPage = this.pageCount;
       this.pageChange();
     },
     gotoNextPage() {
       if (!this.canGoNext) return;
-      this.currentPage++;
+      this.internalCurrentPage++;
       this.pageChange();
+      this.$emit('next-click');
     },
     gotoPrevPage() {
       if (!this.canGoPrev) return;
-      this.currentPage--;
+      this.internalCurrentPage--;
       this.pageChange();
+      this.$emit('prev-click');
     },
     pageChange() {
-      console.log('pc', this.currentPage);
-      this.$emit('current-change', this.currentPage);
+      // console.log('pc', this.internalCurrentPage);
+      this.$emit('current-change', this.internalCurrentPage);
+      this.$emit('update:currentPage', parseInt(this.internalCurrentPage, 10));
     },
     sizeChange() {
-      console.log('sc', this.pagerCount);
-      this.$emit('size-change', this.pagerCount);
+      // console.log('sc', this.internalPagerCount);
+      this.$emit('size-change', this.internalPagerCount);
     }
   }
 };
