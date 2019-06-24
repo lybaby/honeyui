@@ -405,6 +405,7 @@
         // }
 
         // if (target.tagName !== 'TD') return;
+        if (!hasClass(target, 'tea-calendar__cell') || target.dataset.index === undefined) return;
 
         const row = target.parentNode.dataset.index; // target.parentNode.rowIndex - 1;
         const column = this.selectionMode === 'week' ? 1 : /* target.cellIndex */target.dataset.index;
