@@ -18,7 +18,7 @@
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <i slot="prefix"
+    <!-- <i slot="prefix"
       class="el-input__icon"
       :class="triggerClass"
       @click="handleFocus">
@@ -28,10 +28,10 @@
       @click="handleClickIcon"
       :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
-    </i>
+    </i> -->
   </el-input>
   <div
-    class="el-date-editor el-range-editor el-input__inner"
+    class="el-date-editor-x el-range-editor-x el-input__inner-x tea-datepicker"
     :class="[
       'el-date-editor--' + type,
       pickerSize ? `el-range-editor--${ pickerSize }` : '',
@@ -45,8 +45,11 @@
     ref="reference"
     v-clickoutside="handleClose"
     v-else>
-    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
-    <input
+    <!-- <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i> -->
+    <div class="tea-datepicker__input">
+        <input type="input" style="background-color: white" class="tea-input" :value="rangeDisplayValue" placeholder="开始日期 至 结束日期" readonly>
+    </div>
+    <!-- <input
       autocomplete="off"
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
@@ -57,11 +60,11 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
-      class="el-range-input">
-    <slot name="range-separator">
+      class="el-range-input"> -->
+    <!-- <slot name="range-separator">
       <span class="el-range-separator">{{ rangeSeparator }}</span>
-    </slot>
-    <input
+    </slot> -->
+    <!-- <input
       autocomplete="off"
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
@@ -72,13 +75,13 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
-      class="el-range-input">
-    <i
+      class="el-range-input"> -->
+    <!-- <i
       @click="handleClickIcon"
       v-if="haveTrigger"
       :class="[showClose ? '' + clearIcon : '']"
       class="el-input__icon el-range__close-icon">
-    </i>
+    </i> -->
   </div>
 </template>
 
@@ -517,7 +520,9 @@ export default {
         return '';
       }
     },
-
+    rangeDisplayValue() {
+      return this.displayValue ? ((this.displayValue && this.displayValue[0]) + '~' + (this.displayValue && this.displayValue[1])) : '';
+    },
     parsedValue() {
       if (!this.value) return this.value; // component value is not set
       if (this.type === 'time-select') return this.value; // time-select does not require parsing, this might change in next major version

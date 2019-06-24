@@ -38,6 +38,7 @@
 
 <script>
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, prevDate, nextDate, isDate, clearTime as _clearTime} from 'element-ui/src/utils/date-util';
+  import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
   import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
@@ -277,14 +278,16 @@
         }
 
         if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
-          classes.push('in-range');
-
+          classes.push('in-range-x');
+          
           if (cell.start) {
             classes.push('start-date');
-          }
-
-          if (cell.end) {
+            classes.push('is-selected tea-calendar__day--start');
+          } else if (cell.end) {
             classes.push('end-date');
+            classes.push('is-selected tea-calendar__day--end');
+          } else {
+            classes.push('tea-calendar__day--in-range');
           }
         }
 
@@ -358,15 +361,19 @@
 
         let target = event.target;
         if (target.tagName === 'SPAN') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
+          // target = target.parentNode.parentNode;
           target = target.parentNode;
         }
-        if (target.tagName !== 'TD') return;
+        // if (target.tagName === 'DIV') {
+        //   target = target.parentNode;
+        // }
 
-        const row = target.parentNode.rowIndex - 1;
-        const column = target.cellIndex;
+        // if (target.tagName !== 'TD') return;
+        if (!hasClass(target, 'tea-calendar__cell') || target.dataset.index === undefined) return;
+
+        const row = target.parentNode.dataset.index; // target.parentNode.rowIndex - 1;
+        const column = this.selectionMode === 'week' ? 1 : /* target.cellIndex */target.dataset.index;
+        const cell = this.rows[row][column];
 
         // can not select disabled date
         if (this.rows[row][column].disabled) return;

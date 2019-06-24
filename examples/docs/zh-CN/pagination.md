@@ -13,7 +13,8 @@
   <el-pagination
     layout="prev, pager, next"
     :current-page.sync="currentPage1"
-    :total="50">
+    :total="50"
+    @current-change="handleCurrentChange">
   </el-pagination>
 </div>
 <div class="block">
@@ -25,14 +26,6 @@
 </div>
 <script>
   export default {
-    methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
-    },
     data() {
       return {
         currentPage1: 6
@@ -41,6 +34,14 @@
     methods: {
       changePage() {
         this.currentPage1++
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        this.currentPage1 = val
+        console.log(typeof val)
+        console.log(`当前页: ${val}`);
       }
     }
   }

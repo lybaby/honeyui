@@ -70,3 +70,15 @@
     }
   }
 }
+
+.tea-calendar__header {
+  .tea-btn {
+    margin-left: 0 !important;
+  }
+}
+
+.el-date-range-picker__time-header {
+  .tea-input {
+    width: 120px !important;
+  }
+}
