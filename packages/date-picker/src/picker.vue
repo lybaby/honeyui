@@ -1,6 +1,9 @@
 <template>
   <el-input
-    :class="['el-date-editor--' + type, this.type.indexOf('time') !== -1 ? 'tea-timepicker__input':'tea-datepicker__input']"
+    :class="[
+      'el-date-editor--' + type, 
+      this.type.indexOf('time') !== -1 && this.type.indexOf('datetime') === -1? 'tea-timepicker__input':'tea-datepicker__input'
+    ]"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
     :disabled="pickerDisabled"
     :size="pickerSize"
