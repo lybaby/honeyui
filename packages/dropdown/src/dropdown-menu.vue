@@ -1,8 +1,10 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
-      <slot></slot>
-    </ul>
+    <div class="el-dropdown-menu-x tea-dropdown-box el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
+      <ul class="tea-list tea-list--option tea-list--group">
+        <slot></slot>
+      </ul>
+    </div>
   </transition>
 </template>
 <script>
@@ -18,7 +20,7 @@
     props: {
       visibleArrow: {
         type: Boolean,
-        default: true
+        default: false
       },
       arrowOffset: {
         type: Number,

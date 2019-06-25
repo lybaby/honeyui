@@ -1,6 +1,6 @@
 <template>
   <li
-    class="el-dropdown-menu__item"
+    class="el-dropdown-menu__item-x"
     :class="{
       'is-disabled': disabled,
       'el-dropdown-menu__item--divided': divided
