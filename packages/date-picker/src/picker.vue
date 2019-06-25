@@ -886,8 +886,8 @@ export default {
           this.refInput[0].setSelectionRange(start, end);
           this.refInput[0].focus();
         } else if (pos === 'max') {
-          this.refInput[1].setSelectionRange(start, end);
-          this.refInput[1].focus();
+          this.refInput[0].setSelectionRange(start + 9, end + 9);
+          this.refInput[0].focus();
         }
       });
     },

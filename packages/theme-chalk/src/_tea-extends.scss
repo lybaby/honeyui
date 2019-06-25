@@ -91,3 +91,16 @@
     }
   }
 }
+.el-time-panel__footer {
+  height: 48px !important;
+  padding: 10px !important;
+  .tea-btn:first-child {
+    margin-right: 5px;
+  }
+}
+
+.el-date-editor--datetimerange {
+  .tea-input {
+    width: 270px !important;
+  }
+}

@@ -43,13 +43,14 @@
       <div class="el-time-panel__footer">
         <button
           type="button"
-          class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ t('el.datepicker.cancel') }}</button>
-        <button
-          type="button"
-          class="el-time-panel__btn confirm"
+          class="el-time-panel__btn-x tea-btn confirm"
           @click="handleConfirm()"
           :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
+        <button
+          type="button"
+          class="el-time-panel__btn-x tea-btn tea-btn--weak cancel"
+          @click="handleCancel()">{{ t('el.datepicker.cancel') }}</button>
+        
       </div>
     </div>
   </transition>
