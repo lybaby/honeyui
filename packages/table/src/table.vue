@@ -4,6 +4,7 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'tea-table--bordered': border || isGroup,
+      'tea-table--inner-bordered': innerBorder,
       'el-table--hidden': isHidden,
       'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,
@@ -261,6 +262,8 @@
       stripe: Boolean,
 
       border: Boolean,
+
+      innerBorder: Boolean,
 
       rowKey: [String, Function],
 
