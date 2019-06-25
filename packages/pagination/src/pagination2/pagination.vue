@@ -88,15 +88,15 @@ export default {
   data() {
     // debugger;
     let val = this.currentPage;
-    const pageCount = Math.ceil(this.total / this.pagerCount);
-    if (val < 1) {
-      val = 1;
-      this.$emit('update:currentPage', val);
-    }
-    if (val > pageCount) {
-      val = pageCount;
-      this.$emit('update:currentPage', val);
-    }
+    // const pageCount = Math.ceil(this.total / this.pagerCount);
+    // if (val < 1) {
+    //   val = 1;
+    //   this.$emit('update:currentPage', val);
+    // }
+    // if (val > pageCount) {
+    //   val = pageCount;
+    //   this.$emit('update:currentPage', val);
+    // }
     return {
       internalPagerCount: this.pagerCount,
       internalCurrentPage: val
@@ -117,6 +117,9 @@ export default {
       this.pageChange();
     },
     currentPage(val) {
+      if (!this.total) {
+        return;
+      }
       // console.log('cp');
       if (val < 1) {
         val = 1;

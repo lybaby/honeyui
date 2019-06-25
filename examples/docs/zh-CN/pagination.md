@@ -28,7 +28,7 @@
   export default {
     data() {
       return {
-        currentPage1: 6
+        currentPage1: 1
       };
     },
     methods: {
