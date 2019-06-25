@@ -279,7 +279,7 @@
 
         if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
           classes.push('in-range-x');
-          
+
           if (cell.start) {
             classes.push('start-date');
             classes.push('is-selected tea-calendar__day--start');
@@ -373,7 +373,7 @@
 
         const row = target.parentNode.dataset.index; // target.parentNode.rowIndex - 1;
         const column = this.selectionMode === 'week' ? 1 : /* target.cellIndex */target.dataset.index;
-        const cell = this.rows[row][column];
+        // const cell = this.rows[row][column];
 
         // can not select disabled date
         if (this.rows[row][column].disabled) return;
