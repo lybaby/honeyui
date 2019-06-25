@@ -104,3 +104,10 @@
     width: 270px !important;
   }
 }
+
+.el-date-editor--timerange {
+  .tea-datepicker__input:after {
+    background-position: 99.5% 82.74000000000001%;
+    background-size: 1350% 1331.25%;
+  }
+}
