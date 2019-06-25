@@ -24,10 +24,10 @@
           <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="margin-right: 10px"></el-date-picker>
           <el-time-picker placeholder="选择时间" v-model="form.date2"></el-time-picker>
       </el-form-item>
-      <el-form-item label="即时配送">
+      <el-form-item label="即时配送" align>
         <el-switch v-model="form.delivery"></el-switch>
       </el-form-item>
-      <el-form-item label="活动性质">
+      <el-form-item label="活动性质" align>
         <el-checkbox-group v-model="form.type">
           <el-checkbox label="美食/餐厅线上活动" name="type" block></el-checkbox>
           <el-checkbox label="地推活动" name="type" block></el-checkbox>
@@ -35,13 +35,13 @@
           <el-checkbox label="单纯品牌曝光" name="type" block></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="特殊资源">
+      <el-form-item label="特殊资源" align>
         <el-radio-group v-model="form.resource">
           <el-radio label="线上品牌商赞助" block></el-radio>
           <el-radio label="线下场地免费" block></el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="活动形式">
+      <el-form-item label="活动形式" align>
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>
@@ -195,10 +195,10 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
       </el-form-item>
     </el-col>
   </el-form-item>
-  <el-form-item label="即时配送" prop="delivery">
+  <el-form-item label="即时配送" prop="delivery" align>
     <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
-  <el-form-item label="活动性质" prop="type">
+  <el-form-item label="活动性质" prop="type" align>
     <el-checkbox-group v-model="ruleForm.type">
       <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
       <el-checkbox label="地推活动" name="type"></el-checkbox>
@@ -206,13 +206,13 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
       <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
     </el-checkbox-group>
   </el-form-item>
-  <el-form-item label="特殊资源" prop="resource">
+  <el-form-item label="特殊资源" prop="resource" align>
     <el-radio-group v-model="ruleForm.resource">
       <el-radio label="线上品牌商赞助"></el-radio>
       <el-radio label="线下场地免费"></el-radio>
     </el-radio-group>
   </el-form-item>
-  <el-form-item label="活动形式" prop="desc">
+  <el-form-item label="活动形式" prop="desc" align>
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
@@ -626,7 +626,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
 | inline-message  | 以行内形式展示校验信息 | boolean | — | false |
 | size  | 用于控制该表单域下组件的尺寸 | string | medium / small / mini | - |
-
+| align  | 用于控制该表单域下是否对齐 | boolean |  | false |
 ### Form-Item Slot
 | name | 说明 |
 |------|--------|

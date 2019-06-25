@@ -19,7 +19,7 @@
       </div>
       
     </label-wrap>
-    <div class="el-form-item__content-x tea-form__controls" :class="{'is-error': validateState === 'error'}" :style="contentStyle">
+    <div class="el-form-item__content-x tea-form__controls" :class="{'is-error': validateState === 'error', 'tea-form__controls--text': align}" :style="contentStyle">
       <slot></slot>
       <template v-if="validateState === 'error' && showMessage && form.showMessage">
         <b class="tea-icon tea-icon-valid"></b>
@@ -87,7 +87,11 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      align: {
+        type: Boolean,
+        default: false
+      }
     },
     components: {
       // use this component to calculate auto width
