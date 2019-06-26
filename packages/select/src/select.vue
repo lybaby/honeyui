@@ -124,7 +124,23 @@
         :append-to-body="popperAppendToBody"
         :placement="type === 'pagination' ? 'top-start':'bottom-start'"
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
-        v-show="visible && emptyText !== false">
+        v-show="visible/* && emptyText !== false */">
+        <form class="tea-form--search" action="" v-if="filterable">
+          <div class="tea-search tea-search--simple">
+            <div class="tea-search__inner">
+              <input 
+                class="tea-input tea-input--search" 
+                placeholder="" 
+                @keyup="debouncedOnInputChange"
+                @paste="debouncedOnInputChange"
+                v-model="query"
+              />
+            </div>
+            <button type="button" class="tea-btn tea-btn--icon tea-btn--search">
+              <i class="tea-icon tea-icon-search"></i>
+            </button>
+          </div>
+        </form>
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
@@ -139,7 +155,15 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+        <ul class="tea-list tea-list--option" v-if="loading">
+          <li class="tea-list__label tea-text-center">
+            <span class="tea-action-state">
+                <i class="tea-icon tea-icon-loading tea-mr-2n"></i>
+                <span class="tea-action-state__text">搜索中</span>
+            </span>
+          </li>
+        </ul>
+        <template v-if="emptyText && !loading && (!allowCreate || (allowCreate && options.length === 0 ))">
           <slot name="empty" v-if="$slots.empty"></slot>
           <p class="el-select-dropdown__empty" v-else>
             {{ emptyText }}
@@ -431,7 +455,7 @@
             this.query = this.remote ? '' : this.selectedLabel;
             this.handleQueryChange(this.query);
             if (this.multiple) {
-              this.$refs.input.focus();
+              this.$refs.input && this.$refs.input.focus();
             } else {
               if (!this.remote) {
                 this.broadcast('ElOption', 'queryChange', '');
@@ -493,7 +517,7 @@
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.$nextTick(() => {
-            const length = this.$refs.input.value.length * 15 + 20;
+            const length = 50;// this.$refs.input.value.length * 15 + 20;
             this.inputLength = this.collapseTags ? Math.min(50, length) : length;
             this.managePlaceholder();
             this.resetInputHeight();
@@ -654,13 +678,13 @@
 
       managePlaceholder() {
         if (this.currentPlaceholder !== '') {
-          this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
+          this.currentPlaceholder = this.$refs.input && this.$refs.input.value ? '' : this.cachedPlaceHolder;
         }
       },
 
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
-        this.inputLength = this.$refs.input.value.length * 15 + 20;
+        this.inputLength = 50; // this.$refs.input.value.length * 15 + 20;
         this.resetInputHeight();
       },
 
@@ -714,7 +738,7 @@
             this.handleQueryChange('');
             this.inputLength = 20;
           }
-          if (this.filterable) this.$refs.input.focus();
+          if (this.filterable) this.$refs.input && this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
           this.emitChange(option.value);
@@ -802,8 +826,11 @@
       },
 
       onInputChange() {
-        if (this.filterable && this.query !== this.selectedLabel) {
-          this.query = this.selectedLabel;
+        // console.log('ic');
+        // console.log(this.query, this.selectedLabel);
+        if (this.filterable /* && this.query !== this.selectedLabel*/) {
+          // console.log(this.query, this.selectedLabel);
+          // this.query = this.selectedLabel;
           this.handleQueryChange(this.query);
         }
       },

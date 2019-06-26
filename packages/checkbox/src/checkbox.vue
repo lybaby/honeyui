@@ -234,7 +234,7 @@
         this.dispatch('ElFormItem', 'el.form.change', value);
       },
       indeterminate(val) {
-        console.log(val);
+        // console.log(val);
         this.updateIndeterminate(val);
       }
     }
