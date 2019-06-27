@@ -11,20 +11,24 @@
   <template>
     <el-table
       :data="tableData"
-      style="width: 100%">
+      empty-text="列表为空, 暂无信息">
       <el-table-column
         prop="date"
-        label="日期"
-        width="180">
+        label="类型"
+        width="150"
+        show-overflow-tooltip>
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名"
-        width="180">
+        label="本月使用量"
+        align="right"
+        show-overflow-tooltip>
       </el-table-column>
       <el-table-column
         prop="address"
-        label="地址">
+        label="环比"
+        align="right"
+        width="150" show-overflow-tooltip>
       </el-table-column>
     </el-table>
   </template>

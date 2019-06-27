@@ -50,7 +50,7 @@
     v-else>
     <!-- <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i> -->
     <div class="tea-datepicker__input">
-        <input type="input" style="background-color: white" class="tea-input" :value="rangeDisplayValue" placeholder="开始日期 至 结束日期" readonly>
+        <input type="input" :disabled="pickerDisabled" :readonly="!editable || readonly" class="tea-input" :value="rangeDisplayValue" placeholder="开始日期 至 结束日期">
     </div>
     <!-- <input
       autocomplete="off"

@@ -153,6 +153,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00</span>
     <el-date-picker
+      :disabled="true"
       v-model="value1"
       type="datetimerange"
       start-placeholder="开始日期"

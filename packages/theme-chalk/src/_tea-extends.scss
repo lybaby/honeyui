@@ -111,3 +111,11 @@
     background-size: 1350% 1331.25%;
   }
 }
+
+.tea-datepicker,
+.tea-datetimepicker,
+.tea-monthpicker {
+  .tea-input:disabled {
+    cursor: not-allowed;
+  }
+}

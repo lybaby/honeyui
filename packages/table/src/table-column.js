@@ -185,7 +185,7 @@ export default {
           };
           if (column.showOverflowTooltip) {
             props.class += ' el-tooltip';
-            props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
+            // props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
           }
           if (column.showOverflowTooltip) {
             return (<div { ...props }>

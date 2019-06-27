@@ -17,7 +17,7 @@
     <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top" :hide-after="sec">
       <el-button>上边</el-button>
     </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end" hide-after=0>
+    <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end">
       <el-button>上右</el-button>
     </el-tooltip>
   </div>
@@ -60,8 +60,11 @@
   export default {
     data(){
       return {
-        sec: 1000000
+        sec: 0
       }
+    },
+    mounted() {
+      this.$refs.aa.show();
     },
     methods: {
       input(value) {
