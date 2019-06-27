@@ -11,7 +11,7 @@
 ```html
 <div class="box">
   <div class="top">
-    <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start" :hide-after="sec">
+    <el-tooltip class="item" effect="dark" content="Top Left 提示文字Top Left 提示文字Top Left 提示文字Top Left文字Top Left 提示文字" placement="top-start" :hide-after="sec">
       <el-button>上左</el-button>
     </el-tooltip>
     <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top" :hide-after="sec">

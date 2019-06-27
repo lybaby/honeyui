@@ -119,3 +119,16 @@
     cursor: not-allowed;
   }
 }
+
+.tea-tooltip {
+  // display: inline-block;
+  .tea-tooltip__inner {
+    // padding: 3px 7px;
+    // color: #fff;
+    // background-color: #333;
+    // border-color: #333;
+    // box-shadow: inherit;
+    // border-radius: 4px;
+    word-wrap: break-word;
+  }
+}

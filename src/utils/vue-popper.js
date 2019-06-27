@@ -43,10 +43,6 @@ export default {
       type: Boolean,
       default: true
     },
-    initOffset: {
-      type: Number,
-      default: 0
-    },
     popperOptions: {
       type: Object,
       default() {
@@ -108,7 +104,6 @@ export default {
       options.placement = this.currentPlacement;
       options.offset = this.offset;
       options.arrowOffset = this.arrowOffset;
-      options.initOffset = this.initOffset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
