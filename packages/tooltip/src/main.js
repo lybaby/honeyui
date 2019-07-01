@@ -90,10 +90,9 @@ export default {
             aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
-              ['tea-tooltip','el-tooltip__popper', 'is-' + this.effect, this.popperClass]
+              ['tea-tooltip', 'el-tooltip__popper', 'is-' + this.effect, this.popperClass]
             }>
             <div class="tea-tooltip__inner ">{ this.$slots.content || this.content }</div>
-            
           </div>
         </transition>);
     }
