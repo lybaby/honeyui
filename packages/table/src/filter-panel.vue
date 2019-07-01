@@ -204,6 +204,7 @@
           Dropdown.close(this);
         }
       });
+      this.optionChange();
     },
     watch: {
       showPopper(val) {
