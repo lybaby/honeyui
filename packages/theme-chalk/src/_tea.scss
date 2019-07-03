@@ -3266,7 +3266,8 @@ input[type=checkbox][disabled]:indeterminate {
 
 .tea-tabs__tablist {
   font-size: 0;
-  min-width: 100%
+  min-width: 100%;
+  margin-left: 20px;
 }
 
 .tea-tabs__tabitem,
