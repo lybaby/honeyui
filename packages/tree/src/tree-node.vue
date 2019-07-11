@@ -6,7 +6,7 @@
     v-show="node.visible"
     :class="{
       'is-expanded': expanded,
-      'is-current': node.isCurrent,
+      'is-selected': node.isCurrent,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
       'is-checked': !node.disabled && node.checked

@@ -298,7 +298,14 @@ export default {
       let cell = target;
 
       try {
-        cell = target.parentNode.parentNode;
+        switch (cell.tagName.toLowerCase()) {
+          case 'i':
+            cell = cell.parentNode.parentNode;
+            break;
+          case 'span':
+            cell = cell.parentNode;
+            break;
+        }
       } catch (err) {
         cell = target;
       }
