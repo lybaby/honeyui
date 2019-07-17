@@ -9,11 +9,13 @@
 <div class="block">
   <span class="demonstration">页数较少时的效果</span>
   <el-button @click="changePage">add page</el-button>
+  <el-button @click="setPage">set page</el-button>
+  <el-button @click="setTotal">set total</el-button>
   <span>{{currentPage1}}</span>
   <el-pagination
     layout="prev, pager, next"
     :current-page.sync="currentPage1"
-    :total="50"
+    :total="total"
     @current-change="handleCurrentChange">
   </el-pagination>
 </div>
@@ -21,6 +23,7 @@
   <span class="demonstration">大于 7 页时的效果</span>
   <el-pagination
     layout="prev, pager, next"
+    :current-page.sync="currentPage2"
     :total="1000">
   </el-pagination>
 </div>
@@ -28,18 +31,31 @@
   export default {
     data() {
       return {
-        currentPage1: 1
+        currentPage1: 1,
+        currentPage2: 1,
+        total: 50
       };
     },
     methods: {
       changePage() {
         this.currentPage1++
       },
+      setPage() {
+        this.currentPage1 = 1
+      },
+      setTotal() {
+        this.total = 0
+        this.currentPage1 = 6
+        setTimeout(()=>{
+          this.total = 1
+          this.currentPage1 = 1
+        }, 1000)
+      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        this.currentPage1 = val
+        // this.currentPage1 = val
         console.log(typeof val)
         console.log(`当前页: ${val}`);
       }

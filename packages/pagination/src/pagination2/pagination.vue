@@ -110,31 +110,14 @@ export default {
     internalPagerCount(val, old) {
       // recalculate currentPage
       // console.log(val, old);
-      const cp = parseInt(this.internalCurrentPage, 10);
+      let cp = parseInt(this.currentPage, 10);
       const currentItem = (cp - 1) * old + 1;
-      this.internalCurrentPage = Math.ceil(currentItem / val);
+      cp = Math.ceil(currentItem / val);
       this.sizeChange();
-      this.pageChange();
+      this.pageChange(cp);
     },
-    currentPage(val) {
-      if (!this.total) {
-        return;
-      }
-      // console.log('cp');
-      if (val < 1) {
-        val = 1;
-        this.$emit('update:currentPage', val);
-        return;
-      }
-      if (val > this.pageCount) {
-        val = this.pageCount;
-        this.$emit('update:currentPage', val);
-        return;
-      }
-      if (val !== this.internalCurrentPage) {
-        this.internalCurrentPage = val;
-        this.pageChange();
-      }
+    currentPage(page) {
+      this.internalCurrentPage = page;
     }
   },
   computed: {
@@ -142,11 +125,11 @@ export default {
       return Math.ceil(this.total / this.internalPagerCount);
     },
     canGoPrev() {
-      const cp = parseInt(this.internalCurrentPage, 10);
+      const cp = parseInt(this.currentPage, 10);
       return cp > 1;
     },
     canGoNext() {
-      const cp = parseInt(this.internalCurrentPage, 10);
+      const cp = parseInt(this.currentPage, 10);
       return cp < this.pageCount;
     }
   },
@@ -161,34 +144,30 @@ export default {
         cp = this.pageCount;
       }
       this.internalCurrentPage = cp;
-      this.pageChange();
+      this.pageChange(cp);
     },
     gotoFirstPage() {
       if (!this.canGoPrev) return;
-      this.internalCurrentPage = 1;
-      this.pageChange();
+      this.pageChange(1);
     },
     gotoLastPage() {
       if (!this.canGoNext) return;
-      this.internalCurrentPage = this.pageCount;
-      this.pageChange();
+      this.pageChange(this.pageCount);
     },
     gotoNextPage() {
       if (!this.canGoNext) return;
-      this.internalCurrentPage++;
-      this.pageChange();
+      this.pageChange(this.currentPage + 1);
       this.$emit('next-click');
     },
     gotoPrevPage() {
       if (!this.canGoPrev) return;
-      this.internalCurrentPage--;
-      this.pageChange();
+      this.pageChange(this.currentPage - 1);
       this.$emit('prev-click');
     },
-    pageChange() {
-      // console.log('pc', this.internalCurrentPage);
-      this.$emit('current-change', this.internalCurrentPage);
-      this.$emit('update:currentPage', parseInt(this.internalCurrentPage, 10));
+    pageChange(newPage) {
+      // console.log('pc', newPage);
+      this.$emit('current-change', newPage);
+      this.$emit('update:currentPage', parseInt(newPage, 10));
     },
     sizeChange() {
       // console.log('sc', this.internalPagerCount);
