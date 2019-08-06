@@ -1,9 +1,10 @@
 <template>
   <div
-    class="el-steps"
+    class="tea-step"
     :class="[
-       !simple && 'el-steps--' + direction,
-       simple && 'el-steps--simple'
+       !simple && 'tea-steps--' + direction,
+       simple && 'tea-steps--simple',
+       'tea-step--' + lineStyle
      ]">
       <slot></slot>
   </div>
@@ -33,6 +34,10 @@ export default {
     processStatus: {
       type: String,
       default: 'process'
+    },
+    lineStyle: {
+      type: String, // alternative , dot
+      default: ''
     }
   },
 
