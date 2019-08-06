@@ -14,6 +14,7 @@
     position: relative;
     font-size: 0;
     vertical-align: middle;
+    height: 100%;
   }
 
   @include e(icon) {
@@ -23,6 +24,7 @@
     margin-right: $--rate-icon-margin;
     color: $--rate-icon-color;
     transition: .3s;
+    height: 100%;
     &.hover {
       transform: scale(1.15);
     }
@@ -40,6 +42,7 @@
     left: 0;
     display: inline-block;
     overflow: hidden;
+    height: 100%;
   }
 
   @include e(text) {

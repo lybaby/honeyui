@@ -1,9 +1,9 @@
 @import "common/var";
 
 @font-face {
-  font-family: 'element-icons';
-  src: url('#{$--font-path}/element-icons.woff') format('woff'), /* chrome, firefox */
-       url('#{$--font-path}/element-icons.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  font-family: 'teaextico';
+  src: url('#{$--font-path}/teaext.woff') format('woff'), /* chrome, firefox */
+       url('#{$--font-path}/teaext.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
   font-style: normal
 }
@@ -31,7 +31,7 @@ $icon-png-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dis
   height: 16px;
   background-repeat: no-repeat;
   background-position: inherit;
-  font-size: 0
+  // font-size: 0
 }
 
 /*
@@ -1098,15 +1098,17 @@ $icon-png-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dis
 .el-icon-s-goods:before {
   content: "\e7b2";
 }
-
+*/
 .el-icon-star-off:before {
-  content: "\e717";
+  font-family: 'teaextico';
+  content: "\e9d9";
 }
 
 .el-icon-star-on:before {
-  content: "\e797";
+  font-family: 'teaextico';
+  content: "\e9d9";
 }
-
+/*
 .el-icon-more-outline:before {
   content: "\e6cc";
 }
