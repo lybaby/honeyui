@@ -16,7 +16,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
           class="el-carousel__arrow el-carousel__arrow--left">
-          <i class="el-icon-arrow-left"></i>
+          <i class="tea-icon tea-icon-arrowleft"></i>
         </button>
       </transition>
       <transition
@@ -29,7 +29,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
           class="el-carousel__arrow el-carousel__arrow--right">
-          <i class="el-icon-arrow-right"></i>
+          <i class="tea-icon tea-icon-arrowright"></i>
         </button>
       </transition>
       <slot></slot>
