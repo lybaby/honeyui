@@ -14,6 +14,7 @@
     ]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
+    @click="handleClick"
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
@@ -310,6 +311,9 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.blur', [this.value]);
         }
+      },
+      handleClick(e) {
+        this.$emit('click', e);
       },
       select() {
         this.getInput().select();

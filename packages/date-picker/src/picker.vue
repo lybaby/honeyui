@@ -12,6 +12,7 @@
     v-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
+    @click="handleFocus"
     @focus="handleFocus"
     @keydown.native="handleKeydown"
     :value="displayValue"
