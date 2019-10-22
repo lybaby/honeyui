@@ -1,0 +1,134 @@
+.tea-textarea-group {
+  display: inline-block;
+  font-size: 0;
+  position: relative;
+  padding-bottom: 20px;
+
+  .tea-textarea__label {
+    font-size: 12px;
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    color: #888;
+  }
+}
+
+.tea-extends--pagination-select {
+  width: 48px;
+  min-width: 48px;
+}
+
+.tea-pagination__turnbtn {
+  user-select: none;
+}
+
+.tea-ext-input-wrap {
+  display: inline-block;
+}
+
+.has-time {
+  .el-date-picker__time-header {
+    border-bottom: none;
+
+    .el-date-picker__editor-wrap {
+      width: 100px;
+      display: inline-block;
+
+      .tea-input {
+        width: 100px;
+        border: none;
+      }
+    }
+  }
+
+}
+
+.tea-form {
+  .tea-form__label.is-required {
+    label:after {
+      position: relative;
+      vertical-align: -3px;
+    }
+  }
+}
+
+
+.tea-menu__submenu .tea-icon-arrowup{
+  position: absolute;
+  left: 160px;
+  top: 10px;
+}
+.tea-menu__submenu.is-opened .tea-menu__list {
+  display: block;
+}
+
+.is-error {
+  .tea-dropdown {
+    .tea-dropdown-btn.tea-dropdown__header {
+      color: #e1504a;
+      border-color: #e1504a;
+    }
+  }
+}
+
+.tea-calendar__header {
+  .tea-btn {
+    margin-left: 0 !important;
+  }
+}
+
+.el-date-range-picker__time-header {
+  .tea-input {
+    width: 120px !important;
+  }
+}
+
+.tea-table--inner-bordered {
+  td, th {
+    border-right: 1px solid #e5e5e5;
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+.el-time-panel__footer {
+  height: 48px !important;
+  padding: 10px !important;
+  .tea-btn:first-child {
+    margin-right: 5px;
+  }
+}
+
+.el-date-editor--datetimerange {
+  .tea-input {
+    width: 270px !important;
+  }
+}
+
+.el-date-editor--timerange {
+  .tea-datepicker__input:after {
+    background-position: 99.5% 82.74000000000001%;
+    background-size: 1350% 1331.25%;
+  }
+}
+
+.tea-datepicker,
+.tea-datetimepicker,
+.tea-monthpicker {
+  .tea-input:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.tea-tooltip {
+  // display: inline-block;
+  .tea-tooltip__inner {
+    // padding: 3px 7px;
+    // color: #fff;
+    // background-color: #333;
+    // border-color: #333;
+    // box-shadow: inherit;
+    // border-radius: 4px;
+    word-wrap: break-word;
+  }
+}
