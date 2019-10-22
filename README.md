@@ -7,12 +7,12 @@
 
 ## Install
 ```shell
-tnpm install @tencent/honey-ui -S
+tnpm install honey-ui -S
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import HoneyUI from '@tencent/honey-ui'
+import HoneyUI from 'honey-ui'
 
 Vue.use(HoneyUI)
