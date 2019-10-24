@@ -6101,6 +6101,26 @@ input[type=search]::-webkit-search-cancel-button {
   padding: 12px 15px
 }
 
+.tea-calendar__type--month .tea-calendar__day--end:after, .tea-calendar__type--month .tea-calendar__day--start:after{
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 12px;
+  bottom: 12px;
+  width: 30px;
+  background-color: #f2f2f2;
+}
+
+.tea-calendar__type--month .tea-calendar__day--in-range:before{
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  background-color: #f2f2f2;
+}
+
 .tea-calendar--year .tea-calendar__cell>span,
 .tea-calendar__type--year .tea-calendar__cell>span {
   width: 36px;

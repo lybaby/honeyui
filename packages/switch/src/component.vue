@@ -1,33 +1,37 @@
 <template>
-  <div
-    class="tea-switch"
-    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
-    role="switch"
-    :aria-checked="checked"
-    :aria-disabled="switchDisabled"
-    @click.prevent="switchValue"
-  >
-    <input
-      class="tea-switch__input"
-      type="checkbox"
-      @change="handleChange"
-      ref="input"
-      :id="id"
-      :name="name"
-      :true-value="activeValue"
-      :false-value="inactiveValue"
-      :disabled="switchDisabled"
-      @keydown.enter="switchValue"
-    >
+  <div>
     <span
       :class="['el-switch__label-x', 'el-switch__label--left-x', !checked ? 'is-active' : '']"
-      v-if="inactiveIconClass || inactiveText">
+       v-if="inactiveIconClass || inactiveText">
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
-      <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
+      <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked"  class="tea-fz-reset"  style="vertical-align: middle; margin: 0px 5px;">{{ inactiveText }}</span>
     </span>
-    <span class="tea-switch__toggle" ref="core">
+    <label
+            class="tea-switch"
+           :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
+           role="switch"
+           :aria-checked="checked"
+           :aria-disabled="switchDisabled"
+           @click.prevent="switchValue"
+    >
+      <input
+              class="tea-switch__input"
+              type="checkbox"
+              @change="handleChange"
+              ref="input"
+              :id="id"
+              :name="name"
+              :true-value="activeValue"
+              :false-value="inactiveValue"
+              :disabled="switchDisabled"
+              @keydown.enter="switchValue"
+      >
+      <span class="tea-switch__toggle" ref="core">
     </span>
+    </label>
     <span
+      class="tea-fz-reset"
+      style="vertical-align: middle; margin: 0px 5px;"
       :class="['el-switch__label-x', 'el-switch__label--right-x', checked ? 'is-active' : '']"
       v-if="activeIconClass || activeText">
       <i :class="[activeIconClass]" v-if="activeIconClass"></i>

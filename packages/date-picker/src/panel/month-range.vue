@@ -2,74 +2,112 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-range-picker el-popper"
+      class="tea-dropdown-box el-picker-panel-x el-date-range-picker-x el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts
       }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-        <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
-            type="button"
-            class="el-picker-panel__shortcut"
-            v-for="(shortcut, key) in shortcuts"
-            :key="key"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
-        </div>
-        <div class="el-picker-panel__body">
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
+        <div class="tea-calendar tea-calendar--date-range el-picker-panel__body-x">
+          <div class="tea-calendar__header" v-if="shortcuts">
+            <div  class="tea-segment tea-segment--rimless">
               <button
-                type="button"
-                @click="leftPrevYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
-                v-if="unlinkPanels"
-                @click="leftNextYear"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ leftLabel }}</div>
+                      type="button"
+                      class="tea-btn"
+                      v-for="(shortcut, key) in shortcuts"
+                      :key="key"
+                      @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
             </div>
-            <month-table
-              selection-mode="range"
-              :date="leftDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              @changerange="handleChangeRange"
-              @pick="handleRangePick">
-            </month-table>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
-              <button
-                type="button"
-                v-if="unlinkPanels"
-                @click="rightPrevYear"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
-                @click="rightNextYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
+          <div class="tea-calendar__body">
+            <div class="tea-calendar__table el-picker-panel__content-x el-date-range-picker__content-x is-left-x">
+              <div class="el-date-range-picker__header-x tea-calendar__caption">
+                <!--<button-->
+                <!--type="button"-->
+                <!--@click="leftPrevYear"-->
+                <!--class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>-->
+                <!--<button-->
+                <!--type="button"-->
+                <!--v-if="unlinkPanels"-->
+                <!--@click="leftNextYear"-->
+                <!--:disabled="!enableYearArrow"-->
+                <!--:class="{ 'is-disabled': !enableYearArrow }"-->
+                <!--class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>-->
+                <div>{{ leftLabel }}</div>
+              </div>
+              <month-table
+                      selection-mode="range"
+                      :date="leftDate"
+                      :default-value="defaultValue"
+                      :min-date="minDate"
+                      :max-date="maxDate"
+                      :range-state="rangeState"
+                      :disabled-date="disabledDate"
+                      @changerange="handleChangeRange"
+                      @pick="handleRangePick">
+              </month-table>
+              <div class="tea-pagination tea-pagination--bordernone">
+                <button class="tea-pagination__turnbtn tea-pagination__prebtn" title="" @click="leftPrevYear"><i
+                        class="tea-icon tea-icon-arrowleft"></i></button>
+                <button class="tea-pagination__turnbtn tea-pagination__curbtn" title="">
+                  <i class="tea-icon tea-icon-cur"></i></button>
+                <button class="tea-pagination__turnbtn tea-pagination__nextbtn"
+                        title="" :disabled="!enableYearArrow"
+                        @click="leftNextYear"
+                        :class="{ 'is-disabled': !enableYearArrow }"><i class="tea-icon tea-icon-arrowright"></i></button>
+              </div>
             </div>
-            <month-table
-              selection-mode="range"
-              :date="rightDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              @changerange="handleChangeRange"
-              @pick="handleRangePick">
-            </month-table>
+            <div class="tea-calendar__table  el-picker-panel__content-x el-date-range-picker__content-x is-right-x">
+              <div class="el-date-range-picker__header-x tea-calendar__caption">
+                <!--<button-->
+                        <!--type="button"-->
+                        <!--v-if="unlinkPanels"-->
+                        <!--@click="rightPrevYear"-->
+                        <!--:disabled="!enableYearArrow"-->
+                        <!--:class="{ 'is-disabled': !enableYearArrow }"-->
+                        <!--class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>-->
+                <!--<button-->
+                        <!--type="button"-->
+                        <!--@click="rightNextYear"-->
+                        <!--class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>-->
+                <div>{{ rightLabel }}</div>
+              </div>
+              <month-table
+                      selection-mode="range"
+                      :date="rightDate"
+                      :default-value="defaultValue"
+                      :min-date="minDate"
+                      :max-date="maxDate"
+                      :range-state="rangeState"
+                      :disabled-date="disabledDate"
+                      @changerange="handleChangeRange"
+                      @pick="handleRangePick">
+              </month-table>
+              <div class="tea-pagination tea-pagination--bordernone">
+                <button
+                        class="tea-pagination__turnbtn tea-pagination__prebtn"
+                        title=""
+                        @click="rightPrevYear"
+                        :disabled="!enableYearArrow"
+                        :class="{ 'is-disabled': !enableYearArrow }"
+                >
+                  <i class="tea-icon tea-icon-arrowleft"></i>
+                </button>
+                <button
+                        class="tea-pagination__turnbtn tea-pagination__curbtn"
+                        title=""
+                >
+                  <i class="tea-icon tea-icon-cur"></i>
+                </button>
+                <button
+                        class="tea-pagination__turnbtn tea-pagination__nextbtn"
+                        title=""
+                        @click="rightNextYear"
+                >
+                  <i class="tea-icon tea-icon-arrowright"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
