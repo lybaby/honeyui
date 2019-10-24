@@ -163,6 +163,9 @@
     data() {
       return {
         pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: '最近一周',
             onClick(picker) {
@@ -236,6 +239,9 @@
     data() {
       return {
         pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: '本月',
             onClick(picker) {
