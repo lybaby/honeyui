@@ -106,7 +106,7 @@
         style.disabled = typeof this.disabledDate === 'function'
           ? datesInMonth(year, month).every(this.disabledDate)
           : false;
-        style['tea-calendar__day--outside'] = style.disabled
+        style['tea-calendar__day--outside'] = style.disabled;
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
         style['is-selected'] = style.current;
         style.today = today.getFullYear() === year && today.getMonth() === month;
