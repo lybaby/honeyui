@@ -117,8 +117,12 @@
           style['in-range-x'] = true;
 
           if (cell.start) {
-            style['start-date'] = true;
-            style['is-selected tea-calendar__day--start'] = true;
+            if (!(cell.start && cell.end)) {
+              style['start-date'] = true;
+              style['is-selected tea-calendar__day--start'] = true;
+            } else {
+              style['is-selected'] = true;
+            }
           } else if (cell.end) {
             style['end-date'] = true;
             style['is-selected tea-calendar__day--end'] = true;

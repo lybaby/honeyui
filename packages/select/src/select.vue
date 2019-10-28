@@ -125,7 +125,7 @@
         :placement="type === 'pagination' ? 'top-start':'bottom-start'"
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
         v-show="visible/* && emptyText !== false */">
-        <form class="tea-form--search" action="" v-if="filterable" @submit.native.prevent>
+        <form class="tea-form--search" οnsubmit="return false;" v-if="filterable" @submit.native.prevent>
           <div class="tea-search tea-search--simple">
             <div class="tea-search__inner">
               <input 
@@ -135,6 +135,7 @@
                 @paste="debouncedOnInputChange"
                 v-model="query"
               />
+              <input style="display:none" />
             </div>
             <button type="button" class="tea-btn tea-btn--icon tea-btn--search">
               <i class="tea-icon tea-icon-search"></i>
