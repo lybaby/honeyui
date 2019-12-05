@@ -15,6 +15,7 @@
   <el-pagination
     layout="prev, pager, next"
     :current-page.sync="currentPage1"
+    :page-sizes="[60, 50, 40, 30, 20, 10]"
     :total="total"
     @current-change="handleCurrentChange">
   </el-pagination>
