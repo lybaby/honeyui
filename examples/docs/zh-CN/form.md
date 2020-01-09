@@ -210,6 +210,8 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     <el-radio-group v-model="ruleForm.resource">
       <el-radio label="线上品牌商赞助"></el-radio>
       <el-radio label="线下场地免费"></el-radio>
+      <el-radio label="线下场地免费2"></el-radio>
+      <el-radio label="线下场地免费3"></el-radio>
     </el-radio-group>
   </el-form-item>
   <el-form-item label="活动形式" prop="desc" align>

@@ -28,6 +28,33 @@ export default {
 ```
 :::
 
+### 限制数字用法
+
+:::demo
+```html
+<el-input v-model="inpNum" placeholder="请输入数字"></el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: '0'
+    }
+  },
+  computed: {
+    inpNum: {
+      get() {
+        return this.input
+      },
+      set(value) {
+        this.input = value.replace(/[^\d.]/g, '')
+      }
+    }
+  }
+}
+</script>
+```
+:::
 
 ### 禁用状态
 
@@ -429,7 +456,7 @@ export default {
     class="el-icon-edit el-input__icon"
     slot="suffix"
     @click="handleIconClick">
-  </i>
+  </input>
   <template slot-scope="{ item }">
     <div class="name">{{ item.value }}</div>
     <span class="addr">{{ item.address }}</span>

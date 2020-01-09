@@ -135,3 +135,9 @@
     word-wrap: break-word;
   }
 }
+
+div[role='group'].el-checkbox-group, 
+div[role='radiogroup'].el-radio-group {
+  display: inline-block;
+  width: calc(100% - 40px) !important;
+}
