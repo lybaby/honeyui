@@ -98,7 +98,6 @@
         return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === value.getMonth();
       },
       getCellStyle(cell) {
-        console.log('a');
         const style = {};
         const year = this.date.getFullYear();
         const today = new Date();
@@ -107,21 +106,24 @@
         style.disabled = typeof this.disabledDate === 'function'
           ? datesInMonth(year, month).every(this.disabledDate)
           : false;
+        style['tea-calendar__day--outside'] = style.disabled;
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
         style['is-selected'] = style.current;
         style.today = today.getFullYear() === year && today.getMonth() === month;
         style['tea-calendar__cell--now'] = style.today;
         style.default = defaultValue.some(date => this.cellMatchesDate(cell, date));
 
-        if (cell.inRange) {
-          style['in-range'] = true;
+        if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'range')) {
+          style['in-range-x'] = true;
 
           if (cell.start) {
             style['start-date'] = true;
-          }
-
-          if (cell.end) {
+            style['is-selected tea-calendar__day--start'] = true;
+          } else if (cell.end) {
             style['end-date'] = true;
+            style['is-selected tea-calendar__day--end'] = true;
+          } else {
+            style['tea-calendar__day--in-range'] = true;
           }
         }
         return style;
@@ -152,20 +154,37 @@
       handleMouseMove(event) {
         if (!this.rangeState.selecting) return;
 
+        // let target = event.target;
+        // if (target.tagName === 'A') {
+        //   target = target.parentNode.parentNode;
+        // }
+        // if (target.tagName === 'DIV') {
+        //   target = target.parentNode;
+        // }
+        // if (target.tagName !== 'TD') return;
+        //
+        // const row = target.parentNode.rowIndex;
+        // const column = target.cellIndex;
+        // // can not select disabled date
+        // if (this.rows[row][column].disabled) return;
         let target = event.target;
-        if (target.tagName === 'A') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
+        if (target.tagName === 'SPAN') {
+          // target = target.parentNode.parentNode;
           target = target.parentNode;
         }
-        if (target.tagName !== 'TD') return;
+        // if (target.tagName === 'DIV') {
+        //   target = target.parentNode;
+        // }
 
-        const row = target.parentNode.rowIndex;
-        const column = target.cellIndex;
+        // if (target.tagName !== 'TD') return;
+        if (!hasClass(target, 'tea-calendar__cell') || target.dataset.index === undefined) return;
+
+        const row = parseInt(target.parentNode.dataset.index, 10); // target.parentNode.rowIndex - 1;
+        const column = parseInt(target.dataset.index, 10);
+        // const cell = this.rows[row][column];
+
         // can not select disabled date
         if (this.rows[row][column].disabled) return;
-
         // only update rangeState when mouse moves to a new cell
         // this avoids frequent Date object creation and improves performance
         if (row !== this.lastRow || column !== this.lastColumn) {
@@ -182,7 +201,6 @@
         }
       },
       handleMonthTableClick(event) {
-        console.log('a');
         let target = event.target;
         if (target.tagName === 'SPAN') {
           target = target.parentNode;
