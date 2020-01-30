@@ -31,7 +31,7 @@
         ["module-resolver", {
           "root": ["element-ui"],
           "alias": {
-            "element-ui/src": "@tencent/honey-ui/lib"
+            "element-ui/src": "honey-ui/lib"
           }
         }]
       ]

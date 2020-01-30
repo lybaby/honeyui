@@ -7,7 +7,7 @@
 
 ## Install
 ```shell
-tnpm install honey-ui -S
+npm install honey-ui -S
 ```
 
 ## Quick Start

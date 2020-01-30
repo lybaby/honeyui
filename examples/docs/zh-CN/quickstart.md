@@ -22,8 +22,8 @@
 
 ```javascript
 import Vue from 'vue';
-import ElementUI from '@tencent/honey-ui';
-import '@tencent/honey-ui/lib/theme-chalk/index.css';
+import ElementUI from 'honey-ui';
+import 'honey-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -67,7 +67,7 @@ npm install babel-plugin-component -D
 
 ```javascript
 import Vue from 'vue';
-import { Button, Select } from '@tencent/honey-ui';
+import { Button, Select } from 'honey-ui';
 import App from './App.vue';
 
 Vue.component(Button.name, Button);
@@ -155,7 +155,7 @@ import {
   MessageBox,
   Message,
   Notification
-} from '@tencent/honey-ui';
+} from 'honey-ui';
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -240,7 +240,7 @@ Vue.prototype.$message = Message;
 
 ```js
 import Vue from 'vue';
-import Element from '@tencent/honey-ui';
+import Element from 'honey-ui';
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
@@ -248,7 +248,7 @@ Vue.use(Element, { size: 'small', zIndex: 3000 });
 
 ```js
 import Vue from 'vue';
-import { Button } from '@tencent/honey-ui';
+import { Button } from 'honey-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);
