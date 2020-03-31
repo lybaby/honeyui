@@ -130,7 +130,7 @@
             <div class="tea-search__inner">
               <input 
                 class="tea-input tea-input--search" 
-                placeholder="" 
+                :placeholder="searchplaceholder" 
                 @keyup="debouncedOnInputChange"
                 @paste="debouncedOnInputChange"
                 v-model="query"
@@ -352,6 +352,10 @@
       type: {
         type: String,
         default: 'normal'
+      },
+      searchplaceholder: {
+        type: String,
+        default: ''
       }
     },
 
@@ -453,6 +457,7 @@
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
+            console.log(this.query);
             this.handleQueryChange(this.query);
             if (this.multiple) {
               this.$refs.input && this.$refs.input.focus();
@@ -485,6 +490,7 @@
           this.setSelected();
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
+          console.log(this.query);
           this.checkDefaultFirstOption();
         }
       }
@@ -598,7 +604,7 @@
           }
           this.selectedLabel = option.currentLabel;
           this.selected = option;
-          if (this.filterable) this.query = this.selectedLabel;
+          // if (this.filterable) this.query = this.selectedLabel;
           return;
         }
         let result = [];

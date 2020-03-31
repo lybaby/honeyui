@@ -365,7 +365,7 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
+  <el-select v-model="value" placeholder="请选择" >
     <el-option-group
       v-for="group in options"
       :key="group.label"
@@ -424,7 +424,7 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select v-model="value" filterable multiple placeholder="请选择" border>
+  <el-select v-model="value" filterable multiple placeholder="请选择" border searchplaceholder="请输入手机号进行搜索">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -470,7 +470,6 @@
 <template>
   <el-select
     v-model="value"
-    multiple
     filterable
     remote
     reserve-keyword
@@ -529,7 +528,7 @@
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
-          }, 2000);
+          }, 200);
         } else {
           this.options = [];
         }
@@ -602,6 +601,7 @@
 | autocomplete | select input 的 autocomplete 属性 | string | — | off |
 | auto-complete | 下个主版本弃用 | string | — | off |
 | placeholder | 占位符 | string | — | 请选择 |
+| searchplaceholder | 搜索框占位符 | string | — |  |
 | filterable | 是否可搜索 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
 | filter-method | 自定义搜索方法 | function | — | — |
