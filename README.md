@@ -16,3 +16,8 @@ import Vue from 'vue'
 import HoneyUI from 'honey-ui'
 
 Vue.use(HoneyUI)
+
+
+## 预览路径
+
+http://129.204.92.24/ 目前没有域名，将就着用吧
