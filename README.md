@@ -16,8 +16,8 @@ import Vue from 'vue'
 import HoneyUI from 'honey-ui'
 
 Vue.use(HoneyUI)
-
+```
 
 ## 预览路径
 
-[预览路径](http://129.204.92.24/ "前端UI组件")
+[前端UI组件预览](http://129.204.92.24/)
