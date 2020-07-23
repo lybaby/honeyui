@@ -118,7 +118,7 @@
                         class="tea-icon tea-icon-arrowleft"></i></button>
                 <button class="tea-pagination__turnbtn tea-pagination__curbtn" title="">
                     <i class="tea-icon tea-icon-cur"></i></button>
-                <button class="tea-pagination__turnbtn tea-pagination__nextbtn"
+                <button class="tea-pagination__turnbtn tea-pagination__nextbtn" @click="leftNextMonth"
                     title="" :disabled="!enableMonthArrow"
                   :class="{ 'is-disabled': !enableMonthArrow }"><i class="tea-icon tea-icon-arrowright"></i></button>
               </div>
