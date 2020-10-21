@@ -1,7 +1,7 @@
 <template>
   <el-input
     :class="[
-      'el-date-editor--' + type, 
+      'el-date-editor--' + type,
       this.type.indexOf('time') !== -1 && this.type.indexOf('datetime') === -1? 'tea-timepicker__input':'tea-datepicker__input'
     ]"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
@@ -51,7 +51,7 @@
     v-else>
     <!-- <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i> -->
     <div class="tea-datepicker__input">
-        <input type="input" :disabled="pickerDisabled" :readonly="!editable || readonly" class="tea-input" :value="rangeDisplayValue" placeholder="开始日期 至 结束日期">
+        <input type="input" :disabled="pickerDisabled" :readonly="!editable || readonly" class="tea-input" :value="rangeDisplayValue" :placeholder="`${startPlaceholder} ${rangeSeparator} ${endPlaceholder}`">
     </div>
     <!-- <input
       autocomplete="off"
@@ -354,8 +354,14 @@ export default {
     valueFormat: String,
     readonly: Boolean,
     placeholder: String,
-    startPlaceholder: String,
-    endPlaceholder: String,
+    startPlaceholder: {
+      type: String,
+      default: '开始日期'
+    },
+    endPlaceholder: {
+      type: String,
+      default: '结束日期'
+    },
     prefixIcon: String,
     clearIcon: {
       type: String,
