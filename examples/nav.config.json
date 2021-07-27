@@ -237,6 +237,10 @@
           "groupName": "Others",
           "list": [
             {
+              "path": "/rank",
+              "title": "Rank 层级组件"
+            },
+            {
               "path": "/dialog",
               "title": "Dialog 对话框"
             },
