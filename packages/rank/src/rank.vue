@@ -108,13 +108,12 @@ export default {
   },
   watch: {
     inputValue(v) {
-      this.$emit('change', v);
+      this.$emit('change', v, this.itemIdArr);
     },
     selectedItem: {
       handler(v) {
         if (v && v.length) {
           v.forEach((val, idx) => {
-            console.log('val, idx: ', val, idx);
             this.strArr[idx] = val[this.label];
             this.itemIdArr[idx] = val[this.idName];
           });
