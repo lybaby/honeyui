@@ -193,7 +193,7 @@ export default {
   display: inline-block;
   .rank-input {
     width: 300px;
-    /deep/.tea-input {
+    ::v-deep.tea-input {
       width: 300px;
       background-color: #fff;
       cursor: pointer;
@@ -207,7 +207,7 @@ export default {
     }
   }
   .tea-input-disabled {
-    /deep/.tea-input {
+    ::v-deep.tea-input {
       background: #f2f2f2;
       color: #bbb;
       cursor: not-allowed;
