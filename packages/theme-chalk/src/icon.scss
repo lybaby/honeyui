@@ -11,27 +11,12 @@
 $icon-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dist/sprite/tea.mf646518b.min-201905161128.svg);
 $icon-png-url: url(http://imgcache.qq.com/open_proj/proj_qcloud_v2/tea-style/dist/sprite/tea.mf646518b.min-201905161128.png);
 [class^="el-icon-"], [class*=" el-icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  // font-family: 'element-icons' !important;
-  // speak: none;
-  // font-style: normal;
-  // font-weight: normal;
-  // font-variant: normal;
-  // text-transform: none;
-  // line-height: 1;
-  // vertical-align: baseline;
-  // display: inline-block;
-
-  // /* Better Font Rendering =========== */
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
   display: inline-block;
   vertical-align: middle;
   width: 16px;
   height: 16px;
   background-repeat: no-repeat;
   background-position: inherit;
-  // font-size: 0
 }
 
 /*

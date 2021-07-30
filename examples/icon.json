@@ -1,9 +1,1 @@
-[
-  "close", "dismiss", "delete", "shopcart", "more", "folderclose", "folderopen", "notice", "guide",
-  "info", "help", "consult", "realname", "realnamev", "show", "hide", "warning", "error", "pending",
-  "infoblue", "success", "loading", "sort", "sortup", "sortdown","btnback", "plus", "minus",
-  "setting", "pencil", "copy", "remind", "phone", "phonev", "wechat", "wechatv", "drop",
-  "email", "emailv", "qq", "viewgrid", "viewlist", "monitor", "download", "filter",
-  "convertip--blue", "convertip", "arrowup", "arrowdown", "arrowleft", "arrowright", "externallink",
-  "refresh", "fullscreen", "fullscreenquit", "trenddown", "trendup"
-]
+["star-on","star-off"]
