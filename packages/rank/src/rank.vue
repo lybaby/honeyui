@@ -16,7 +16,7 @@
     <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="handleDropdownLeave">
       <div class="rank-panel__wrap" v-show="showPanel" ref="popper">
         <el-tabs v-model="selectedTabVal" @tab-click="tabClick">
-          <el-tab-pane v-for="(item, tabIndex) in tablist" :key="item.id || tabIndex" :label="item[tabLabel]" :name="item[tabName]" :disabled="tabIndex > strArr.length">
+          <el-tab-pane v-for="(item, tabIndex) in tablist" :key="item[tabName]" :label="item[tabLabel]" :name="item[tabName]" :disabled="tabIndex > strArr.length">
             <el-scrollbar class="data-scrollbar" ref="scrollbar">
               <div class="scroll-content" ref="scrollContent" v-if="data && data.length">
                 <span v-for="(item, index) in data" :key="index" :ref="`item-${item[idName]}`" @click="handleClickItem(item, index)" class="content-item" :class="{'hidden-text': tooltip, ...itemClass, 'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]}">
@@ -108,9 +108,9 @@ export default {
   },
   watch: {
     inputValue(v) {
-      this.$emit('change', v, this.itemIdArr);
+      this.$emit('change', v, this.selectedItemSelf);
     },
-    selectedItem: {
+    selectedItemSelf: {
       handler(v) {
         if (v && v.length) {
           v.forEach((val, idx) => {
@@ -126,11 +126,12 @@ export default {
   },
   data() {
     return {
+      selectedItemSelf: this.selectedItem,
       showPanel: false,
       inputValue: this.value,
       strArr: [],
       itemIdArr: [],
-      selectedTabVal: this.selectedTab || 0,
+      selectedTabVal: this.selectedTab || this.tablist[0][this.tabName],
       selectedTabIndex: 0
     };
   },
@@ -151,8 +152,8 @@ export default {
       this.$nextTick(() => this.scrollToItem());
     },
     scrollToItem() {
-      const item = this.selectedItem[this.selectedTabIndex];
-      const target = this.$refs[`item-${item[this.idName]}`] && this.$refs[`item-${item[this.idName]}`][0];
+      const item = this.selectedItemSelf[this.selectedTabIndex];
+      const target = item && this.$refs[`item-${item[this.idName]}`] && this.$refs[`item-${item[this.idName]}`][0];
       if (this.$refs.scrollContent && target) {
         const menu = this.$refs.scrollContent[this.selectedTabIndex];
         scrollIntoView(menu, target);
@@ -161,7 +162,7 @@ export default {
     tabClick(item) {
       this.selectedTabVal = item.name;
       this.selectedTabIndex = Number(item.index);
-      if (this.selectedItem.length) {
+      if (this.selectedItemSelf.length) {
         this.handleMenuEnter();
       }
       this.$emit('click-tab', item);
@@ -180,6 +181,10 @@ export default {
       }
       this.strArr[tabIndex] = item[this.label];
       this.itemIdArr[tabIndex] = item[this.idName];
+      this.selectedItemSelf[tabIndex] = {
+        [this.idName]: item[this.idName],
+        [this.label]: item[this.label]
+      };
       this.inputValue = this.strArr.join('/');
       this.$emit('click-item', item, index);
     }
