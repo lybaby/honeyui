@@ -141,12 +141,14 @@ export default {
         return;
       }
       this.showPanel = !this.showPanel;
+      this.$emit('handle-click');
     },
     handleClickOutside() {
       this.showPanel = false;
     },
     handleDropdownLeave() {
       this.showPanel = false;
+      this.$emit('handle-panel-hide');
     },
     handleMenuEnter() {
       this.$nextTick(() => this.scrollToItem());
