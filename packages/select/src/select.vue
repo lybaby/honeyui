@@ -125,7 +125,7 @@
         :placement="type === 'pagination' ? 'top-start':'bottom-start'"
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
         v-show="visible/* && emptyText !== false */">
-        <form class="tea-form--search" action="" v-if="filterable">
+        <form class="tea-form--search" action="" v-if="filterable" @mouseenter="filterInputHovering = true" @mouseleave="filterInputHovering = false">
           <div class="tea-search tea-search--simple">
             <div class="tea-search__inner">
               <input 
@@ -137,6 +137,7 @@
               />
             </div>
             <button type="button" class="tea-btn tea-btn--icon tea-btn--search">
+              <i v-if="showFilterClearable" class="tea-icon tea-icon-close" @click="handleFilterClearClick" style="transform: scale(0.75)"></i>
               <i class="tea-icon tea-icon-search"></i>
             </button>
           </div>
@@ -236,6 +237,18 @@
         return criteria;
       },
 
+      showFilterClearable() {
+        let hasValue = this.multiple
+          ? Array.isArray(this.selected) && this.selected.length > 0
+          : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
+        let criteria = !this.multiple &&
+          this.filterClearable &&
+          !this.selectDisabled &&
+          this.filterInputHovering &&
+          hasValue;
+        return criteria;
+      },
+
       iconClass() {
         return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
       },
@@ -309,6 +322,7 @@
           return true;
         }
       },
+      filterClearable: Boolean,
       automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
@@ -379,6 +393,7 @@
         query: '',
         previousQuery: null,
         inputHovering: false,
+        filterInputHovering: false,
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
@@ -457,7 +472,6 @@
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
-            console.log(this.query);
             this.handleQueryChange(this.query);
             if (this.multiple) {
               this.$refs.input && this.$refs.input.focus();
@@ -490,7 +504,6 @@
           this.setSelected();
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
-          console.log(this.query);
           this.checkDefaultFirstOption();
         }
       }
@@ -649,6 +662,11 @@
 
       handleClearClick(event) {
         this.deleteSelected(event);
+      },
+
+      handleFilterClearClick(event) {
+        this.query = '';
+        this.deleteCustomSelected(event);
       },
 
       doDestroy() {
@@ -816,6 +834,15 @@
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;
+        this.$emit('clear');
+      },
+
+      deleteCustomSelected(event) {
+        event.stopPropagation();
+        const value = this.multiple ? [] : '';
+        this.query = '';
+        this.selected = value;
+        this.$emit('change', value);
         this.$emit('clear');
       },
 

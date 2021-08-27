@@ -603,6 +603,7 @@
 | placeholder | 占位符 | string | — | 请选择 |
 | searchplaceholder | 搜索框占位符 | string | — |  |
 | filterable | 是否可搜索 | boolean | — | false |
+| filterClearable | 对于单选的可搜索的 Select，是否可以清空选项 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
 | filter-method | 自定义搜索方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
