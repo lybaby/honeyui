@@ -20,4 +20,4 @@ Vue.use(HoneyUI)
 
 ## 预览路径
 
-[前端UI组件预览](http://129.204.92.24/)
+[前端UI组件预览](https://static.haina.com/honeyui/index.html)
