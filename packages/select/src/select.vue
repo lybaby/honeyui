@@ -104,13 +104,17 @@
     <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}">
       <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}">
         <div class="tea-dropdown__value">
-          <template v-if="multiple && selected.length > 0">
-            <span v-for="(item, index) in selected" :key="index">{{item.currentLabel}}{{index+1 === selected.length?'':', '}}</span>
-          </template>
-          <template v-else>
-            {{selectedLabel || placeholder}}
-          </template>
-          
+          <slot name="display-text">
+            <template v-if="displayText !== undefined">
+              {{displayText || placeholder}}
+            </template>
+            <template v-else-if="multiple && selected.length > 0">
+              <span v-for="(item, index) in selected" :key="index">{{item.currentLabel}}{{index+1 === selected.length?'':', '}}</span>
+            </template>
+            <template v-else>
+              {{selectedLabel || placeholder}}
+            </template>
+          </slot>
         </div>
         <i type="arrowdown" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
       </div>
@@ -332,6 +336,7 @@
       loading: Boolean,
       popperClass: String,
       remote: Boolean,
+      displayText: String,
       loadingText: String,
       noMatchText: String,
       noDataText: String,
