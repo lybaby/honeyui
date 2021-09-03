@@ -358,6 +358,52 @@
 ```
 :::
 
+### 自定义显示内容
+
+可根据 `displayText` 属性或 `display-text` 具名插槽指定选择框内部显示的内容
+
+:::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
+```html
+<template>
+  <el-select v-model="value" :displayText="value + value" placeholder="请选择" border>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+    <div slot="display-text">hihi+{{value}}</div>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 分组
 
 备选项进行分组展示
@@ -600,6 +646,7 @@
 | name | select input 的 name 属性 | string | — | — |
 | autocomplete | select input 的 autocomplete 属性 | string | — | off |
 | auto-complete | 下个主版本弃用 | string | — | off |
+| display-text | 自定义选择框显示的内容 | string / slot | — | — |
 | placeholder | 占位符 | string | — | 请选择 |
 | searchplaceholder | 搜索框占位符 | string | — |  |
 | filterable | 是否可搜索 | boolean | — | false |
