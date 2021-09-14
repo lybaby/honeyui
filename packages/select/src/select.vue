@@ -102,7 +102,7 @@
       </template>
     </el-input>
     <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}">
-      <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}">
+      <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}" @mouseenter="inputHovering = true" @mouseleave="inputHovering = false">
         <div class="tea-dropdown__value">
           <slot name="display-text">
             <template v-if="displayText !== undefined">
@@ -116,7 +116,8 @@
             </template>
           </slot>
         </div>
-        <i type="arrowdown" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
+        <i type="arrowdown" v-if="!showCloseNew" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
+        <i v-if="showCloseNew"  class="tea-icon tea-icon-close" style="transform: scale(0.75)" @click="handleClearClick"></i>
       </div>
     </div>
     <transition
@@ -234,6 +235,17 @@
         let hasValue = this.multiple
           ? Array.isArray(this.value) && this.value.length > 0
           : this.value !== undefined && this.value !== null && this.value !== '';
+        let criteria = this.clearable &&
+          !this.selectDisabled &&
+          this.inputHovering &&
+          hasValue;
+        return criteria;
+      },
+
+      showCloseNew() {
+        let hasValue = this.multiple
+          ? Array.isArray(this.selected) && this.selected.length > 0
+          : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&

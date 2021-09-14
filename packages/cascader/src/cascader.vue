@@ -28,14 +28,14 @@
         <i
           v-if="clearBtnVisible"
           key="clear"
-          class="el-input__icon el-icon-circle-close"
+          class="tea-icon tea-icon-close"
           @click.stop="handleClear"></i>
         <i
           v-else
           key="arrow-down"
           :class="[
-            'el-input__icon',
-            'el-icon-arrow-down',
+            'tea-icon',
+            'tea-icon-arrowdown',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"></i>

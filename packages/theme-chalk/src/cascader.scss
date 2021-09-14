@@ -10,6 +10,10 @@
   position: relative;
   font-size: $--font-size-base;
   line-height: $--input-height;
+  
+  .tea-input[readonly] {
+    background-color: #fff;
+  }
 
   &:not(.is-disabled):hover {
     .el-input__inner {
@@ -30,7 +34,7 @@
     }
 
     .el-icon-arrow-down {
-      transition: transform .3s;
+      transition: transform 0.3s;
       font-size: 14px;
 
       @include when(reverse) {
@@ -145,7 +149,8 @@
     outline: none;
     cursor: pointer;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background: $--cascader-node-background-hover;
     }
 
