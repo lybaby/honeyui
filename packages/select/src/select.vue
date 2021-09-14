@@ -242,7 +242,7 @@
         return criteria;
       },
 
-      showCloseNew(){
+      showCloseNew() {
         let hasValue = this.multiple
           ? Array.isArray(this.selected) && this.selected.length > 0
           : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
