@@ -155,7 +155,7 @@
       },
       fixedHeight]">
       <div v-if="showHeader"
-        class="el-table__fixed-header-wrapper"
+        class="el-table__fixed-header-wrapper tea-table__header"
         ref="rightFixedHeaderWrapper">
         <table-header
           ref="rightFixedTableHeader"
