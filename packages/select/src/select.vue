@@ -175,6 +175,7 @@
             {{ emptyText }}
           </p>
         </template>
+        <slot name="menu-footer"/>
       </el-select-menu>
     </transition>
   </div>
