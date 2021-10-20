@@ -77,8 +77,8 @@ export const cellForced = {
         store.toggleRowExpansion(row);
       };
       return (<div class={ classes }
-        on-click={callback}>
-        <i class='el-icon el-icon-arrow-right'></i>
+        on-click={callback} style="display: inline-block; margin-right: 3px;">
+        <i class='tea-icon tea-icon-arrowright'></i>
       </div>);
     },
     sortable: false,
