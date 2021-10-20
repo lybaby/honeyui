@@ -77,7 +77,7 @@ export const cellForced = {
         store.toggleRowExpansion(row);
       };
       return (<div class={ classes }
-        on-click={callback} style="display: inline-block; margin-right: 3px;">
+        on-click={callback}>
         <i class='tea-icon tea-icon-arrowright'></i>
       </div>);
     },
@@ -108,7 +108,7 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
   }
   if (typeof treeNode.expanded === 'boolean' && !treeNode.noLazyChildren) {
     const expandClasses = ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : ''];
-    let iconClasses = ['el-icon-arrow-right'];
+    let iconClasses = ['tea-icon tea-icon-arrowright'];
     if (treeNode.loading) {
       iconClasses = ['el-icon-loading'];
     }
