@@ -470,14 +470,24 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select v-model="value" filterable multiple placeholder="请选择" border searchplaceholder="请输入手机号进行搜索">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <div>
+    <el-select v-model="value" filterable placeholder="请选择" border searchplaceholder="请输入手机号进行搜索">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+    <el-select v-model="value1" filterable multiple placeholder="请选择" border searchplaceholder="请输入手机号进行搜索">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </div>
 </template>
 
 <script>
@@ -499,8 +509,40 @@
         }, {
           value: '选项5',
           label: '北京烤鸭'
+        },{
+          value: '选项11',
+          label: '黄金糕'
+        }, {
+          value: '选项22',
+          label: '双皮奶'
+        }, {
+          value: '选项33',
+          label: '蚵仔煎'
+        }, {
+          value: '选项44',
+          label: '龙须面'
+        }, {
+          value: '选项55',
+          label: '北京烤鸭'
         }],
-        value: ''
+        options1: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: '',
+        value1: ''
       }
     }
   }
@@ -584,6 +626,70 @@
 </script>
 ```
 :::
+
+
+### 带清空按钮的搜索
+
+可以利用搜索功能快速查找选项
+
+:::demo 为`el-select`添加`filterClearable`属性即可启用搜索删除功能。
+```html
+<template>
+  <div>
+    <el-select v-model="value" filterable placeholder="请选择" border searchplaceholder="请输入手机号进行搜索" filter-clearable>
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        },{
+          value: '选项11',
+          label: '黄金糕'
+        }, {
+          value: '选项22',
+          label: '双皮奶'
+        }, {
+          value: '选项33',
+          label: '蚵仔煎'
+        }, {
+          value: '选项44',
+          label: '龙须面'
+        }, {
+          value: '选项55',
+          label: '北京烤鸭'
+        }],
+        value: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 
 ### 创建条目
 可以创建并选中选项中不存在的条目
@@ -681,6 +787,7 @@
 |    —    | Option 组件列表 |
 | prefix  | Select 组件头部内容 |
 | empty | 无选项时的列表 |
+| menu-footer | 下拉框底部区域 |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

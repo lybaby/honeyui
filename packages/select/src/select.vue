@@ -106,13 +106,13 @@
         <div class="tea-dropdown__value">
           <slot name="display-text">
             <template v-if="displayText !== undefined">
-              {{displayText || placeholder}}
+              {{displayText ||currentPlaceholder|| placeholder}}
             </template>
             <template v-else-if="multiple && selected.length > 0">
               <span v-for="(item, index) in selected" :key="index">{{item.currentLabel}}{{index+1 === selected.length?'':', '}}</span>
             </template>
             <template v-else>
-              {{selectedLabel || placeholder}}
+              {{selectedLabel || currentPlaceholder || placeholder}}
             </template>
           </slot>
         </div>
@@ -130,19 +130,23 @@
         :placement="type === 'pagination' ? 'top-start':'bottom-start'"
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
         v-show="visible/* && emptyText !== false */">
-        <form class="tea-form--search" action="" v-if="filterable" @mouseenter="filterInputHovering = true" @mouseleave="filterInputHovering = false">
+        <form class="tea-form--search" action="" v-if="filterable">
           <div class="tea-search tea-search--simple">
             <div class="tea-search__inner">
               <input 
                 class="tea-input tea-input--search" 
+                :class="{'tea-input--search-clearable': showFilterClearable}"
                 :placeholder="searchplaceholder" 
                 @keyup="debouncedOnInputChange"
                 @paste="debouncedOnInputChange"
                 v-model="query"
+                ref="queryInput"
               />
             </div>
+            <button v-if="showFilterClearable" @click="handleFilterClearClick" type="button" class="tea-btn tea-btn--icon tea-btn--search-clear">
+              <i class="tea-icon tea-icon-close" style="transform: scale(0.75)"></i>
+            </button>
             <button type="button" class="tea-btn tea-btn--icon tea-btn--search">
-              <i v-if="showFilterClearable" class="tea-icon tea-icon-close" @click="handleFilterClearClick" style="transform: scale(0.75)"></i>
               <i class="tea-icon tea-icon-search"></i>
             </button>
           </div>
@@ -255,14 +259,14 @@
       },
 
       showFilterClearable() {
-        let hasValue = this.multiple
-          ? Array.isArray(this.selected) && this.selected.length > 0
-          : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
+        // let hasValue = this.multiple
+        //   ? Array.isArray(this.selected) && this.selected.length > 0
+        //   : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
         let criteria = !this.multiple &&
           this.filterClearable &&
           !this.selectDisabled &&
-          this.filterInputHovering &&
-          hasValue;
+          this.query;
+          // hasValue;
         return criteria;
       },
 
@@ -339,7 +343,10 @@
           return true;
         }
       },
-      filterClearable: Boolean,
+      filterClearable: {
+        tyoe: Boolean,
+        default: true
+      },
       automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
@@ -411,7 +418,6 @@
         query: '',
         previousQuery: null,
         inputHovering: false,
-        filterInputHovering: false,
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
@@ -489,8 +495,14 @@
         } else {
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
-            this.query = this.remote ? '' : this.selectedLabel;
+            // this.query = this.remote ? '' : this.selectedLabel;  // remove: 去掉这个将选项默认作为搜索内容的逻辑，对齐tea-ui（kristli）
+            this.query = '';
             this.handleQueryChange(this.query);
+            this.$nextTick(() => {
+              if (this.$refs.queryInput && this.$refs.queryInput.focus) {
+                this.$refs.queryInput.focus();
+              }
+            });
             if (this.multiple) {
               this.$refs.input && this.$refs.input.focus();
             } else {
@@ -503,6 +515,16 @@
                 this.currentPlaceholder = this.selectedLabel;
                 this.selectedLabel = '';
               }
+
+              // 滚动到选中项
+              this.$refs.scrollbar.$children.forEach(child => {
+                if (child.itemSelected) {
+                  this.$nextTick(() => {
+                    const { offsetTop = 0 } = child.$el;
+                    child.$el.parentNode.scrollTop = offsetTop;
+                  });
+                }
+              });
             }
           }
         }
@@ -684,7 +706,8 @@
 
       handleFilterClearClick(event) {
         this.query = '';
-        this.deleteCustomSelected(event);
+        // this.deleteCustomSelected(event);
+        this.handleQueryChange(this.query);
       },
 
       doDestroy() {
