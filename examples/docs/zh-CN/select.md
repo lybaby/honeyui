@@ -308,6 +308,54 @@
 ```
 :::
 
+### 下拉菜单同步宽度
+
+使得下拉框的宽度与弹出按钮宽度同步
+
+:::demo 使用参数 `match-button-width` 控制即可
+```html
+<template>
+  <div>
+    <el-select v-model="value" placeholder="请选择" :border="true" full match-button-width>
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </div>
+  
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: ''
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### 自定义模板
 
 可以自定义备选项
@@ -770,6 +818,8 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| match-button-width | 弹出区域是否与下拉按钮同宽 | boolean | - | false |
+| full | 当值为 true 时，下拉框将撑满容器宽度 | boolean | - | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

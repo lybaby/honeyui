@@ -101,7 +101,7 @@
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
-    <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}">
+    <div class="tea-dropdown" ref="reference" :class="{'is-disabled': selectDisabled}" :style="full ? { width: '100%' } : {}">
       <div class="tea-dropdown__header" :class="{'tea-dropdown-btn': border}" @mouseenter="inputHovering = true" @mouseleave="inputHovering = false">
         <div class="tea-dropdown__value">
           <slot name="display-text">
@@ -129,6 +129,7 @@
         :append-to-body="popperAppendToBody"
         :placement="type === 'pagination' ? 'top-start':'bottom-start'"
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
+        :style="selectMenuStyle"
         v-show="visible/* && emptyText !== false */">
         <form class="tea-form--search" action="" v-if="filterable">
           <div class="tea-search tea-search--simple">
@@ -311,6 +312,10 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+
+      selectMenuStyle() {
+        return parseInt(this.dropdownBoxWidth, 10) > 0 ? { width: this.dropdownBoxWidth + 'px' } : {};
       }
     },
 
@@ -344,8 +349,16 @@
         }
       },
       filterClearable: {
-        tyoe: Boolean,
+        type: Boolean,
         default: true
+      },
+      matchButtonWidth: {
+        type: Boolean,
+        default: false
+      },
+      full: {
+        type: Boolean,
+        default: false
       },
       automaticDropdown: Boolean,
       size: String,
@@ -421,7 +434,8 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        dropdownBoxWidth: 0
       };
     },
 
@@ -460,6 +474,7 @@
 
       visible(val) {
         if (!val) {
+          // 隐藏
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
@@ -493,6 +508,7 @@
             }
           }
         } else {
+          // 显示
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             // this.query = this.remote ? '' : this.selectedLabel;  // remove: 去掉这个将选项默认作为搜索内容的逻辑，对齐tea-ui（kristli）
@@ -526,6 +542,9 @@
                 }
               });
             }
+          }
+          if (this.matchButtonWidth && this.$refs.reference.clientWidth) {
+            this.dropdownBoxWidth = this.$refs.reference.clientWidth;
           }
         }
         this.$emit('visible-change', val);
