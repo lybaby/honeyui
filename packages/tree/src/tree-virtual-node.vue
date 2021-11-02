@@ -47,7 +47,7 @@
         style="margin-right: 0"
       >
       </el-checkbox>
-      <span v-if="source.loading" class="el-tree-node__loading-icon el-icon-loading"> </span>
+      <!-- <span v-if="source.loading" class="el-tree-node__loading-icon el-icon-loading"> </span> -->
       <node-content :node="source"></node-content>
     </div>
   </div>
