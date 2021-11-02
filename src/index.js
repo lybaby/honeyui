@@ -210,7 +210,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.9.1-r51',
+  version: '2.9.1-r52',
   locale: locale.use,
   i18n: locale.i18n,
   install,

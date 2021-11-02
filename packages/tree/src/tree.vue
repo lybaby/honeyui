@@ -11,7 +11,8 @@
   >
     <virtual-list
       v-if="virtual"
-      :style="{ height: '100%', 'overflow-y': 'auto' }"
+      class="v-list"
+      :style="virtualListStyle"
       :data-key="getNodeKey"
       :data-sources="visibleList"
       :data-component="itemComponent"
@@ -89,6 +90,10 @@ export default {
     virtualKeeps: {
       type: Number,
       default: 50
+    },
+    virtualListStyle: {
+      type: Object,
+      default: () => ({})
     },
     data: {
       type: Array

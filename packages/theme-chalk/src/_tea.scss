@@ -4045,6 +4045,11 @@ input[type=checkbox][disabled]:indeterminate {
   max-width: 420px
 }
 
+.tea-tree .v-list {
+  height: 100%;
+  overflow-y: auto;
+}
+
 .tea-tree__node {
   position: relative;
   line-height: 1;

@@ -930,12 +930,18 @@
 
 采用 `vue-virtual-scroll-list` 组件优化大量数据时列表性能，通过 `virtual` 属性开启，默认关闭。
 
-**!!! 开启后，必须为 `el-tree` 组件设置 `height` 属性，否则该功能不生效 !!!**
+**!!! 开启后，必须通过 `virtual-list-style` 字段为组件设置 `height / max-height` 属性（参考 demo 中代码），否则该功能不生效 !!!**
 
 :::demo
 
 ```html
-<el-tree style="height:200px;" virtual :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+<el-tree
+  virtual
+  :virtual-list-style="{ 'max-height': '200px' }"
+  :data="data"
+  :props="defaultProps"
+  @node-click="handleNodeClick"
+></el-tree>
 
 <script>
   export default {
@@ -1007,8 +1013,9 @@
 | draggable             | 是否开启拖拽节点功能                                                                                                                       | boolean                                | —      | false  |
 | allow-drag            | 判断节点能否被拖拽                                                                                                                         | Function(node)                         | —      | —      |
 | allow-drop            | 拖拽时判定目标节点能否被放置。`type` 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后 | Function(draggingNode, dropNode, type) | —      | —      |
-| virtual               | 是否开启虚拟列表优化（数据量较大时建议开启）                                                                                               | boolean                                | —      | false  |
-| virtual-keeps         | 虚拟列表渲染的实际 dom 节点数                                                                                                          | number                                 | —      | 50     |
+| virtual               | 是否开启虚拟列表优化，数据量较大时建议开启。开启后，节点拖拽功能将失效（暂未适配）                                                         | boolean                                | —      | false  |
+| virtual-list-style    | 虚拟列表 div 容器的 style，通过指定 `height / max-height` 来触发滚动                                                                       | object                                 | —      | —      |
+| virtual-keeps         | 虚拟列表渲染的实际 dom 节点数                                                                                                              | number                                 | —      | 50     |
 
 ### props
 
