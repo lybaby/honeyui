@@ -29,6 +29,7 @@
           v-if="clearBtnVisible"
           key="clear"
           class="tea-icon tea-icon-close"
+          style="transform:scale(0.75)"
           @click.stop="handleClear"></i>
         <i
           v-else
@@ -611,7 +612,8 @@ export default {
       if (this.$isServer || !$el) return;
 
       const { suggestionPanel } = this.$refs;
-      const inputInner = $el.querySelector('.el-input__inner');
+      // const inputInner = $el.querySelector('.el-input__inner');
+      const inputInner = $el.querySelector('.tea-input');
 
       if (!inputInner) return;
 

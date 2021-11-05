@@ -74,10 +74,6 @@
             {
               "path": "/link",
               "title": "Link 文字链接"
-            },
-            {
-              "path": "/search",
-              "title": "search搜索"
             }
           ]
         },
@@ -239,6 +235,10 @@
             {
               "path": "/rank",
               "title": "Rank 层级组件"
+            },
+            {
+              "path": "/search",
+              "title": "Search 搜索"
             },
             {
               "path": "/dialog",

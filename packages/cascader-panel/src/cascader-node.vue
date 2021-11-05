@@ -57,6 +57,11 @@
 
         if (!checkStrictly && isDisabled || node.loading) return;
 
+        // add logic (kristli): when cancel the link between parent and child with multiple field disabled, node clicking event means a selection of the node
+        if (checkStrictly && !multiple) {
+          this.handleCheckChange();
+        }
+
         if (config.lazy && !node.loaded) {
           panel.lazyLoad(node, () => {
             // do not use cached leaf value here, invoke this.isLeaf to get new value.
@@ -75,8 +80,9 @@
       },
 
       handleCheckChange() {
-        const { panel, value } = this;
+        const { panel, value, node } = this;
         panel.handleCheckChange(value);
+        panel.handleExpand(node);
       },
 
       handleMultiCheckChange(checked) {
@@ -161,19 +167,19 @@
 
       renderCheckIcon(h) {
         return (
-          <i class="el-icon-check el-cascader-node__prefix"></i>
+          <i class="tea-icon tea-icon-check el-icon-check el-cascader-node__prefix"></i>
         );
       },
 
       renderLoadingIcon(h) {
         return (
-          <i class="el-icon-loading el-cascader-node__postfix"></i>
+          <i class="tea-icon tea-icon-loading el-icon-loading el-cascader-node__postfix"></i>
         );
       },
 
       renderExpandIcon(h) {
         return (
-          <i class="el-icon-arrow-right el-cascader-node__postfix"></i>
+          <i class="tea-icon tea-icon-arrowright el-icon-arrow-right el-cascader-node__postfix"></i>
         );
       },
 
@@ -204,20 +210,19 @@
       const disabled = !checkStrictly && isDisabled;
       const events = { on: {} };
 
-      if (!isLeaf) {
-        if (expandTrigger === 'click') {
-          events.on.click = this.handleExpand;
-        } else {
-          events.on.mouseenter = e => {
-            this.handleExpand();
-            this.$emit('expand', e);
-          };
-          events.on.focus = e => {
-            this.handleExpand();
-            this.$emit('expand', e);
-          };
-        }
-      } else if (!isDisabled && !checkStrictly && !multiple) {
+      if (expandTrigger === 'click') {
+        events.on.click = this.handleExpand;
+      } else {
+        events.on.mouseenter = e => {
+          this.handleExpand();
+          this.$emit('expand', e);
+        };
+        events.on.focus = e => {
+          this.handleExpand();
+          this.$emit('expand', e);
+        };
+      }
+      if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
         events.on.click = this.handleCheckChange;
       }
 

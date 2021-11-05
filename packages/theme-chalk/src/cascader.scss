@@ -1,18 +1,28 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "./input";
-@import "./popper";
-@import "./tag";
-@import "./cascader-panel";
+@import 'mixins/mixins';
+@import 'common/var';
+@import './input';
+@import './popper';
+@import './tag';
+@import './cascader-panel';
 
 @include b(cascader) {
   display: inline-block;
   position: relative;
   font-size: $--font-size-base;
-  line-height: $--input-height;
-  
+  // line-height: $--input-height;
+
   .tea-input[readonly] {
     background-color: #fff;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    padding-right: 20px;
+  }
+
+  .el-input__suffix {
+    cursor: pointer;
+    .tea-icon {
+      margin-top: 8px;
+    }
   }
 
   &:not(.is-disabled):hover {
@@ -122,6 +132,18 @@
         &:hover {
           background-color: $--color-text-secondary;
         }
+      }
+    }
+
+    .tea-tag {
+      margin: 2px 0 2px 6px;
+      & > span {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .tea-icon-dismiss {
+        transform: scale(0.8);
       }
     }
   }

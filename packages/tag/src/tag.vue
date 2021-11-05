@@ -52,7 +52,7 @@
           <span>{ this.$slots.default }</span>
 
           {
-            this.closable && <a href="#" type="close" class="tea-icon tea-icon-dismiss" on-click={ this.handleClose }></a>
+            this.closable && <i class="tea-icon tea-icon-dismiss" on-click={ this.handleClose }></i>
           }
         </div>
       );
