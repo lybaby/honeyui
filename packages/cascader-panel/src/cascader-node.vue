@@ -59,14 +59,14 @@
 
         // add logic (kristli): when cancel the link between parent and child with multiple field disabled, node clicking event means a selection of the node
         if (checkStrictly && !multiple) {
-          this.handleCheckChange();
+          const { panel, value } = this;
+          panel.handleCheckChange(value);
         }
 
-        if (config.lazy && !node.loaded) {
+        // do not use cached leaf value here, invoke this.isLeaf to get new value.
+        const { isLeaf } = this;
+        if (!isLeaf && config.lazy && !node.loaded) {
           panel.lazyLoad(node, () => {
-            // do not use cached leaf value here, invoke this.isLeaf to get new value.
-            const { isLeaf } = this;
-
             if (!isLeaf) this.handleExpand();
             if (multiple) {
               // if leaf sync checked state, else clear checked state
