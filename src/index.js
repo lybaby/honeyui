@@ -27,6 +27,7 @@ import CheckboxButton from '../packages/checkbox-button/index.js';
 import CheckboxGroup from '../packages/checkbox-group/index.js';
 import Switch from '../packages/switch/index.js';
 import Select from '../packages/select/index.js';
+import Popper from '../packages/popper/index.js';
 import Option from '../packages/option/index.js';
 import OptionGroup from '../packages/option-group/index.js';
 import Button from '../packages/button/index.js';
@@ -119,6 +120,7 @@ const components = [
   CheckboxGroup,
   Switch,
   Select,
+  Popper,
   Option,
   OptionGroup,
   Button,
@@ -210,7 +212,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.9.1-r55',
+  version: '2.9.1-r56',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -243,6 +245,7 @@ export default {
   CheckboxGroup,
   Switch,
   Select,
+  Popper,
   Option,
   OptionGroup,
   Button,

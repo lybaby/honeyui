@@ -253,6 +253,10 @@
               "title": "Popover 弹出框"
             },
             {
+              "path": "/popper",
+              "title": "Popper 弹出菜单"
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },

@@ -26,6 +26,7 @@
   "checkbox-group": "./packages/checkbox-group/index.js",
   "switch": "./packages/switch/index.js",
   "select": "./packages/select/index.js",
+  "popper": "./packages/popper/index.js",
   "option": "./packages/option/index.js",
   "option-group": "./packages/option-group/index.js",
   "button": "./packages/button/index.js",

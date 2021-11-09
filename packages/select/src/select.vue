@@ -260,14 +260,10 @@
       },
 
       showFilterClearable() {
-        // let hasValue = this.multiple
-        //   ? Array.isArray(this.selected) && this.selected.length > 0
-        //   : this.selected.value !== undefined && this.selected.value !== null && this.selected.value !== '';
         let criteria = !this.multiple &&
           this.filterClearable &&
           !this.selectDisabled &&
           this.query;
-          // hasValue;
         return criteria;
       },
 
