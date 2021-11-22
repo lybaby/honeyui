@@ -1,16 +1,6 @@
 <template>
-  <div
-    :class="[
-      'el-cascader-panel',
-      border && 'is-bordered'
-    ]"
-    @keydown="handleKeyDown">
-    <cascader-menu
-      ref="menu"
-      v-for="(menu, index) in menus"
-      :index="index"
-      :key="index"
-      :nodes="menu"></cascader-menu>
+  <div :class="['el-cascader-panel', border && 'is-bordered']" @keydown="handleKeyDown">
+    <cascader-menu ref="menu" v-for="(menu, index) in menus" :index="index" :key="index" :nodes="menu"></cascader-menu>
   </div>
 </template>
 
@@ -20,13 +10,7 @@ import Store from './store';
 import merge from 'element-ui/src/utils/merge';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-import {
-  noop,
-  coerceTruthyValueToArray,
-  isEqual,
-  isEmpty,
-  valueEquals
-} from 'element-ui/src/utils/util';
+import { noop, coerceTruthyValueToArray, isEqual, isEmpty, valueEquals } from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
@@ -44,7 +28,7 @@ const DefaultProps = {
   hoverThreshold: 500
 };
 
-const isLeaf = el => !el.getAttribute('aria-owns');
+const isLeaf = (el) => !el.getAttribute('aria-owns');
 
 const getSibling = (el, distance) => {
   const { parentNode } = el;
@@ -62,13 +46,13 @@ const getMenuIndex = (el, distance) => {
   return Number(pieces[pieces.length - 2]);
 };
 
-const focusNode = el => {
+const focusNode = (el) => {
   if (!el) return;
   el.focus();
   !isLeaf(el) && el.click();
 };
 
-const checkNode = el => {
+const checkNode = (el) => {
   if (!el) return;
 
   const input = el.querySelector('input');
@@ -109,7 +93,8 @@ export default {
       checkedNodePaths: [],
       store: [],
       menus: [],
-      activePath: []
+      activePath: [],
+      loadCount: 0
     };
   },
 
@@ -136,7 +121,7 @@ export default {
 
   watch: {
     options: {
-      handler: function() {
+      handler() {
         this.initStore();
       },
       immediate: true,
@@ -156,7 +141,10 @@ export default {
   },
 
   mounted() {
-    if (!isEmpty(this.value)) {
+    // if (!isEmpty(this.value)) {
+    //   this.syncCheckedValue();
+    // }
+    if (!this.isEmptyValue(this.value)) {
       this.syncCheckedValue();
     }
   },
@@ -175,6 +163,7 @@ export default {
     syncCheckedValue() {
       const { value, checkedValue } = this;
       if (!isEqual(value, checkedValue)) {
+        this.activePath = [];
         this.checkedValue = value;
         this.syncMenuState();
       }
@@ -189,33 +178,57 @@ export default {
     syncMultiCheckState() {
       const nodes = this.getFlattedNodes(this.leafOnly);
 
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         node.syncCheckState(this.checkedValue);
       });
     },
+    isEmptyValue(val) {
+      const { multiple, config } = this;
+      const { emitPath } = config;
+      if (multiple || emitPath) {
+        return isEmpty(val);
+      }
+      return false;
+    },
+    // syncActivePath() {
+    //   let { checkedValue, store, multiple } = this;
+    //   if (isEmpty(checkedValue)) {
+    //     this.activePath = [];
+    //     this.menus = [store.getNodes()];
+    //   } else {
+    //     checkedValue = multiple ? checkedValue[0] : checkedValue;
+    //     const checkedNode = this.getNodeByValue(checkedValue) || {};
+    //     const nodes = [];
+    //     let { parent } = checkedNode;
+    //     while (parent) {
+    //       nodes.unshift(parent);
+    //       parent = parent.parent;
+    //     }
+    //     nodes.forEach(node => this.handleExpand(node, true /* silent */));
+    //   }
+    // },
     syncActivePath() {
-      let { checkedValue, store, multiple } = this;
-      if (isEmpty(checkedValue)) {
+      const { store, multiple, activePath, checkedValue } = this;
+      if (!isEmpty(activePath)) {
+        const nodes = activePath.map((node) => this.getNodeByValue(node.getValue()));
+        this.expandNodes(nodes);
+      } else if (!this.isEmptyValue(checkedValue)) {
+        const value = multiple ? checkedValue[0] : checkedValue;
+        const checkedNode = this.getNodeByValue(value) || {};
+        const nodes = (checkedNode.pathNodes || []).slice(0, -1);
+        this.expandNodes(nodes);
+      } else {
         this.activePath = [];
         this.menus = [store.getNodes()];
-      } else {
-        checkedValue = multiple ? checkedValue[0] : checkedValue;
-        const checkedNode = this.getNodeByValue(checkedValue) || {};
-        const nodes = [];
-        let { parent } = checkedNode;
-        while (parent) {
-          nodes.unshift(parent);
-          parent = parent.parent;
-        }
-        nodes.forEach(node => this.handleExpand(node, true /* silent */));
       }
+    },
+    expandNodes(nodes) {
+      nodes.forEach((node) => this.handleExpand(node, true /* silent */));
     },
     calculateCheckedNodePaths() {
       const { checkedValue, multiple } = this;
-      const checkedValues = multiple
-        ? coerceTruthyValueToArray(checkedValue)
-        : [ checkedValue ];
-      this.checkedNodePaths = checkedValues.map(v => {
+      const checkedValues = multiple ? coerceTruthyValueToArray(checkedValue) : [checkedValue];
+      this.checkedNodePaths = checkedValues.map((v) => {
         const checkedNode = this.getNodeByValue(v);
         return checkedNode ? checkedNode.pathNodes : [];
       });
@@ -258,8 +271,10 @@ export default {
       }
     },
     handleExpand(node, silent) {
+      const { activePath } = this;
       const { level } = node;
-      const path = this.activePath.slice(0, level - 1);
+      // const path = this.activePath.slice(0, level - 1);
+      const path = activePath.slice(0, level - 1);
       const menus = this.menus.slice(0, level);
 
       if (!node.isLeaf) {
@@ -273,9 +288,14 @@ export default {
       this.menus = menus;
 
       if (!silent) {
-        const pathValues = path.map(node => node.getValue());
-        this.$emit('active-item-change', pathValues); // Deprecated
-        this.$emit('expand-change', pathValues);
+        const pathValues = path.map((node) => node.getValue());
+        // this.$emit('active-item-change', pathValues); // Deprecated
+        // this.$emit('expand-change', pathValues);
+        const activePathValues = activePath.map((node) => node.getValue());
+        if (!valueEquals(pathValues, activePathValues)) {
+          this.$emit('active-item-change', pathValues); // Deprecated
+          this.$emit('expand-change', pathValues);
+        }
       }
     },
     handleCheckChange(value) {
@@ -289,31 +309,50 @@ export default {
         this.menus = [this.store.getNodes()];
       }
       node.loading = true;
-      const resolve = dataList => {
+      const resolve = (dataList) => {
         const parent = node.root ? null : node;
         dataList && dataList.length && this.store.appendNodes(dataList, parent);
         node.loading = false;
         node.loaded = true;
+
+        // dispose default value on lazy load mode
+        if (Array.isArray(this.checkedValue)) {
+          const nodeValue = this.checkedValue[this.loadCount++];
+          const valueKey = this.config.value;
+          const leafKey = this.config.leaf;
+          if (Array.isArray(dataList) && dataList.filter((item) => item[valueKey] === nodeValue).length > 0) {
+            const checkedNode = this.store.getNodeByValue(nodeValue);
+            if (!checkedNode.data[leafKey]) {
+              this.lazyLoad(checkedNode, () => {
+                this.handleExpand(checkedNode);
+              });
+            }
+            if (this.loadCount === this.checkedValue.length) {
+              this.$parent.computePresentText();
+            }
+          }
+        }
+
         onFullfiled && onFullfiled(dataList);
       };
       config.lazyLoad(node, resolve);
     },
     /**
      * public methods
-    */
+     */
     calculateMultiCheckedValue() {
-      this.checkedValue = this.getCheckedNodes(this.leafOnly)
-        .map(node => node.getValueByOption());
+      this.checkedValue = this.getCheckedNodes(this.leafOnly).map((node) => node.getValueByOption());
     },
     scrollIntoView() {
       if (this.$isServer) return;
 
       const menus = this.$refs.menu || [];
-      menus.forEach(menu => {
+      menus.forEach((menu) => {
         const menuElement = menu.$el;
         if (menuElement) {
           const container = menuElement.querySelector('.el-scrollbar__wrap');
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
+          const activeNode =
+            menuElement.querySelector('.el-cascader-node.is-active') ||
             menuElement.querySelector('.el-cascader-node.in-active-path');
           scrollIntoView(container, activeNode);
         }
@@ -330,11 +369,12 @@ export default {
       const { checkedValue, multiple } = this;
       if (multiple) {
         const nodes = this.getFlattedNodes(leafOnly);
-        return nodes.filter(node => node.checked);
+        return nodes.filter((node) => node.checked);
       } else {
-        return isEmpty(checkedValue)
-          ? []
-          : [this.getNodeByValue(checkedValue)];
+        // return isEmpty(checkedValue)
+        //   ? []
+        //   : [this.getNodeByValue(checkedValue)];
+        return this.isEmptyValue(checkedValue) ? [] : [this.getNodeByValue(checkedValue)];
       }
     },
     clearCheckedNodes() {
@@ -342,8 +382,8 @@ export default {
       const { multiple, emitPath } = config;
       if (multiple) {
         this.getCheckedNodes(leafOnly)
-          .filter(node => !node.isDisabled)
-          .forEach(node => node.doCheck(false));
+          .filter((node) => !node.isDisabled)
+          .forEach((node) => node.doCheck(false));
         this.calculateMultiCheckedValue();
       } else {
         this.checkedValue = emitPath ? [] : null;

@@ -1,17 +1,13 @@
 <template>
   <div
     ref="reference"
-    :class="[
-      'el-cascader',
-      realSize && `el-cascader--${realSize}`,
-      { 'is-disabled': isDisabled }
-    ]"
+    :class="['el-cascader', realSize && `el-cascader--${realSize}`, { 'is-disabled': isDisabled }]"
     v-clickoutside="() => toggleDropDownVisible(false)"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
-    @keydown="handleKeyDown">
-
+    @keydown="handleKeyDown"
+  >
     <el-input
       ref="input"
       v-model="multiple ? presentText : inputValue"
@@ -23,36 +19,36 @@
       :class="{ 'is-focus': dropDownVisible }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @input="handleInput">
+      @input="handleInput"
+    >
       <template slot="suffix">
         <i
           v-if="clearBtnVisible"
           key="clear"
           class="tea-icon tea-icon-close"
-          style="transform:scale(0.75)"
-          @click.stop="handleClear"></i>
+          style="transform: scale(0.75)"
+          @click.stop="handleClear"
+        ></i>
         <i
           v-else
           key="arrow-down"
-          :class="[
-            'tea-icon',
-            'tea-icon-arrowdown',
-            dropDownVisible && 'is-reverse'
-          ]"
-          @click.stop="toggleDropDownVisible()"></i>
+          :class="['tea-icon', 'tea-icon-arrowdown', dropDownVisible && 'is-reverse']"
+          @click.stop="toggleDropDownVisible()"
+        ></i>
       </template>
     </el-input>
 
     <div v-if="multiple" class="el-cascader__tags">
       <el-tag
-        v-for="(tag, index) in presentTags"
+        v-for="tag in presentTags"
         :key="tag.key"
         type="info"
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(index)">
+        @close="deleteTag(tag)"
+      >
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -61,16 +57,14 @@
         type="text"
         class="el-cascader__search-input"
         :placeholder="presentTags.length ? '' : placeholder"
-        @input="e => handleInput(inputValue, e)"
+        @input="(e) => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
-        @keydown.delete="handleDelete">
+        @keydown.delete="handleDelete"
+      />
     </div>
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
-      <div
-        v-show="dropDownVisible"
-        ref="popper"
-        :class="['el-popper', 'el-cascader__dropdown', popperClass]">
+      <div v-show="dropDownVisible" ref="popper" :class="['el-popper', 'el-cascader__dropdown', popperClass]">
         <el-cascader-panel
           ref="panel"
           v-show="!filtering"
@@ -80,7 +74,8 @@
           :border="false"
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
-          @close="toggleDropDownVisible(false)"></el-cascader-panel>
+          @close="toggleDropDownVisible(false)"
+        ></el-cascader-panel>
         <el-scrollbar
           ref="suggestionPanel"
           v-if="filterable"
@@ -88,17 +83,16 @@
           tag="ul"
           class="el-cascader__suggestion-panel"
           view-class="el-cascader__suggestion-list"
-          @keydown.native="handleSuggestionKeyDown">
+          @keydown.native="handleSuggestionKeyDown"
+        >
           <template v-if="suggestions.length">
             <li
               v-for="(item, index) in suggestions"
               :key="item.uid"
-              :class="[
-                'el-cascader__suggestion-item',
-                item.checked && 'is-checked'
-              ]"
+              :class="['el-cascader__suggestion-item', item.checked && 'is-checked']"
               :tabindex="-1"
-              @click="handleSuggestionClick(index)">
+              @click="handleSuggestionClick(index)"
+            >
               <span>{{ item.text }}</span>
               <i v-if="item.checked" class="el-icon-check"></i>
             </li>
@@ -224,7 +218,7 @@ export default {
     },
     beforeFilter: {
       type: Function,
-      default: () => (() => {})
+      default: () => () => {}
     },
     popperClass: String
   },
@@ -251,9 +245,7 @@ export default {
       return this.size || _elFormItemSize || (this.$ELEMENT || {}).size;
     },
     tagSize() {
-      return ['small', 'mini'].indexOf(this.realSize) > -1
-        ? 'mini'
-        : 'small';
+      return ['small', 'mini'].indexOf(this.realSize) > -1 ? 'mini' : 'small';
     },
     isDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
@@ -262,18 +254,16 @@ export default {
       const config = this.props || {};
       const { $attrs } = this;
 
-      Object
-        .keys(MigratingProps)
-        .forEach(oldProp => {
-          const { newProp, type } = MigratingProps[oldProp];
-          let oldValue = $attrs[oldProp] || $attrs[kebabCase(oldProp)];
-          if (isDef(oldProp) && !isDef(config[newProp])) {
-            if (type === Boolean && oldValue === '') {
-              oldValue = true;
-            }
-            config[newProp] = oldValue;
+      Object.keys(MigratingProps).forEach((oldProp) => {
+        const { newProp, type } = MigratingProps[oldProp];
+        let oldValue = $attrs[oldProp] || $attrs[kebabCase(oldProp)];
+        if (isDef(oldProp) && !isDef(config[newProp])) {
+          if (type === Boolean && oldValue === '') {
+            oldValue = true;
           }
-        });
+          config[newProp] = oldValue;
+        }
+      });
 
       return config;
     },
@@ -291,9 +281,7 @@ export default {
         return false;
       }
 
-      return this.multiple
-        ? !!this.checkedNodes.filter(node => !node.isDisabled).length
-        : !!this.presentText;
+      return this.multiple ? !!this.checkedNodes.filter((node) => !node.isDisabled).length : !!this.presentText;
     },
     panel() {
       return this.$refs.panel;
@@ -301,6 +289,9 @@ export default {
   },
 
   watch: {
+    disabled() {
+      this.computePresentContent();
+    },
     value(val) {
       if (!isEqual(val, this.checkedValue)) {
         this.checkedValue = val;
@@ -317,7 +308,7 @@ export default {
       }
     },
     options: {
-      handler: function() {
+      handler() {
         this.$nextTick(this.computePresentContent);
       },
       deep: true
@@ -495,7 +486,7 @@ export default {
       const checkedNodes = this.getCheckedNodes(leafOnly);
       const tags = [];
 
-      const genTag = node => ({
+      const genTag = (node) => ({
         node,
         key: node.uid,
         text: node.getText(showAllLevels, separator),
@@ -516,7 +507,7 @@ export default {
               closable: false
             });
           } else {
-            rest.forEach(node => tags.push(genTag(node)));
+            rest.forEach((node) => tags.push(genTag(node)));
           }
         }
       }
@@ -531,19 +522,18 @@ export default {
         filterMethod = (node, keyword) => node.text.includes(keyword);
       }
 
-      const suggestions = this.panel.getFlattedNodes(this.leafOnly)
-        .filter(node => {
-          if (node.isDisabled) return false;
-          node.text = node.getText(this.showAllLevels, this.separator) || '';
-          return filterMethod(node, this.inputValue);
-        });
+      const suggestions = this.panel.getFlattedNodes(this.leafOnly).filter((node) => {
+        if (node.isDisabled) return false;
+        node.text = node.getText(this.showAllLevels, this.separator) || '';
+        return filterMethod(node, this.inputValue);
+      });
 
       if (this.multiple) {
-        this.presentTags.forEach(tag => {
+        this.presentTags.forEach((tag) => {
           tag.hitState = false;
         });
       } else {
-        suggestions.forEach(node => {
+        suggestions.forEach((node) => {
           node.checked = isEqual(this.checkedValue, node.getValueByOption());
         });
       }
@@ -601,12 +591,19 @@ export default {
         this.toggleDropDownVisible(false);
       }
     },
-    deleteTag(index) {
+    deleteTag(tag) {
       const { checkedValue } = this;
-      const val = checkedValue[index];
-      this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      const current = tag.node.getValueByOption();
+      const val = checkedValue.find((n) => isEqual(n, current));
+      this.checkedValue = checkedValue.filter((n) => !isEqual(n, current));
       this.$emit('remove-tag', val);
     },
+    // deleteTag(index) {
+    //   const { checkedValue } = this;
+    //   const val = checkedValue[index];
+    //   this.checkedValue = checkedValue.filter((n, i) => i !== index);
+    //   this.$emit('remove-tag', val);
+    // },
     updateStyle() {
       const { $el, inputInitialHeight } = this;
       if (this.$isServer || !$el) return;
@@ -626,12 +623,22 @@ export default {
       }
 
       if (tags) {
-        const { offsetHeight } = tags;
+        // const { offsetHeight } = tags;
+        // const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
+        // inputInner.style.height = height;
+        // this.updatePopper();
+        const offsetHeight = Math.round(tags.getBoundingClientRect().height);
         const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
         inputInner.style.height = height;
-        this.updatePopper();
+        if (this.dropDownVisible) {
+          this.updatePopper();
+        }
       }
     },
+
+    /**
+     * public methods
+     */
     getCheckedNodes(leafOnly) {
       return this.panel.getCheckedNodes(leafOnly);
     }
