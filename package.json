@@ -1,6 +1,6 @@
 {
   "name": "honey-ui",
-  "version": "2.9.1-r60",
+  "version": "2.9.1-r61",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [

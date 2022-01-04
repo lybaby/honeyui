@@ -15,10 +15,10 @@ nodes.forEach((node) => {
   var arr = selector.match(reg);
   let flag = true;
 
-  if (node.nodes) {
-    const labelArr = node.nodes.map((child) => child.prop);
-    flag = labelArr.indexOf('background-size') > -1;
-  }
+  // if (node.nodes) {
+  //   const labelArr = node.nodes.map((child) => child.prop);
+  //   flag = labelArr.indexOf('background-size') > -1;
+  // }
 
   if (arr && arr[1] && flag && arr[1].indexOf(':hover') === -1) {
     classList.push(arr[1].replace('.size-', ' size-'));
