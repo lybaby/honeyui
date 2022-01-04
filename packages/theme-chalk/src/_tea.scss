@@ -4739,11 +4739,6 @@ input[type=checkbox][disabled]:indeterminate {
 }
 
 .tea-dropdown-box {
-  // border: 1px solid #ddd;
-  // background-color: #fff;
-  // box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
-  // min-width: 150px;
-  // position: relative
   border-radius: 0;
   background-color: #fff;
   -webkit-box-shadow: 0 0 16px 0 rgba(54, 58, 80, 0.16);
@@ -5045,10 +5040,6 @@ input[type=checkbox][disabled]:indeterminate {
   transition-property: left;
   box-shadow: 0 3px 6px rgba(0, 0, 0, .3)
 }
-
-// .tea-switch:hover .tea-switch__toggle:before {
-//   background-color: #f2f2f2
-// }
 
 .tea-switch__toggle:after {
   position: absolute;
@@ -6254,7 +6245,6 @@ input[type=search]::-webkit-search-cancel-button {
 
 .tea-table {
   background-color: #fff;
-  // overflow: inherit;
   overflow: hidden;
   position: relative;
 }
