@@ -13,6 +13,7 @@
   <el-button type="primary">主要按钮</el-button>
   <el-button type="weak">次要按钮</el-button>
   <el-button type="pay">支付按钮</el-button>
+  <el-button type="error">错误按钮</el-button>
 </el-row>
 
 ```
@@ -28,8 +29,9 @@
 <el-row>
   <el-button disabled>默认按钮</el-button>
   <el-button type="primary" disabled>主要按钮</el-button>
-  <el-button type="info" disabled>信息按钮</el-button>
-  <el-button type="warning" disabled>警告按钮</el-button>
+  <el-button type="weak" disabled>次要按钮</el-button>
+  <el-button type="pay" disabled>支付按钮</el-button>
+  <el-button type="error" disabled>错误按钮</el-button>
 </el-row>
 
 ```
@@ -88,6 +90,7 @@
 <el-button type="primary" :loading="true"></el-button>
 <el-button type="weak" :loading="true"></el-button>
 <el-button type="pay" :loading="true"></el-button>
+<el-button type="primary" :loading="true">正在加载</el-button>
 ```
 :::
 

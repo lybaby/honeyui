@@ -13,7 +13,7 @@
         </p>
         <p class="el-alert__description" v-if="$slots.default && !description"><slot></slot></p>
         <p class="el-alert__description" v-if="description && !$slots.default">{{ description }}</p>
-        <a class="tea-icon tea-icon-close" :class="{ 'is-customed': closeText !== '', 'el-icon-close': closeText === '' }" v-show="closable" @click="close()">{{closeText}}</a>
+        <i class="tea-icon tea-icon-close size-s" :class="{ 'is-customed': closeText !== '', 'el-icon-close': closeText === '' }" v-show="closable" @click="close()">{{closeText}}</i>
       </div>
     </div>
   </transition>

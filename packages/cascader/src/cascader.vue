@@ -22,13 +22,7 @@
       @input="handleInput"
     >
       <template slot="suffix">
-        <i
-          v-if="clearBtnVisible"
-          key="clear"
-          class="tea-icon tea-icon-close"
-          style="transform: scale(0.75)"
-          @click.stop="handleClear"
-        ></i>
+        <i v-if="clearBtnVisible" key="clear" class="tea-icon tea-icon-dismiss size-s" @click.stop="handleClear" />
         <i
           v-else
           key="arrow-down"

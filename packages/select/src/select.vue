@@ -117,7 +117,7 @@
           </slot>
         </div>
         <i type="arrowdown" v-if="!showCloseNew" class="tea-icon" :class="{'tea-icon-arrowdown': type !== 'pagination', 'tea-icon-arrowup': type === 'pagination'}"></i>
-        <i v-if="showCloseNew"  class="tea-icon tea-icon-close" style="transform: scale(0.75)" @click="handleClearClick"></i>
+        <i v-if="showCloseNew" class="tea-icon tea-icon-dismiss size-s" @click="handleClearClick"></i>
       </div>
     </div>
     <transition
@@ -145,7 +145,7 @@
               />
             </div>
             <button v-if="showFilterClearable" @click="handleFilterClearClick" type="button" class="tea-btn tea-btn--icon tea-btn--search-clear">
-              <i class="tea-icon tea-icon-close" style="transform: scale(0.75)"></i>
+              <i class="tea-icon tea-icon-dismiss size-s"></i>
             </button>
             <button type="button" class="tea-btn tea-btn--icon tea-btn--search">
               <i class="tea-icon tea-icon-search"></i>

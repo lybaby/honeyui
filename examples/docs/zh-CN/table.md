@@ -441,7 +441,8 @@
     <el-table-column
       prop="date"
       label="日期"
-      width="150">
+      width="150"
+      fixed>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -470,7 +471,8 @@
     </el-table-column>
     <el-table-column
       label="操作"
-      width="100">
+      width="100"
+      fixed="right">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text">查看</el-button>
         <el-button type="text">编辑</el-button>
@@ -539,7 +541,9 @@
     <el-table-column   
       prop="date"
       label="日期"
-      width="150">
+      width="150"
+      fixed
+      >
     </el-table-column>
     <el-table-column
       prop="name"

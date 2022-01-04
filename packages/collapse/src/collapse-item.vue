@@ -23,7 +23,7 @@
       >
         <slot name="title">{{title}}</slot>
         <i
-          class="el-collapse-item__arrow el-icon-arrow-right"
+          class="el-collapse-item__arrow tea-icon tea-icon-arrowright"
           :class="{'is-active': isActive}">
         </i>
       </div>

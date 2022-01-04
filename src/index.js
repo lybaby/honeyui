@@ -89,6 +89,7 @@ import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
 import Search from '../packages/search/index.js';
 import Rank from '../packages/rank/index.js';
+import Drawer from '../packages/drawer/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -177,6 +178,7 @@ const components = [
   CascaderPanel,
   Search,
   Rank,
+  Drawer,
   CollapseTransition
 ];
 
@@ -212,7 +214,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.9.1-r59',
+  version: '2.9.1-r60',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -305,5 +307,6 @@ export default {
   PageHeader,
   CascaderPanel,
   Search,
-  Rank
+  Rank,
+  Drawer
 };

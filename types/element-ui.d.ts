@@ -77,6 +77,7 @@ import { ElImage } from './image'
 import { ElBacktop } from './backtop'
 import { ElInfiniteScroll } from './infiniteScroll'
 import { ElPageHeader } from './page-header'
+import { ElDrawer } from './drawer'
 
 export interface InstallationOptions {
   locale: any,
@@ -182,6 +183,9 @@ export class DatePicker extends ElDatePicker {}
 
 /** Dialog Component */
 export class Dialog extends ElDialog {}
+
+/** Drawer Component */
+export class Drawer extends ElDrawer {}
 
 /** Dropdown Component */
 export class Dropdown extends ElDropdown {}

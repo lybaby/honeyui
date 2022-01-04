@@ -13,7 +13,7 @@
             {{ placeholder }}
           </slot>
         </div>
-        <i v-if="showClose" class="tea-icon tea-icon-close" style="transform: scale(0.75)" @click="handleClearClick" />
+        <i v-if="showClose" class="tea-icon tea-icon-dismiss size-s" @click="handleClearClick" />
         <template v-else>
           <i type="arrowdown" v-if="enableArrow" class="tea-icon tea-icon-arrowdown"></i>
         </template>
