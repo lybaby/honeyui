@@ -274,6 +274,7 @@
       :key="item.value"
       :label="item.label"
       :value="item.value"
+      :disabled="item.disabled"
       type="checkbox">
     </el-option>
   </el-select>
@@ -285,7 +286,8 @@
       return {
         options: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕',
+          disabled: true
         }, {
           value: '选项2',
           label: '双皮奶'

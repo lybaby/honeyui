@@ -11,7 +11,7 @@
     }">
     <slot>
       <label v-if="select.multiple" class="tea-form-check">
-        <input class="tea-checkbox" type="checkbox" value="" id="" name="checkboxGroup" :checked="itemSelected">
+        <input class="tea-checkbox" type="checkbox" value="" id="" name="checkboxGroup" :checked="itemSelected" :disabled="disabled || groupDisabled || limitReached">
         <span class="tea-form-check__label">{{ currentLabel }}</span>
       </label>
       <span v-else>{{ currentLabel }}</span>
