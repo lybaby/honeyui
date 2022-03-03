@@ -1,6 +1,6 @@
 {
   "name": "honey-ui",
-  "version": "2.9.1-r62",
+  "version": "2.9.1-r64",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -61,7 +61,6 @@
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
-    "node-sass": "^4.14.1",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
     "throttle-debounce": "^1.0.1",
