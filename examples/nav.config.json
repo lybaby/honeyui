@@ -97,6 +97,10 @@
               "title": "InputNumber 计数器"
             },
             {
+              "path": "/select-tree",
+              "title": "SelectTree 树形选择器"
+            },
+            {
               "path": "/select",
               "title": "Select 选择器"
             },

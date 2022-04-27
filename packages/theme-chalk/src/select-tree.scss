@@ -1,0 +1,46 @@
+.select-tree-popper {
+  width: 420px;
+  display: block;
+
+  .tea-dropdown__header {
+    & > .tea-icon {
+      flex-shrink: 0;
+    }
+  }
+
+  .value {
+    line-height: 22px;
+    white-space: normal;
+  }
+
+  .tag-group {
+    margin-bottom: 5px;
+  }
+}
+
+.select-tree-dropdown {
+  min-width: 420px;
+
+  // padding: 0 10px;
+  .input {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+
+    .tea-input {
+      width: calc(100% - 24px);
+      border: 0;
+    }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.2s ease;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    transform: translateX(4px);
+    // transform: scale(0.9);
+    opacity: 0;
+  }
+}

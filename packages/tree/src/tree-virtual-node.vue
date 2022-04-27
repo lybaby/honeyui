@@ -109,7 +109,7 @@ export default {
                 h(
                   'span',
                   {
-                    class: 'el-tree-node__label'
+                    class: 'tea-tree__label tea-tree__label-title'
                   },
                   [data[props.treeLabel || props.label]]
                 )

@@ -90,6 +90,7 @@ import CascaderPanel from '../packages/cascader-panel/index.js';
 import Search from '../packages/search/index.js';
 import Rank from '../packages/rank/index.js';
 import Drawer from '../packages/drawer/index.js';
+import SelectTree from '../packages/select-tree/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -179,6 +180,7 @@ const components = [
   Search,
   Rank,
   Drawer,
+  SelectTree,
   CollapseTransition
 ];
 
@@ -214,7 +216,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.9.1-r64',
+  version: '2.9.1-r65',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -308,5 +310,6 @@ export default {
   CascaderPanel,
   Search,
   Rank,
-  Drawer
+  Drawer,
+  SelectTree
 };

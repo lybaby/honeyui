@@ -174,7 +174,7 @@
             <ul class="pure-menu-list">
               <li
                 class="nav-item"
-                v-for="(navItem, key) in group.list"
+                v-for="(navItem, key) in sortGroupList(group.list)"
                 v-show="!navItem.disabled"
                 :key="key">
                 <router-link
@@ -236,6 +236,9 @@
       }
     },
     methods: {
+      sortGroupList(list) {
+        return [...list].sort((a, b) => a.title > b.title ? 1 : -1);
+      },
       handleResize() {
         this.isSmallScreen = document.documentElement.clientWidth < 768;
         this.handlePathChange();

@@ -88,5 +88,6 @@
   "cascader-panel": "./packages/cascader-panel/index.js",
   "search": "./packages/search/index.js",
   "rank": "./packages/rank/index.js",
-  "drawer": "./packages/drawer/index.js"
+  "drawer": "./packages/drawer/index.js",
+  "select-tree": "./packages/select-tree/index.js"
 }
