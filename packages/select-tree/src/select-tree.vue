@@ -3,7 +3,7 @@
     <div class="value" slot="value">
       <span v-if="showPlaceholder">{{ placeholder }}</span>
       <span v-if="selectAllText && selectAll">{{ selectAllText }}</span>
-      <transition-group v-show="!showPlaceholder && !(selectAll && selectAllText)" tag="div" class="tag-group">
+      <transition-group v-show="!showPlaceholder && !(selectAll && selectAllText)" tag="div" class="tag-group" name="fade">
         <template v-for="tag in selected">
           <el-tag
             :key="tag.id"
