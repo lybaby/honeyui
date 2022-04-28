@@ -3,7 +3,12 @@
     <div class="value" slot="value">
       <span v-if="showPlaceholder">{{ placeholder }}</span>
       <span v-if="selectAllText && selectAll">{{ selectAllText }}</span>
-      <transition-group v-show="!showPlaceholder && !(selectAll && selectAllText)" tag="div" class="tag-group" name="fade">
+      <transition-group
+        v-show="!showPlaceholder && !(selectAll && selectAllText)"
+        tag="div"
+        class="tag-group"
+        name="fade"
+      >
         <template v-for="tag in selected">
           <el-tag
             :key="tag.id"
@@ -40,10 +45,22 @@
 </template>
 
 <script>
+import ElTag from 'element-ui/packages/tag';
+import ElPopper from 'element-ui/packages/popper';
+import ElInput from 'element-ui/packages/input';
+import ElTree from 'element-ui/packages/tree';
+
 export default {
   name: 'ElSelectTree',
 
   componentName: 'ElSelectTree',
+
+  components: {
+    ElTag,
+    ElPopper,
+    ElInput,
+    ElTree
+  },
 
   props: {
     // 是否正在加载中

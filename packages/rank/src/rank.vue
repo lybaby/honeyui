@@ -1,5 +1,6 @@
 <template>
   <div class="tea-custom-rank" v-clickoutside="handleClickOutside">
+    <!-- <div @click="handleShowPanel" :class="{ 'tea-input-disabled': disabled }">{{ inputValue }}</div> -->
     <el-input
       :value="inputValue"
       readonly
@@ -7,26 +8,65 @@
       @click.native="handleShowPanel"
       placeholder="请选择"
       class="rank-input"
-      :class="{'tea-input-disabled': disabled}">
+      :class="{ 'tea-input-disabled': disabled }"
+    >
       <template slot="append">
         <i v-show="!showPanel" class="select-icon tea-icon tea-icon-arrowdown"></i>
         <i v-show="showPanel" class="select-icon tea-icon tea-icon-arrowup"></i>
       </template>
     </el-input>
     <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="handleDropdownLeave">
-      <div class="rank-panel__wrap" v-show="showPanel" ref="popper">
-        <el-tabs v-model="selectedTabVal" @tab-click="tabClick">
-          <el-tab-pane v-for="(item, tabIndex) in tablist" :key="item[tabName]" :label="item[tabLabel]" :name="item[tabName]" :disabled="tabIndex > strArr.length">
+      <div class="tea-dropdown-box rank-panel__wrap" v-show="showPanel" ref="popper">
+        <el-tabs v-model="selectedTabVal" @tab-click="tabClick" v-loading="panelLoading">
+          <el-tab-pane
+            v-for="(item, tabIndex) in tablist"
+            :key="item[tabName]"
+            :label="item[tabLabel]"
+            :name="item[tabName]"
+            :disabled="tabIndex > strArr.length"
+          >
             <el-scrollbar class="data-scrollbar" ref="scrollbar">
               <div class="scroll-content" ref="scrollContent" v-if="data && data.length">
-                <span v-for="(item, index) in data" :key="index" :ref="`item-${item[idName]}`" @click="handleClickItem(item, index)" class="content-item" :class="{'hidden-text': tooltip, ...itemClass, 'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]}">
-                  <el-tooltip class="item" effect="dark" :content="item[label]" :disabled="item[label] && item[label].length < 6" v-if="tooltip">
-                    <span>{{item[label]}}</span>
+                <el-button
+                  v-for="(item, index) in data"
+                  :ref="`item-${item[idName]}`"
+                  class="content-item"
+                  type="text"
+                  :key="item[idName]"
+                  @click="handleClickItem(item, index)"
+                  :class="{
+                    ...itemClass,
+                    'hidden-text': tooltip,
+                    'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
+                  }"
+                >
+                  {{ item[label] }}
+                </el-button>
+                <!-- <span
+                  v-for="(item, index) in data"
+                  :key="index"
+                  :ref="`item-${item[idName]}`"
+                  @click="handleClickItem(item, index)"
+                  class="content-item"
+                  :class="{
+                    'hidden-text': tooltip,
+                    ...itemClass,
+                    'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
+                  }"
+                >
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    :content="item[label]"
+                    :disabled="item[label] && item[label].length < 6"
+                    v-if="tooltip"
+                  >
+                    <span>{{ item[label] }}</span>
                   </el-tooltip>
                   <span v-else>
-                    {{item[label]}}
+                    {{ item[label] }}
                   </span>
-                </span>
+                </span> -->
               </div>
               <div v-else class="no-data">暂无数据</div>
             </el-scrollbar>
@@ -72,10 +112,12 @@ export default {
     },
     tablist: {
       type: Array,
-      default: () => [{
-        label: '',
-        name: ''
-      }]
+      default: () => [
+        {
+          label: '',
+          name: ''
+        }
+      ]
     },
     tabLabel: {
       type: String,
@@ -104,6 +146,10 @@ export default {
     selectedItem: {
       type: Array,
       default: () => []
+    },
+    panelLoading: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
@@ -162,6 +208,10 @@ export default {
       }
     },
     tabClick(item) {
+      if (this.panelLoading) {
+        // 当tab在加载的时候，不允许重复切换tab
+        return;
+      }
       this.selectedTabVal = item.name;
       this.selectedTabIndex = Number(item.index);
       if (this.selectedItemSelf.length) {
