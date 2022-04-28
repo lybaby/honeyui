@@ -109,7 +109,7 @@
 :::demo 说明
 
 ```html
-<el-select-tree :tree-data="treeData" :tree-props="vTreeProps" />
+<el-select-tree filterable :tree-data="treeData" :tree-props="vTreeProps" />
 <script>
   const genChild = (prefix = '') => {
     const childArr = [];

@@ -27,46 +27,29 @@
           >
             <el-scrollbar class="data-scrollbar" ref="scrollbar">
               <div class="scroll-content" ref="scrollContent" v-if="data && data.length">
-                <el-button
+                <div
                   v-for="(item, index) in data"
-                  :ref="`item-${item[idName]}`"
-                  class="content-item"
-                  type="text"
                   :key="item[idName]"
-                  @click="handleClickItem(item, index)"
-                  :class="{
-                    ...itemClass,
-                    'hidden-text': tooltip,
-                    'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
-                  }"
-                >
-                  {{ item[label] }}
-                </el-button>
-                <!-- <span
-                  v-for="(item, index) in data"
-                  :key="index"
                   :ref="`item-${item[idName]}`"
-                  @click="handleClickItem(item, index)"
+                  :title="String(item[label]).length < 6 ? '' : item[label]"
                   class="content-item"
                   :class="{
-                    'hidden-text': tooltip,
                     ...itemClass,
+                    'hidden-text': tooltip,
                     'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
                   }"
                 >
                   <el-tooltip
-                    class="item"
                     effect="dark"
+                    placement="top"
                     :content="item[label]"
-                    :disabled="item[label] && item[label].length < 6"
-                    v-if="tooltip"
+                    :disabled="!tooltip || String(item[label]).length < 6"
                   >
-                    <span>{{ item[label] }}</span>
+                    <el-button style="width:100%" @click="handleClickItem(item, index)" type="text">
+                      {{ item[label] }}
+                    </el-button>
                   </el-tooltip>
-                  <span v-else>
-                    {{ item[label] }}
-                  </span>
-                </span> -->
+                </div>
               </div>
               <div v-else class="no-data">暂无数据</div>
             </el-scrollbar>

@@ -9,34 +9,37 @@
     }"
     role="tree"
   >
-    <virtual-list
-      v-if="virtual"
-      class="v-list"
-      :style="virtualListStyle"
-      :data-key="getNodeKey"
-      :data-sources="visibleList"
-      :data-component="itemComponent"
-      :keeps="virtualKeeps"
-      :extra-props="{
-        renderAfterExpand,
-        showCheckbox,
-        renderContent,
-        props,
-        onNodeExpand: handleNodeExpand
-      }"
-    />
-    <template v-else>
-      <el-tree-node
-        v-for="child in root.childNodes"
-        :node="child"
-        :props="props"
-        :render-after-expand="renderAfterExpand"
-        :show-checkbox="showCheckbox"
-        :key="getNodeKey(child)"
-        :render-content="renderContent"
-        @node-expand="handleNodeExpand"
-      >
-      </el-tree-node>
+    <template v-if="!isEmpty">
+      <virtual-list
+        v-if="virtual"
+        class="v-list"
+        ref="virtualList"
+        :style="virtualListStyle"
+        :data-key="getNodeKey"
+        :data-sources="visibleList"
+        :data-component="itemComponent"
+        :keeps="virtualKeeps"
+        :extra-props="{
+          renderAfterExpand,
+          showCheckbox,
+          renderContent,
+          props,
+          onNodeExpand: handleNodeExpand
+        }"
+      />
+      <template v-else>
+        <el-tree-node
+          v-for="child in root.childNodes"
+          :node="child"
+          :props="props"
+          :render-after-expand="renderAfterExpand"
+          :show-checkbox="showCheckbox"
+          :key="getNodeKey(child)"
+          :render-content="renderContent"
+          @node-expand="handleNodeExpand"
+        >
+        </el-tree-node>
+      </template>
     </template>
     <div class="el-tree__empty-block" v-if="isEmpty">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
@@ -89,7 +92,7 @@ export default {
     },
     virtualKeeps: {
       type: Number,
-      default: 50
+      default: 30
     },
     virtualListStyle: {
       type: Object,
@@ -182,7 +185,9 @@ export default {
 
     isEmpty() {
       const { childNodes } = this.root;
-      return !childNodes || childNodes.length === 0 || childNodes.every(({ visible }) => !visible);
+      return this.virtual
+        ? this.visibleList.length === 0
+        : !childNodes || childNodes.length === 0 || childNodes.every(({ visible }) => !visible);
     },
 
     visibleList() {
@@ -223,11 +228,12 @@ export default {
     /* for virtual edit start */
     flattenTree(datas) {
       return datas.reduce((conn, data) => {
-        conn.push(data);
-        if (data.expanded && data.childNodes.length) {
-          conn.push(...this.flattenTree(data.childNodes));
+        if (data.visible) {
+          conn.push(data);
+          if (data.expanded && data.childNodes.length) {
+            conn.push(...this.flattenTree(data.childNodes));
+          }
         }
-
         return conn;
       }, []);
     },

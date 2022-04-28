@@ -39,11 +39,17 @@
     min-width: 350px;
     min-height: 100px;
     .scroll-content {
-      padding: 0 12px;
+      padding: 6px 12px;
       .content-item {
         display: inline-block;
-        padding: 6px 8px;
-        cursor: pointer;
+        max-width: 100%;
+        overflow: hidden;
+        .tea-btn--text {
+          overflow: hidden;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
       .hidden-text {
         width: 80px;
@@ -54,6 +60,9 @@
       .selected-item {
         color: #006eff;
       }
+    }
+    .tea-tabs__tabpanel {
+      padding: 0;
     }
     .no-data {
       text-align: center;
