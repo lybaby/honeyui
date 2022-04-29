@@ -35,8 +35,7 @@
                   class="content-item"
                   :class="{
                     ...itemClass,
-                    'hidden-text': tooltip,
-                    'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
+                    'hidden-text': tooltip
                   }"
                 >
                   <el-tooltip
@@ -44,8 +43,15 @@
                     placement="top"
                     :content="item[label]"
                     :disabled="!tooltip || String(item[label]).length < 6"
+                    :enterable="false"
                   >
-                    <el-button style="width:100%" @click="handleClickItem(item, index)" type="text">
+                    <el-button
+                      :class="{
+                        'selected-item': itemIdArr[tabIndex] !== undefined && itemIdArr[tabIndex] === item[idName]
+                      }"
+                      @click="handleClickItem(item, index)"
+                      type="text"
+                    >
                       {{ item[label] }}
                     </el-button>
                   </el-tooltip>
