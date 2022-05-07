@@ -28,9 +28,10 @@
       v-loading="isLoading"
       el-loading-text="数据加载中"
     >
-      <el-input v-if="filterable" v-model="searchText" class="input" :placeholder="searchPlaceholder">
-        <i slot="append" class="tea-icon tea-icon-search" />
-      </el-input>
+      <div class="search-container" v-if="filterable">
+        <el-input v-model="searchText" class="input" :placeholder="searchPlaceholder"> </el-input>
+        <i slot="append" class="icon tea-icon tea-icon-search" />
+      </div>
       <el-tree
         ref="tree"
         :data="treeData"

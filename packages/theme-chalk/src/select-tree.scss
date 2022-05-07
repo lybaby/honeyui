@@ -33,14 +33,23 @@
 .select-tree-dropdown {
   min-width: 420px;
 
-  // padding: 0 10px;
-  .input {
-    width: 100%;
-    border-bottom: 1px solid #ddd;
+  .search-container {
+    position: relative;
 
-    .tea-input {
-      width: calc(100% - 24px);
-      border: 0;
+    .input {
+      width: 100%;
+      // border-bottom: 1px solid #ddd;
+      .tea-input {
+        width: 100%;
+        padding-right: 30px;
+        // border: 0;
+      }
+    }
+
+    .icon {
+      position: absolute;
+      right: 7px;
+      top: 7px;
     }
   }
 }
