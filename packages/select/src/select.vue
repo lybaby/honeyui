@@ -131,7 +131,7 @@
         :class="{'tea-extends--pagination-select': type === 'pagination'}"
         :style="selectMenuStyle"
         v-show="visible/* && emptyText !== false */">
-        <form class="tea-form--search" action="" v-if="filterable">
+        <form class="tea-form--search" action="" v-if="filterable" @submit.native.prevent>
           <div class="tea-search tea-search--simple">
             <div class="tea-search__inner">
               <input 
